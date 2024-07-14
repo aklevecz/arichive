@@ -1,0 +1,6 @@
+:root {
+    --grey: #c9c9c9;
+
+    --primary-color: var(--grey);
+    --secondary-color: whitesmoke;
+}
