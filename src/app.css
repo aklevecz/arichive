@@ -4,3 +4,17 @@
     --primary-color: var(--grey);
     --secondary-color: whitesmoke;
 }
+
+* {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: var(--secondary-color);
+}
+
+h1,h2,h3 {
+    margin:0;
+    padding:0;
+}

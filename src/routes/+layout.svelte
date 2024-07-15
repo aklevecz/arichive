@@ -3,7 +3,10 @@
 	const { children } = $props();
 </script>
 
-{@render children()}
+<img style="width:90%; display:block; margin:1rem auto;" src="/headings/header.png" alt="header" />
+<div style="padding: 1rem;">
+	{@render children()}
+</div>
 
 <style>
 	:global(html, body) {

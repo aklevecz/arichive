@@ -1,30 +1,39 @@
 <script>
 	import SearchBar from '$lib/components/search-bar.svelte';
-    import ArielInfo from '$lib/components/ariel-info.svelte';
+	import ArielInfo from '$lib/components/ariel-info.svelte';
 	import projects from '$lib/stores/projects.svelte';
+	import search from '$lib/stores/search.svelte';
+
 </script>
 
-<div style="display:flex; flex-direction:column; align-items:center; padding: 1rem;">
-	<img style="width:90%;" src="headings/header.png" alt="header" />
-    <ArielInfo />
+<div style="display:flex; flex-direction:column; align-items:center; padding: 0rem;">
+	<ArielInfo />
 	<div style="width:100%;">
-		<div style="margin-top:.5rem;">
+		<div style="">
 			<SearchBar />
 		</div>
-		<div style="margin-top:1rem; padding:.5rem;border: 3px solid var(--secondary-color); min-height: 300px;">
+		<div
+			style="margin-top:1rem; padding:.5rem;border: 3px solid var(--secondary-color);"
+		>
 			{#snippet projectLine({ name, categories })}
-				<div style="display:flex; justify-content:space-between;">
+				<a href={`/projects/${name}`} style="display:block; justify-content:space-between; margin-bottom:.5rem;">
 					<div style="flex: 1 0 50%;">{name}</div>
 					<div style="display:flex; align-items:center; gap:.5rem;">
 						{#each categories as category}
-							<div style="font-size:.5rem;">{category}</div>
+							<div style="font-size:.75rem;">{category}</div>
 						{/each}
 					</div>
-				</div>
+				</a>
 			{/snippet}
-			{#each projects.state as project}
-				{@render projectLine(project)}
-			{/each}
+			{#if search.hasSearchResults}
+				{#each search.state.results as project}
+					{@render projectLine(project.item)}
+				{/each}
+			{:else}
+				{#each projects.state as project}
+					{@render projectLine(project)}
+				{/each}
+			{/if}
 		</div>
 	</div>
 </div>
