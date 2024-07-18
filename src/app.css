@@ -1,20 +1,38 @@
 :root {
-    --grey: #c9c9c9;
+	--grey: #c9c9c9;
+    --black: #202020;
+	/* --grey: #ff000093; */
 
-    --primary-color: var(--grey);
-    --secondary-color: whitesmoke;
+	--primary-color: var(--black);
+	--secondary-color: whitesmoke;
+}
+
+html,
+body {
+	color: var(--secondary-color);
+	background-color: var(--primary-color);
+	font-family: monospace;
+	font-size: 18px;
+	margin: 0;
+	padding: 0;
 }
 
 * {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 a {
-    text-decoration: none;
-    color: var(--secondary-color);
+	text-decoration: none;
+	color: var(--secondary-color);
 }
 
-h1,h2,h3 {
-    margin:0;
-    padding:0;
+h1,
+h2,
+h3 {
+	margin: 0;
+	padding: 0;
+}
+
+.flex-1 {
+	flex: 1 0 auto;
 }

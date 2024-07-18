@@ -15,6 +15,34 @@ export const projectsData = [
 		categories: ['ai', 'digital art', 'ar', 'event']
 	},
 	{
+		id: 'shrooms',
+		name: 'shrooms',
+		description: 'a collection of ai shrooms with ar stuff too',
+		url: 'https://yaytso.art/events/shrooms',
+		categories: ['ai', 'digital art', 'ar', 'event']
+	},
+	{
+		id: 'yaytso',
+		name: 'yaytso',
+		description: 'a space for trippy art',
+		url: 'https://yaytso.art',
+		categories: ['ai', 'art', 'gallery']
+	},
+	{
+		id: 'remi',
+		name: 'remi',
+		description: "supporting remi frogo's art with AR and web experiences",
+		url: 'https://remifrogo.art',
+		categories: ['web', 'ai', 'ar', 'fine art', 'paintings']
+	},
+	{
+		id: 'bao',
+		name: 'bao',
+		description: 'making art with bao the magical dog',
+		url: 'https://baos.haus',
+		categories: ['ai', 'dogs', 'chicken art']
+	},
+	{
 		id: 'good-neighbor',
 		name: 'good neighbor',
 		description: 'creating animated album art for vinyl record covers',
