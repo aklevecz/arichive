@@ -43,7 +43,12 @@ button {
 	box-shadow: none;
 	font-family: monospace;
 }
-
+a.btn {
+	background-color: var(--secondary-color);
+	color: var(--primary-color);
+	border-radius: 30px;
+	padding: .3rem .6rem;
+}
 button.btn {
 	padding: .35rem .5rem;
 }

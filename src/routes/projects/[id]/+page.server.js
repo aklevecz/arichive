@@ -6,7 +6,6 @@ export const prerender = true
 export async function load({ params }) {
     
     const project = projectsData.find(project => project.id === params.id)
-    
     if (!project) {
         error(404, "Project not found")
     }

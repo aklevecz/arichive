@@ -4,7 +4,7 @@
 	const { children } = $props();
 </script>
 
-<div style="padding: 1rem;">
+<div style="padding:0 1rem;">
 	{@render children()}
 </div>
 
@@ -17,7 +17,6 @@
 		margin: 0;
 		padding: 0;
 	} */
-
 	:global(.category-nugget) {
 		font-size: 0.75rem;
 		background-color: var(--secondary-color);

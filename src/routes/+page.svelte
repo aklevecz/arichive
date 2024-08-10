@@ -20,21 +20,6 @@
 		<div
 			style="margin-top:1rem; padding:.5rem;border: 3px solid var(--secondary-color); width: 100%;"
 		>
-			{#snippet projectLine(/** @type {Project} */ project)}
-				<a
-					href={`/projects/${project.name}`}
-					style="display:block; justify-content:space-between; margin-bottom:.5rem;"
-				>
-					<div style="flex: 1 0 50%;">{project.name}</div>
-					<div style="display:flex; align-items:center; gap:.5rem;margin-top:.2rem;">
-						{#each project.categories as category}
-							<div class="category-nugget" style="">
-								{category}
-							</div>
-						{/each}
-					</div>
-				</a>
-			{/snippet}
 			<!-- {#if search.hasSearchResults}
 				{#each search.state.results as project}
 					{@render projectLine(project.item)}
@@ -48,9 +33,24 @@
 					>
 				</div>
 			{/if}
-				{#each filteredProjects as project}
-					{@render projectLine(project)}
-				{/each}
+			{#snippet projectLine(/** @type {Project} */ project)}
+				<a
+					href={`/projects/${project.id}`}
+					style="display:block; justify-content:space-between; margin-bottom:.5rem;"
+				>
+					<div style="flex: 1 0 50%;">{project.name}</div>
+					<div style="display:flex;flex-wrap:wrap; align-items:center; gap:.5rem;margin-top:.2rem;">
+						{#each project.categories as category}
+							<div class="category-nugget" style="">
+								{category}
+							</div>
+						{/each}
+					</div>
+				</a>
+			{/snippet}
+			{#each filteredProjects as project}
+				{@render projectLine(project)}
+			{/each}
 			<!-- {/if} -->
 		</div>
 	</div>
