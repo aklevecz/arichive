@@ -1,16 +1,14 @@
 import Fuse from 'fuse.js';
 import projects from './projects.svelte';
+import filter from './filter.svelte';
 
 function createSearchStore() {
-	/** @type {{query: string, results:import('fuse.js').FuseResult<Project>[]}} */
-	const search = $state({ query: '', results: [] });
+	/** @type {{query: string, results:import('fuse.js').FuseResult<Project>[], resultsIds:string[]}} */
+	const search = $state({ query: '', results: [], resultsIds: [] });
 
 	return {
 		get state() {
 			return search;
-		},
-		get hasSearchResults() {
-			return search.results.length;
 		},
 		/** @param {string} updatedText */
 		updateQuery(updatedText) {
@@ -21,6 +19,7 @@ function createSearchStore() {
 			search.query = updatedText;
 			const results = fuse.search(search.query);
 			search.results = results.filter((result) => result.score && result.score < 0.5);
+			search.resultsIds = search.results.map((result) => result.item.id);
 		}
 	};
 }

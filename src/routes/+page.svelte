@@ -1,39 +1,57 @@
 <script>
+	import ApplyFilters from '$lib/components/apply-filters.svelte';
 	import Header from '$lib/components/header.svelte';
 	import SearchBar from '$lib/components/search-bar.svelte';
+	import filter from '$lib/stores/filter.svelte';
 	import projects from '$lib/stores/projects.svelte';
-	import search from '$lib/stores/search.svelte';
+
+	let filteredProjects = $derived(
+		projects.state.filter(projects.searchFilter).filter(projects.categoryFilter)
+	);
 </script>
 
 <div class="container">
 	<div class="stack header-search-wrapper">
 		<Header />
 		<SearchBar />
+		<ApplyFilters />
 	</div>
 	<div class="content">
-		<div style="margin-top:1rem; padding:.5rem;border: 3px solid var(--secondary-color); width: 100%;">
-			{#snippet projectLine({ name, categories })}
+		<div
+			style="margin-top:1rem; padding:.5rem;border: 3px solid var(--secondary-color); width: 100%;"
+		>
+			{#snippet projectLine(/** @type {Project} */ project)}
 				<a
-					href={`/projects/${name}`}
+					href={`/projects/${project.name}`}
 					style="display:block; justify-content:space-between; margin-bottom:.5rem;"
 				>
-					<div style="flex: 1 0 50%;">{name}</div>
+					<div style="flex: 1 0 50%;">{project.name}</div>
 					<div style="display:flex; align-items:center; gap:.5rem;margin-top:.2rem;">
-						{#each categories as category}
-							<div style="font-size:.75rem;background-color:var(--secondary-color); color:var(--primary-color);padding:1px 4px;">{category}</div>
+						{#each project.categories as category}
+							<div class="category-nugget" style="">
+								{category}
+							</div>
 						{/each}
 					</div>
 				</a>
 			{/snippet}
-			{#if search.hasSearchResults}
+			<!-- {#if search.hasSearchResults}
 				{#each search.state.results as project}
 					{@render projectLine(project.item)}
 				{/each}
-			{:else}
-				{#each projects.state as project}
+			{:else} -->
+			{#if filteredProjects.length === 0}
+				<div style="padding:1rem;">
+					<div>No projects found for filtered selected</div>
+					<button style="padding:.5rem;margin-top:1rem;" onclick={filter.resetFilters}
+						>Clear filters</button
+					>
+				</div>
+			{/if}
+				{#each filteredProjects as project}
 					{@render projectLine(project)}
 				{/each}
-			{/if}
+			<!-- {/if} -->
 		</div>
 	</div>
 </div>
@@ -48,20 +66,20 @@
 	.content {
 		width: 100%;
 	}
+
 	@media (min-width: 768px) {
 		.container {
 			display: flex;
 			flex-direction: row;
-            align-items: start;
-
+			align-items: start;
 		}
 		.content {
 			display: flex;
-            width: auto;
-            flex: 1 0 auto;
+			width: auto;
+			flex: 1 0 auto;
 		}
-        .header-search-wrapper {
-            flex: 0 1 40%
-        }
+		.header-search-wrapper {
+			flex: 0 1 40%;
+		}
 	}
 </style>

@@ -1,6 +1,6 @@
 <script>
 	import '../app.css';
-	import "../stack.css";
+	import '../stack.css';
 	const { children } = $props();
 </script>
 
@@ -17,4 +17,11 @@
 		margin: 0;
 		padding: 0;
 	} */
+
+	:global(.category-nugget) {
+		font-size: 0.75rem;
+		background-color: var(--secondary-color);
+		color: var(--primary-color);
+		padding: 1px 4px;
+	}
 </style>

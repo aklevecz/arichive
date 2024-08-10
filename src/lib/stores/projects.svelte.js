@@ -6,6 +6,9 @@
  *
  */
 
+import filter from './filter.svelte';
+import search from './search.svelte';
+
 export const projectsData = [
 	{
 		id: 'flowers',
@@ -24,9 +27,9 @@ export const projectsData = [
 	{
 		id: 'yaytso',
 		name: 'yaytso',
-		description: 'a space for trippy art',
+		description: 'my space for trippy art',
 		url: 'https://yaytso.art',
-		categories: ['ai', 'art', 'gallery']
+		categories: ['art', 'gallery']
 	},
 	{
 		id: 'remi',
@@ -69,16 +72,60 @@ export const projectsData = [
 		description: 'special QR codes made using ai',
 		url: 'https://yaytso.art/qr-codes',
 		categories: ['ai', 'qr code']
+	},
+	{
+		id: 'aespa',
+		name: 'Aespa Better Things',
+		description: 'Generated thousands of versions of their flower album art using AI',
+		url: 'betterthings.aespa.com',
+		categories: ['ai', 'music', 'digital art']
+	},
+	{
+		id: 'nouns-in-the-park',
+		name: 'Nouns in the Park',
+		description: 'A collection of AI generated nouns in the park',
+		url: 'https://yaytso.art/events/nouns-in-the-park',
+		categories: ['ai', 'digital art', 'ar', 'ai']
 	}
 ];
+
+/** @type {string[]} allCategories */
+let allCategories = [];
+for (const project of projectsData) {
+	for (const category of project.categories) {
+		if (!allCategories.includes(category)) {
+			allCategories.push(category);
+		}
+	}
+}
 
 const createProjectsStore = () => {
 	/** @type {Project[]} projects */
 	const projects = $state([...projectsData]);
+	const categories = $state(allCategories.sort((a, b) => a.localeCompare(b)));
 
 	return {
 		get state() {
 			return projects;
+		},
+		/** @param {Project} project */
+		searchFilter(project) {
+			if (search.state.resultsIds.length === 0) {
+				return true;
+			}
+			return search.state.resultsIds.includes(project.id);
+		},
+		/** @param {Project} project */
+		categoryFilter(project) {
+			if (filter.state.categories.length === 0) {
+				return true;
+			}
+			return filter.state.categories.every((filterCategory) =>
+				project.categories.includes(filterCategory)
+			);
+		},
+		get categories() {
+			return categories;
 		}
 	};
 };

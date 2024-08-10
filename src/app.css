@@ -1,10 +1,11 @@
 :root {
 	--grey: #c9c9c9;
-    --black: #202020;
+	--black: #202020;
 	/* --grey: #ff000093; */
 
 	--primary-color: var(--black);
 	--secondary-color: whitesmoke;
+	--accent-color: 239, 239, 54;
 }
 
 html,
@@ -35,4 +36,14 @@ h3 {
 
 .flex-1 {
 	flex: 1 0 auto;
+}
+
+button {
+	border: none;
+	box-shadow: none;
+	font-family: monospace;
+}
+
+button.btn {
+	padding: .35rem .5rem;
 }
