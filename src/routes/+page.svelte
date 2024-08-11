@@ -9,7 +9,7 @@
 		projects.state.filter(projects.searchFilter).filter(projects.categoryFilter)
 	);
 </script>
-
+<div style="font-size:.5rem;text-align:center;margin-top:.2rem;">under construction</div>
 <div class="container">
 	<div class="stack header-search-wrapper">
 		<Header />
