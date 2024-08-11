@@ -3,6 +3,8 @@
 	import '../stack.css';
 	const { children } = $props();
 
+	const meImg = 'https://eggs.yaytso.art/tokens/egg-token.png'
+
 	const seo = {
 		title: 'Ariel Klevecz',
 		description: 'Ariel Klevecz - Mad Scientist',
@@ -11,11 +13,11 @@
 		ogTitle: 'Ariel Klevecz',
 		ogDescription: 'Ariel Klevecz - Mad Scientist',
 		ogImage: 'URL to an image for social media preview',
-		ogUrl: 'https://klevecz.net/headings/header.png',
+		ogUrl: meImg,
 		twitterCard: 'summary_large_image',
 		twitterTitle: 'Ariel Klevecz',
 		twitterDescription: 'Ariel Klevecz - Mad Scientist',
-		twitterImage: 'https://klevecz.net/headings/header.png'
+		twitterImage: meImg
 	};
 </script>
 
