@@ -1,6 +1,8 @@
 import { projectsData } from '$lib/stores/projects.svelte';
 import { error } from 'console';
 
+export const prerender = true;
+
 /** @type {import('./$types').LayoutServerLoad} */
 export async function load({params}) {
 	const project = projectsData.find((project) => project.id === params.id);

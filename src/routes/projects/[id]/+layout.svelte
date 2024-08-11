@@ -19,7 +19,7 @@
 	<meta property="og:title" content={project?.name} />
 	<meta property="og:description" content={project?.description} />
 	<meta property="og:image" content={imgSrc} />
-	<meta property="og:url" content={window.location.href} />
+	<meta property="og:url" content={`${host}/${project?.id}`} />
 	<meta name="twitter:title" content={project?.name} />
 	<meta name="twitter:description" content={project?.description} />
 	<meta name="twitter:image" content={imgSrc} />
