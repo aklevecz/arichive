@@ -56,6 +56,7 @@
 	<div class="website-iframe-container">
 		{#if project.videoConfiguration}<video
 				class="featured-image {videoFadeClass}"
+				playsinline
 				autoplay
 				muted
 				loop
@@ -73,14 +74,14 @@
 				alt="featured"
 			/>
 		{/if}
-		{#if project.url}
+		{#if project.url && !project.hasGallery}
 			<iframe class="website-iframe" title={`${project.name} iframe`} src={project.url} style=""
 			></iframe>{/if}
 	</div>
 	<div class="info-container">
 		{@render headline({ device: 'desktop' })}
 		{#if project.url}<div style="margin:1rem 0rem; display:block;">
-				<a class="btn visit-site" href={project.url} target="_blank" rel="noopener noreferrer"
+				<a style="margin:auto; display:block;" class="btn visit-site" href={project.url} target="_blank" rel="noopener noreferrer"
 					>visit site</a
 				>
 			</div>
