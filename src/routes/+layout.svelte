@@ -4,7 +4,7 @@
 	const { children } = $props();
 </script>
 
-<div style="padding:0 1rem;">
+<div style="padding:1rem;padding-top:0;">
 	{@render children()}
 </div>
 

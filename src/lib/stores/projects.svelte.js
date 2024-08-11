@@ -77,6 +77,10 @@ export const projectsData = [
 		id: 'bao',
 		name: 'bao',
 		description: 'making art with bao the magical dog',
+		descriptionLong: [
+			`Bao is a magical dog who creates art.`,
+			`I created a website for him to showcase his art and also created an augmented reality experience for people to see his art come to life.`
+		],
 		url: 'https://baos.haus',
 		categories: ['ai', 'dogs', 'chicken art']
 	},
