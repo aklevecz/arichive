@@ -1,16 +1,16 @@
 <script>
 	import projectToImages from '$lib/projectToImages.json';
 	import { onMount } from 'svelte';
-	/** @type {{data:import('./$types').PageData}} */
+	/** @type {{data:import('./$types').LayoutData}} */
 	let { data } = $props();
 	const { project } = data;
-
+	console.log(data);
 	/** @type {Record<string, string[]>} */
 	let imageMap = projectToImages;
 	/** @type {string[]} */
-	const images = imageMap[project.id] ?? [];
-	const imagePrefix = `/projects/${project.id}/`;
-	const src = images[0] ? `/projects/${project.id}/${images[0]}` : '/projects/bao/bao.jpeg';
+	const images = imageMap[project?.id || 0] ?? [];
+	const imagePrefix = `/projects/${project?.id}/`;
+	const src = images[0] ? `/projects/${project?.id}/${images[0]}` : '/projects/bao/bao.jpeg';
 
 	let currentFeaturedImageIndex = $state(Math.floor(Math.random() * images.length));
 	let fadeClass = $state('fade-in');
@@ -40,21 +40,21 @@
 		return () => clearInterval(interval);
 	});
 
-	let firstVideoLoaded = $state(false)
+	let firstVideoLoaded = $state(false);
 </script>
 
 {#snippet headline(/** @type {{device:'mobile' | 'desktop'}} */ { device })}
 	<div class="headline {device}">
-		<h3>{project.name}</h3>
+		<h3>{project?.name}</h3>
 
-		<!-- <img {src} style="height:75px; margin: 1rem 0;" alt={project.name} /> -->
+		<!-- <img {src} style="height:75px; margin: 1rem 0;" alt={project?.name} /> -->
 	</div>
-	<!-- <div style="margin-bottom:1rem;">{project.description}</div> -->
+	<!-- <div style="margin-bottom:1rem;">{project?.description}</div> -->
 {/snippet}
 {@render headline({ device: 'mobile' })}
 <div class="content">
 	<div class="website-iframe-container">
-		{#if project.videoConfiguration}<video
+		{#if project?.videoConfiguration}<video
 				class="featured-image {videoFadeClass}"
 				playsinline
 				autoplay
@@ -62,11 +62,11 @@
 				loop
 				src="https://fest-nouns.yaytso.art/{currentFeaturedVideoId}.mp4"
 				onloadeddata={() => {
-					console.log("LOADINED")
+					console.log('LOADINED');
 					firstVideoLoaded = true;
 				}}
 			></video>{/if}
-		{#if project.hasGallery}
+		{#if project?.hasGallery}
 			<img
 				style=""
 				class="featured-image {fadeClass}"
@@ -74,34 +74,40 @@
 				alt="featured"
 			/>
 		{/if}
-		{#if project.url && !project.hasGallery}
-			<iframe class="website-iframe" title={`${project.name} iframe`} src={project.url} style=""
+		{#if project?.url && !project?.hasGallery}
+			<iframe class="website-iframe" title={`${project?.name} iframe`} src={project?.url} style=""
 			></iframe>{/if}
 	</div>
 	<div class="info-container">
 		{@render headline({ device: 'desktop' })}
-		{#if project.url}<div style="margin:1rem 0rem; display:block;">
-				<a style="margin:auto; display:block;" class="btn visit-site" href={project.url} target="_blank" rel="noopener noreferrer"
-					>visit site</a
+		{#if project?.url}<div style="margin:1rem 0rem; display:block;">
+				<a
+					style="margin:auto; display:block;"
+					class="btn visit-site"
+					href={project?.url}
+					target="_blank"
+					rel="noopener noreferrer">visit site</a
 				>
 			</div>
 		{/if}
-		<div style="margin:1.5rem 0;">{project.description}</div>
-		{#if project.descriptionLong}
-			{#each project.descriptionLong as paragraph}
+		<div style="margin:1.5rem 0;">{project?.description}</div>
+		{#if project?.descriptionLong}
+			{#each project?.descriptionLong as paragraph}
 				<p>{paragraph}</p>
 			{/each}
 		{/if}
 		<div>
 			<div style="display:flex; flex-wrap:wrap; gap:1rem; margin-top:1rem;">
-				{#each project.categories as category}
-					<div class="category-nugget">{category}</div>
-				{/each}
+				{#if project}
+					{#each project?.categories as category}
+						<div class="category-nugget">{category}</div>
+					{/each}
+				{/if}
 			</div>
 		</div>
 	</div>
 </div>
-{#if project.hasGallery}
+{#if project?.hasGallery}
 	<div style="margin-top:1rem;">
 		{#each images as image}
 			<img src={imagePrefix + image} alt={image} style="" class="gallery-image" />
@@ -109,11 +115,10 @@
 	</div>
 {/if}
 
-{#if project.videoConfiguration && firstVideoLoaded}
+{#if project?.videoConfiguration && firstVideoLoaded}
 	<div style="margin-top:1rem;">
-		{#each Array.from({ length: project.videoConfiguration.maxId }, (_, i) => i + 1) as id}
-			<video class="gallery-image" src="https://fest-nouns.yaytso.art/{id}.mp4"
-			></video>
+		{#each Array.from({ length: project?.videoConfiguration.maxId }, (_, i) => i + 1) as id}
+			<video class="gallery-image" src="https://fest-nouns.yaytso.art/{id}.mp4"></video>
 		{/each}
 	</div>
 {/if}
