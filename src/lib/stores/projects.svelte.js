@@ -25,7 +25,7 @@ import search from './search.svelte';
 export const projectsData = [
 	{
 		id: 'flowers',
-		name: 'flowers',
+		name: 'Flowers',
 		description: 'a collection of ai flowers with ar stuff too',
 		descriptionLong: [
 			`21 trippy ai flowers were chosen from a larger generated collection.`,
@@ -70,10 +70,10 @@ export const projectsData = [
 	},
 	{
 		id: 'remi',
-		name: 'remi',
-		description: "supporting remi frogo's art with AR and web experiences",
+		name: 'Remi',
+		description: "supporting Remi Frogo's art with AR and web experiences",
 		descriptionLong: [
-			`Remi Frogo is a talented artist who creates beautiful paintings and fine art.`,
+			`Remi Frogo is a talented artist who creates beautiful paintings that have a wonderful balance of realism and mysticism.`,
 			`I created a website for her to showcase his art and also created an augmented reality experience for people to see her paintings come to life.`
 		],
 		url: 'https://remifrogo.art',
@@ -81,7 +81,7 @@ export const projectsData = [
 	},
 	{
 		id: 'bao',
-		name: 'bao',
+		name: 'Bao',
 		description: 'making art with bao the magical dog',
 		descriptionLong: [
 			`Bao is a magical dog who creates art.`,
@@ -93,7 +93,7 @@ export const projectsData = [
 
 	{
 		id: 'boopers',
-		name: 'boopers',
+		name: 'Boopers',
 		description: 'Using nfc tags for booping stuff',
 		descriptionLong: [
 			`Currently skinned for a scavenger hunt at FWB fest the first weekend of August.`,

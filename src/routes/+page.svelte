@@ -49,13 +49,8 @@
 	</div>
 	<div class="content">
 		<div
-			style="margin-top:1rem; padding:.5rem;border: 3px solid var(--secondary-color); width: 100%;"
+			style="margin-top:1rem; padding:1rem; border: 3px solid var(--secondary-color); width: 100%;"
 		>
-			<!-- {#if search.hasSearchResults}
-				{#each search.state.results as project}
-					{@render projectLine(project.item)}
-				{/each}
-			{:else} -->
 			{#if filteredProjects.length === 0}
 				<div style="padding:1rem;">
 					<div>No projects found for filtered selected</div>
@@ -67,7 +62,7 @@
 			{#snippet projectLine(/** @type {Project} */ project)}
 				<a
 					href={`/projects/${project.id}`}
-					style="display:block; justify-content:space-between; margin-bottom:.5rem;"
+					style="display:block; justify-content:space-between; margin-bottom:1.25rem;"
 				>
 					<div style="flex: 1 0 50%;">{project.name}</div>
 					<div style="display:flex;flex-wrap:wrap; align-items:center; gap:.5rem;margin-top:.2rem;">
