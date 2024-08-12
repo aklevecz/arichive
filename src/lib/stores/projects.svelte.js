@@ -21,18 +21,6 @@ import search from './search.svelte';
  * VISION PRO
  */
 
-/**
- * @typedef {Object} ProjectData
- * @property {string} id
- * @property {string} name
- * @property {string} description
- * @property {string[]} [descriptionLong]
- * @property {string | null} url
- * @property {string[]} categories
- * @property {boolean} [hasGallery]
- * @property {*} [videoConfiguration]
- */
-
 /** @type {ProjectData[]} projectsData */
 export const projectsData = [
 	{
@@ -48,19 +36,23 @@ export const projectsData = [
 		url: 'https://yaytso.art/events/flowers-1',
 		categories: ['ai', 'digital art', 'ar', 'event']
 	},
-	{
-		id: 'shrooms',
-		name: 'shrooms',
-		description: 'a collection of ai shrooms with ar stuff too',
-		descriptionLong: [`to be designd 🍄`],
-		url: 'https://yaytso.art',
-		categories: ['ai', 'digital art', 'ar', 'event']
-	},
+	// {
+	// 	id: 'shrooms',
+	// 	name: 'shrooms',
+	// 	description: 'a collection of ai shrooms with ar stuff too',
+	// 	descriptionLong: [`to be designd 🍄`],
+	// 	url: 'https://yaytso.art',
+	// 	categories: ['ai', 'digital art', 'ar', 'event']
+	// },
 	{
 		id: 'yaytso-gallery',
 		name: 'yaytso gallery',
 		description: 'my space for trippy art',
-		descriptionLong: [`The yaytso gallery is an evolving space of experimental art.`],
+		descriptionLong: [
+			`The yaytso gallery is an evolving space of experimental art.`,
+			`I use it to showcase my art and experiments with AI and AR.`,
+			`Come as you are.`
+		],
 		url: 'https://yaytso.art',
 		categories: ['art', 'gallery']
 	},
@@ -112,17 +104,17 @@ export const projectsData = [
 		url: 'https://boopers.pages.dev',
 		categories: ['scavenger hunts', 'nfc', 'booping']
 	},
-	{
-		id: '8thwall-projects',
-		name: '8thwall projects',
-		description: 'a collection of projects using 8th wall to crate fun ar experiences',
-		descriptionLong: [
-			`8th wall is a powerful tool for creating augmented reality experiences.`,
-			`I have created a number of projects using 8th wall to create fun and interactive experiences.`
-		],
-		url: 'https://www.8thwall.com/yaytso',
-		categories: ['ar', '8th wall']
-	},
+	// {
+	// 	id: '8thwall-projects',
+	// 	name: '8thwall projects',
+	// 	description: 'a collection of projects using 8th wall to crate fun ar experiences',
+	// 	descriptionLong: [
+	// 		`8th wall is a powerful tool for creating augmented reality experiences.`,
+	// 		`I have created a number of projects using 8th wall to create fun and interactive experiences.`
+	// 	],
+	// 	url: 'https://www.8thwall.com/yaytso',
+	// 	categories: ['ar', '8th wall']
+	// },
 	// {
 	// 	id: 'jung',
 	// 	name: 'jung',
