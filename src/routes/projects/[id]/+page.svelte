@@ -1,6 +1,7 @@
 <script>
 	import projectToImages from '$lib/projectToImages.json';
 	import { onMount } from 'svelte';
+	import { fade } from 'svelte/transition';
 	/** @type {{data:import('./$types').LayoutData}} */
 	let { data } = $props();
 	const { project } = data;
@@ -12,6 +13,9 @@
 	const imagePrefix = `/projects/${project?.id}/`;
 	const src = images[0] ? `/projects/${project?.id}/${images[0]}` : '/projects/bao/bao.jpeg';
 
+	/** @type {number[]} clickedArray */
+	let clickedArray = $state([]);
+
 	let currentFeaturedImageIndex = $state(Math.floor(Math.random() * images.length));
 	let fadeClass = $state('fade-in');
 	const randomImage = () => {
@@ -21,9 +25,18 @@
 			fadeClass = 'fade-in';
 		}, 500); // Duration of the fade-out effect
 	};
+	/** @type {*} */
+	let imageInterval = null;
 	onMount(() => {
-		const interval = setInterval(randomImage, 3000);
-		return () => clearInterval(interval);
+		imageInterval = setInterval(randomImage, 3000);
+		return () => clearInterval(imageInterval);
+	});
+
+	$effect(() => {
+		if (currentFeaturedImageIndex) {
+			clearInterval(imageInterval);
+			imageInterval = setInterval(randomImage, 5000);
+		}
 	});
 
 	let currentFeaturedVideoId = $state(2);
@@ -41,6 +54,14 @@
 	});
 
 	let firstVideoLoaded = $state(false);
+
+	// fade in iframe
+	let iframeFadeClass = $state('fade-out');
+	onMount(() => {
+		setTimeout(() => {
+			iframeFadeClass = 'fade-in';
+		}, 1000);
+	})
 </script>
 
 {#snippet headline(/** @type {{device:'mobile' | 'desktop'}} */ { device })}
@@ -75,18 +96,19 @@
 			/>
 		{/if}
 		{#if project?.url && !project?.hasGallery}
-			<iframe class="website-iframe" title={`${project?.name} iframe`} src={project?.url} style=""
-			></iframe>{/if}
+		<!-- style="position:absolute;z-index:0;left:250px;top:200px;"><img alt="smiler" style="width:300px;height:300px;" -->
+			<div class="website-iframe-container">
+				<iframe style="background:none;position:absolute;z-index:1;" class="website-iframe {iframeFadeClass}" title={`${project?.name} iframe`} src={project?.url}
+				></iframe>
+				<div class="smiler-wrapper"><img class="smiler" alt="smiler" src="/animations/smiler-animated.svg"></div>
+			</div>
+		{/if}
 	</div>
 	<div class="info-container">
 		{@render headline({ device: 'desktop' })}
 		{#if project?.url}<div style="margin:1rem 0rem; display:block;">
-				<a
-					style="margin:auto; display:block;"
-					class="btn visit-site"
-					href={project?.url}
-					target="_blank"
-					rel="noopener noreferrer">visit site</a
+				<a class="visit-site" href={project?.url} target="_blank" rel="noopener noreferrer"
+					>visit site</a
 				>
 			</div>
 		{/if}
@@ -110,7 +132,20 @@
 {#if project?.hasGallery}
 	<div style="margin-top:1rem;">
 		{#each images as image}
-			<img src={imagePrefix + image} alt={image} style="" class="gallery-image" />
+			<button
+				class="gallery-image-button"
+				style="opacity:{!clickedArray.includes(images.indexOf(image))
+					? '100%'
+					: '33%'};transition:opacity 0.5s;"
+				onclick={() => {
+					const imageIndex = images.indexOf(image);
+					clickedArray.push(imageIndex);
+					currentFeaturedImageIndex = imageIndex;
+					window.scrollTo({ top: 0, behavior: 'smooth' });
+				}}
+			>
+				<img src={imagePrefix + image} alt={image} style="" class="gallery-image" />
+			</button>
 		{/each}
 	</div>
 {/if}
@@ -145,20 +180,40 @@
 		flex-direction: column;
 	}
 
+	.website-iframe-container {
+		position: relative;
+		width: 100%;
+		height: 400px;
+	}
 	.website-iframe {
 		width: 100%;
-		height: 300px;
+		height: 400px;
 		border: none;
 	}
+
+	.smiler {
+		width: 100%;
+		/* height: 100px; */
+	}
+
 	.visit-site {
 		width: 150px;
-		text-align: center;
+		/* text-align: center; */
+		text-decoration: underline;
+		transition: color 0.5s;
+	}
+	.visit-site:hover {
+		color: rgb(var(--accent-color));
+	}
+	.gallery-image-button {
+		background: none;
+		padding: 0;
+		margin: 0.25rem;
 	}
 	.gallery-image {
 		width: 100px;
 		height: 100px;
 		object-fit: cover;
-		margin: 0.25rem;
 	}
 	.fade-in {
 		opacity: 1;
@@ -208,7 +263,7 @@
 		.info-container {
 			flex: 0 1 33%;
 		}
-		.gallery-image {
+		.gallery-image-button {
 			margin-left: 1rem;
 		}
 	}
