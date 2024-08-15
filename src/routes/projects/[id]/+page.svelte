@@ -144,7 +144,7 @@
 					window.scrollTo({ top: 0, behavior: 'smooth' });
 				}}
 			>
-				<img src={imagePrefix + image} alt={image} style="" class="gallery-image" />
+				<img style="{project?.id === 'secret-clothing' ? "filter: sepia(1)": ""}" src={imagePrefix + image} alt={image} class="gallery-image" />
 			</button>
 		{/each}
 	</div>
