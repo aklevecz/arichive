@@ -89,7 +89,7 @@
 			></video>{/if}
 		{#if project?.hasGallery}
 			<img
-				style=""
+				style="{project?.id === 'secret-clothing' ? "filter: sepia(1)": ""}"
 				class="featured-image {fadeClass}"
 				src={imagePrefix + images[currentFeaturedImageIndex]}
 				alt="featured"
