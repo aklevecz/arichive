@@ -5,7 +5,6 @@
 	/** @type {{data:import('./$types').LayoutData}} */
 	let { data } = $props();
 	const { project } = data;
-	console.log(data);
 	/** @type {Record<string, string[]>} */
 	let imageMap = projectToImages;
 	/** @type {string[]} */
@@ -61,7 +60,7 @@
 		setTimeout(() => {
 			iframeFadeClass = 'fade-in';
 		}, 1000);
-	})
+	});
 </script>
 
 {#snippet headline(/** @type {{device:'mobile' | 'desktop'}} */ { device })}
@@ -74,7 +73,8 @@
 {/snippet}
 {@render headline({ device: 'mobile' })}
 <div class="content">
-	<div class="website-iframe-container">
+	<!-- <div class="website-iframe-container"> -->
+	 <div class="featured-media">
 		{#if project?.videoConfiguration}<video
 				class="featured-image {videoFadeClass}"
 				playsinline
@@ -89,18 +89,24 @@
 			></video>{/if}
 		{#if project?.hasGallery}
 			<img
-				style="{project?.id === 'secret-clothing' ? "filter: sepia(1)": ""}"
+				style={project?.id === 'secret-clothing' ? 'filter: sepia(1)' : ''}
 				class="featured-image {fadeClass}"
 				src={imagePrefix + images[currentFeaturedImageIndex]}
 				alt="featured"
 			/>
 		{/if}
 		{#if project?.url && !project?.hasGallery}
-		<!-- style="position:absolute;z-index:0;left:250px;top:200px;"><img alt="smiler" style="width:300px;height:300px;" -->
+			<!-- style="position:absolute;z-index:0;left:250px;top:200px;"><img alt="smiler" style="width:300px;height:300px;" -->
 			<div class="website-iframe-container">
-				<iframe style="background:none;position:absolute;z-index:1;" class="website-iframe {iframeFadeClass}" title={`${project?.name} iframe`} src={project?.url}
+				<iframe
+					style="background:none;position:absolute;z-index:1;"
+					class="website-iframe {iframeFadeClass}"
+					title={`${project?.name} iframe`}
+					src={project?.url}
 				></iframe>
-				<div class="smiler-wrapper"><img class="smiler" alt="smiler" src="/animations/smiler-animated.svg"></div>
+				<div class="smiler-wrapper">
+					<img class="smiler" alt="smiler" src="/animations/smiler-animated.svg" />
+				</div>
 			</div>
 		{/if}
 	</div>
@@ -144,7 +150,12 @@
 					window.scrollTo({ top: 0, behavior: 'smooth' });
 				}}
 			>
-				<img style="{project?.id === 'secret-clothing' ? "filter: sepia(1)": ""}" src={imagePrefix + image} alt={image} class="gallery-image" />
+				<img
+					style={project?.id === 'secret-clothing' ? 'filter: sepia(1)' : ''}
+					src={imagePrefix + image}
+					alt={image}
+					class="gallery-image"
+				/>
 			</button>
 		{/each}
 	</div>
@@ -173,7 +184,8 @@
 	}
 
 	.featured-image {
-		width: 300px;
+		/* width: 300px; */
+		width: 100%;
 	}
 	.content {
 		display: flex;
@@ -236,7 +248,8 @@
 			display: flex;
 		}
 		.featured-image {
-			width: 500px;
+			width: 80%;
+			/* height: 100%; */
 			margin: 2rem auto;
 			display: block;
 		}
@@ -251,6 +264,10 @@
 		}
 		.content {
 			flex-direction: row;
+		}
+		.featured-media {
+			flex: 1;
+			order: 1;
 		}
 		.website-iframe-container {
 			margin-top: 1rem;
