@@ -59,6 +59,7 @@
 	onMount(() => {
 		setTimeout(() => {
 			iframeFadeClass = 'fade-in';
+			document.querySelector('.smiler-wrapper')?.classList.add('fade-out')
 		}, 1000);
 	});
 </script>
@@ -104,7 +105,7 @@
 					title={`${project?.name} iframe`}
 					src={project?.url}
 				></iframe>
-				<div class="smiler-wrapper">
+				<div class="smiler-wrapper fade-in">
 					<img class="smiler" alt="smiler" src="/animations/smiler-animated.svg" />
 				</div>
 			</div>
@@ -260,7 +261,7 @@
 		}
 
 		h3 {
-			font-size: 3rem;
+			font-size: 2rem;
 		}
 		.content {
 			flex-direction: row;
