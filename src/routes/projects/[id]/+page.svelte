@@ -59,7 +59,7 @@
 	onMount(() => {
 		setTimeout(() => {
 			iframeFadeClass = 'fade-in';
-			document.querySelector('.smiler-wrapper')?.classList.add('fade-out')
+			document.querySelector('.smiler-wrapper')?.classList.add('fade-out');
 		}, 1000);
 	});
 </script>
@@ -75,7 +75,7 @@
 {@render headline({ device: 'mobile' })}
 <div class="content">
 	<!-- <div class="website-iframe-container"> -->
-	 <div class="featured-media">
+	<div class="featured-media">
 		{#if project?.videoConfiguration}<video
 				class="featured-image {videoFadeClass}"
 				playsinline
@@ -90,7 +90,7 @@
 			></video>{/if}
 		{#if project?.hasGallery}
 			<img
-				style={project?.id === 'secret-clothing' ? 'filter: sepia(1)' : ''}
+				style={`${project?.id === 'secret-clothing' ? 'filter: sepia(1)' : ''} ${project?.imgConfiguration ? `width:${project?.imgConfiguration.width}` : ''}`}
 				class="featured-image {fadeClass}"
 				src={imagePrefix + images[currentFeaturedImageIndex]}
 				alt="featured"
@@ -163,9 +163,14 @@
 {/if}
 
 {#if project?.videoConfiguration && firstVideoLoaded}
-	<div style="margin-top:1rem;">
+	<div style="margin-top:1rem;display: flex; flex-wrap: wrap; gap: 1rem;">
 		{#each Array.from({ length: project?.videoConfiguration.maxId }, (_, i) => i + 1) as id}
-			<video class="gallery-image" src="https://fest-nouns.yaytso.art/{id}.mp4"></video>
+			<!-- <video class="gallery-image" src="https://fest-nouns.yaytso.art/{id}.mp4"></video> -->
+			<img
+				src={`${project.id}/thumbnails/${id}.webp`}
+				alt="video thumbnail"
+				class="gallery-image"
+			/>
 		{/each}
 	</div>
 {/if}

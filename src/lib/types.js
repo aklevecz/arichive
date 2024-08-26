@@ -17,4 +17,5 @@
  * @property {string[]} categories
  * @property {boolean} [hasGallery]
  * @property {*} [videoConfiguration]
+ * @property {*} [imgConfiguration]
  */
