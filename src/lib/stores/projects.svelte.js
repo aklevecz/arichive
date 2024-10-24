@@ -89,6 +89,19 @@ export const projectsData = [
 		categories: ['web', 'ai', 'ar', 'fine art', 'paintings']
 	},
 	{
+		id:"instabao",
+		name:"instaBao",
+		description:"an iOS app to follow Bao's life",
+		descriptionLong: [
+			`iOS app to follow Bao's life`,
+			`People can chat with Bao`,
+			`People can see photos of Bao throughout his illustrious life`,
+			`People can also see his art through AR`
+		],
+		url: 'https://insta.baos.haus',
+		categories: ['3d', 'ar', 'nft', 'art', 'instagram']
+	},
+	{
 		id: 'bao',
 		name: 'Bao',
 		description: 'making art with bao the magical dog',
@@ -100,7 +113,18 @@ export const projectsData = [
 		url: 'https://baos.haus',
 		categories: ['ai', 'dogs', 'chicken art']
 	},
-
+	{
+		id: 'iboopers',
+		name: 'iBoopers',
+		description: 'iOS app that uses nfc tags for interative scavenger hunts',
+		descriptionLong: [
+			`iOS app that uses nfc tags for interative scavenger hunts`,
+			`Users find eggs that give them different amounts of points.`
+		],
+		url: 'https://iboopers.com',
+		categories: ['3d', 'nft', 'eggs'],
+		// hasGallery: true
+	},
 	{
 		id: 'boopers',
 		name: 'Boopers',
