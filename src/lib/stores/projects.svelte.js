@@ -89,9 +89,9 @@ export const projectsData = [
 		categories: ['web', 'ai', 'ar', 'fine art', 'paintings']
 	},
 	{
-		id:"instabao",
-		name:"instaBao",
-		description:"an iOS app to follow Bao's life",
+		id: 'instabao',
+		name: 'instaBao',
+		description: "an iOS app to follow Bao's life",
 		descriptionLong: [
 			`iOS app to follow Bao's life`,
 			`People can chat with Bao`,
@@ -99,7 +99,7 @@ export const projectsData = [
 			`People can also see his art through AR`
 		],
 		url: 'https://insta.baos.haus',
-		categories: ['3d', 'ar', 'nft', 'art', 'instagram']
+		categories: ['ios', 'ar', 'art', 'llm', 'instagram']
 	},
 	{
 		id: 'bao',
@@ -122,7 +122,7 @@ export const projectsData = [
 			`Users find eggs that give them different amounts of points.`
 		],
 		url: 'https://iboopers.com',
-		categories: ['3d', 'nft', 'eggs'],
+		categories: ['ios', 'nfc', 'eggs', 'games']
 		// hasGallery: true
 	},
 	{
