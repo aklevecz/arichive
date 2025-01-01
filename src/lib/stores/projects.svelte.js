@@ -298,7 +298,8 @@ export const projectsData = [
 			'Technology used: Lit and EJS'
 		],
 		url: 'https://search.google',
-		categories: ['web']
+		categories: ['web'],
+		hasGallery: true
 	}
 ];
 
