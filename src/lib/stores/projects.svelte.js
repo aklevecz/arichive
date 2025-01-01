@@ -6,6 +6,7 @@
  *
  */
 
+import { canHaveDecorators } from 'typescript';
 import filter from './filter.svelte';
 import search from './search.svelte';
 /**
@@ -276,6 +277,28 @@ export const projectsData = [
 		],
 		url: 'https://officialofficehours.com/reccenter',
 		categories: ['web', 'office hours']
+	},
+	{
+		id: 'wovn',
+		name: 'Wovn formely known as Artifactor',
+		description: 'A platform for NFT artists to understand and support their fanbase',
+		descriptionLong: [
+			`The Wovn platform was a platform for NFT artists to understand and support their fanbase.`,
+			`Artists would connect their wallet address and then their profile would automatically populate from their activity on the blockchain.`,
+			`I built the fullstack MVP using Next.js`
+		],
+		url: 'https://wovn.xyz',
+		categories: ['web', 'nft']
+	}, {
+		id: 'google-search-site',
+		name: 'Google Search Site',
+		description: 'A performant marketing site I worked on at Left Field Labs',
+		descriptionLong: [
+			'A performant marketing site I worked on at Left Field Labs',
+			'Technology used: Lit and EJS'
+		],
+		url: 'https://search.google',
+		categories: ['web']
 	}
 ];
 
