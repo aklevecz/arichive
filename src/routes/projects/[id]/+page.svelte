@@ -64,11 +64,9 @@
 	});
 
 	let videoUrls = $state(project?.videoUrls);
-	let currentVideoUrl = $state(project?.videoUrls[0])
-	let currentVideoUrlInterval = null
+	let currentVideoUrl = $state(project?.videoUrls ? project.videoUrls[0] : null)
 	let featuredVideoElement = $state(null)
 	onMount(() => {
-		console.log(featuredVideoElement)
 		featuredVideoElement.addEventListener('ended', () => {
 			const currentIndex = videoUrls.indexOf(currentVideoUrl)
 			currentVideoUrl = videoUrls[(currentIndex + 1) % videoUrls.length]
