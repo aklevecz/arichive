@@ -62,6 +62,21 @@
 			document.querySelector('.smiler-wrapper')?.classList.add('fade-out');
 		}, 1000);
 	});
+
+	let videoUrls = $state(project?.videoUrls);
+	let currentVideoUrl = $state(project?.videoUrls[0])
+	let currentVideoUrlInterval = null
+	let featuredVideoElement = $state(null)
+	onMount(() => {
+		console.log(featuredVideoElement)
+		featuredVideoElement.addEventListener('ended', () => {
+			const currentIndex = videoUrls.indexOf(currentVideoUrl)
+			currentVideoUrl = videoUrls[(currentIndex + 1) % videoUrls.length]
+		})
+		// currentVideoUrlInterval = setInterval(() => {
+		// 	currentVideoUrl = videoUrls[Math.floor(Math.random() * videoUrls.length)]
+		// }, 5000)
+	})
 </script>
 
 {#snippet headline(/** @type {{device:'mobile' | 'desktop'}} */ { device })}
@@ -76,6 +91,9 @@
 <div class="content">
 	<!-- <div class="website-iframe-container"> -->
 	<div class="featured-media">
+		{#if project?.videoUrls?.length}
+			<video bind:this={featuredVideoElement} class="featured-image" src={`/projects/${project?.id}/${currentVideoUrl}`} autoplay muted></video>
+		{/if}
 		{#if project?.videoConfiguration}<video
 				class="featured-image {videoFadeClass}"
 				playsinline

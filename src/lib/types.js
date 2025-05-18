@@ -16,6 +16,7 @@
  * @property {string | null} url
  * @property {string[]} categories
  * @property {boolean} [hasGallery]
+ * @property {string[]} [videoUrls]
  * @property {*} [videoConfiguration]
  * @property {*} [imgConfiguration]
  */

@@ -6,7 +6,6 @@
  *
  */
 
-import { canHaveDecorators } from 'typescript';
 import filter from './filter.svelte';
 import search from './search.svelte';
 /**
@@ -40,6 +39,54 @@ export const projectsData = [
 		],
 		url: 'https://yaytso.art/events/flowers-1',
 		categories: ['ai', 'digital art', 'ar', 'event']
+	},
+	{
+		id: 'goodneighbor',
+		name: 'Good Neighbor Order Form',
+		description: `A custom order form for good neighbor music to improve their record pipeline and customer relationships`,
+		descriptionLong: [
+			`Good Neighbor is a ecoloigcally friendly record pressing company that uses innovative injection technology to produce records`,
+			`The order form is a tool to improve their customer relationships and internal operations`,
+			`The form is a Sveltekit app hosted on Cloudflare and includes many UX features that save a user's progress to mitigate loss of work`,
+			`There are also fun easter eggs like being able to generate an album cover using Stable Diffusion`
+		],
+		url: 'https://order-form.goodneighbormusic.com',
+		categories: ['web', 'music', 'digital art', 'sveltekit', 'cloudflare', 'ai']
+	},
+	{
+		id: 'live-visuals',
+		name: 'Live TouchDesigner Visuals',
+		description: `Live audio reactive visuals textured with Stable Diffusion`,
+		descriptionLong: [
+			`Live audio reactive visuals made with TouchDesigner.`,
+			`People in front of the camera are body tracked and then textured with audio reactive noise. That noisey silhouette is then textured with a Stable Diffusion prompt that can be changed live`
+		],
+		url: null,
+		videoUrls: [
+			'live-visuals-krg.mp4',
+			'live-visuals2.mp4',
+			'live-visuals3.mp4',
+			'live-visuals4.mp4',
+			'live-visuals5.mp4',
+			'live-visuals6.mp4',
+			'live-visuals7.mp4'
+		],
+		categories: ['ai', 'digital art', 'audio reactive', 'touchdesigner']
+	},
+	{
+		id: 'raptor-app',
+		name: 'Raptor App',
+		description:
+			'An iOS app for raptorly events where attendees can both see their tickets and interact with AR artwork',
+		descriptionLong: [
+			`The Raptor App is an iOS app that allows attendees to see their tickets and interact with AR artwork at raptorly events.`,
+			`The app uses ARKit to image track posters present at the party and superimpose a trippy video on top of them to bring them to life.`,
+			`The app also fetches the tickets for the party the person is attending for easy check in`,
+			`Eventually the app will display a collection related to the person's attendance and easter eggs they have found`
+		],
+		// url:'https://apps.apple.com/us/app/raptor-app/id6741381341',
+		url: 'https://app.raptor.pizza',
+		categories: ['ios', 'ar', 'events', 'ticketing']
 	},
 	// {
 	// 	id: 'shrooms',
@@ -289,7 +336,8 @@ export const projectsData = [
 		],
 		url: 'https://wovn.xyz',
 		categories: ['web', 'nft']
-	}, {
+	},
+	{
 		id: 'google-search-site',
 		name: 'Google Search Site',
 		description: 'A performant marketing site I worked on at Left Field Labs',
