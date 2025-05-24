@@ -90,7 +90,7 @@
 	<!-- <div class="website-iframe-container"> -->
 	<div class="featured-media">
 		{#if project?.videoUrls?.length}
-			<video bind:this={featuredVideoElement} class="featured-image" src={`/projects/${project?.id}/${currentVideoUrl}`} autoplay muted></video>
+			<video playsinline bind:this={featuredVideoElement} class="featured-image" src={`/projects/${project?.id}/${currentVideoUrl}`} autoplay muted></video>
 		{/if}
 		{#if project?.videoConfiguration}<video
 				class="featured-image {videoFadeClass}"
