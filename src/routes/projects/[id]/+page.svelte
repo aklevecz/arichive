@@ -271,7 +271,7 @@
 		}
 		.featured-image {
 			width: 80%;
-			/* height: 100%; */
+			height: calc(100% - 370px);
 			margin: 2rem auto;
 			display: block;
 		}
