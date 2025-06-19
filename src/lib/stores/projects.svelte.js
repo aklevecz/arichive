@@ -27,7 +27,7 @@ export const projectsData = [
 		id: 'flowers',
 		name: 'Flowers',
 		description:
-			'A series of psychedelic AI generated flowers with their own deforum animations. Brought to life through posters with image tracking AR for a interactive gallery show',
+			'A series of psychedelic AI generated flowers with their own deforum animations. Brought to life through posters with image tracking AR for a interactive gallery show. The webpage to the right is a fun ThreeJS viewer for flipping through each poster.',
 		descriptionLong: [
 			`The flowers show was held on June 15th 2024 as the first official show at yaytso gallery featuring Ariel Klevecz and Remi Frogo.`,
 			`Hundreds of lillies were generated using Stable Diffusion XL. 21 of them were selected and then upscaled and outpainted to an aspect ratio to fit a poster.`,
@@ -37,8 +37,23 @@ export const projectsData = [
 			`I also created a experimental version of the AR experience in VisionOS, which was by far the best experience, but still needs to be refined.`,
 			`Technology used: Stable Diffusion, 8th Wall, Swift (ARKit, VisionOS), JavaScript, Cloudflare Workers`
 		],
-		url: 'https://yaytso.art/events/flowers-1',
+		url: 'https://flowers.yaytso.art',
 		categories: ['ai', 'digital art', 'ar', 'event']
+	},
+	{id:"tix",
+		name:"Tickets V2",
+		description:"Ticketing web app including giveaways and bonding curve-esque pricing",
+		descriptionLong: [
+			`I built a newer version of my past ticketing app with improved coding patterns that allowed me to more easily scale its features.`,
+			`WIN TIX takes you to a page where each day there is a free ticket available at a random time to the first person to press the button at that random time.`,
+			`Base ticket prices increased on a quadratic curve in 1ct increments encouraging people to buy earlier because ticket prices rise exponentially as the event approaches.`,
+			`Prices are additionally on a sliding scale and can be discounted with a code.`,
+			`Tickets are purchased through a custom checkout using the Stripe API.`,
+			`When someone either bought or won a ticket, a silly image is generated and applied as their profile picture.`,
+			`They can see their profile and also see the QR codes for their tickets by signing in using their phone number.`,
+		],
+		url: 'https://tix.raptor.pizza',
+		categories: ['web', 'ticketing', 'sveltekit', 'cloudflare', 'stripe', 'ar', 'events']
 	},
 	{
 		id: 'goodneighbor',
@@ -190,17 +205,17 @@ export const projectsData = [
 		url: 'https://boopers.pages.dev',
 		categories: ['scavenger hunts', 'nfc', 'booping']
 	},
-	// {
-	// 	id: '8thwall-projects',
-	// 	name: '8thwall projects',
-	// 	description: 'a collection of projects using 8th wall to crate fun ar experiences',
-	// 	descriptionLong: [
-	// 		`8th wall is a powerful tool for creating augmented reality experiences.`,
-	// 		`I have created a number of projects using 8th wall to create fun and interactive experiences.`
-	// 	],
-	// 	url: 'https://www.8thwall.com/yaytso',
-	// 	categories: ['ar', '8th wall']
-	// },
+	{
+		id: '8thwall-projects',
+		name: '8thwall projects',
+		description: 'a collection of projects using 8th wall to crate fun ar experiences',
+		descriptionLong: [
+			`8th wall is a powerful tool for creating augmented reality experiences.`,
+			`I have created a number of projects using 8th wall to create fun and interactive experiences.`
+		],
+		url: 'https://www.8thwall.com/yaytso',
+		categories: ['ar', '8th wall']
+	},
 	// {
 	// 	id: 'jung',
 	// 	name: 'jung',

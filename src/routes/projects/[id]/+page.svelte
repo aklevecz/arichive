@@ -76,7 +76,7 @@
 		// }, 5000)
 	})
 </script>
-
+<a href="/">home</a>
 {#snippet headline(/** @type {{device:'mobile' | 'desktop'}} */ { device })}
 	<div class="headline {device}">
 		<h3>{project?.name}</h3>
@@ -301,6 +301,7 @@
 		}
 		.info-container {
 			flex: 0 1 33%;
+			line-height: 1.4rem;
 		}
 		.gallery-image-button {
 			margin-left: 1rem;
