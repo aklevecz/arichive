@@ -64,21 +64,24 @@
 	});
 
 	let videoUrls = $state(project?.videoUrls);
-	let currentVideoUrl = $state(project?.videoUrls ? project.videoUrls[0] : null)
-	let featuredVideoElement = $state(null)
+	let currentVideoUrl = $state(project?.videoUrls ? project.videoUrls[0] : null);
+	let featuredVideoElement = $state(null);
 	onMount(() => {
 		featuredVideoElement.addEventListener('ended', () => {
-			const currentIndex = videoUrls.indexOf(currentVideoUrl)
-			currentVideoUrl = videoUrls[(currentIndex + 1) % videoUrls.length]
-		})
+			const currentIndex = videoUrls.indexOf(currentVideoUrl);
+			currentVideoUrl = videoUrls[(currentIndex + 1) % videoUrls.length];
+		});
 		// currentVideoUrlInterval = setInterval(() => {
 		// 	currentVideoUrl = videoUrls[Math.floor(Math.random() * videoUrls.length)]
 		// }, 5000)
-	})
+	});
 </script>
-<a href="/">home</a>
+
+<div style="margin:1rem 0;">
+	<a href="/" style="margin-top:1rem;"> {'<-'} home</a>
+</div>
 {#snippet headline(/** @type {{device:'mobile' | 'desktop'}} */ { device })}
-	<div class="headline {device}">
+	<div class="headline heading {device}">
 		<h3>{project?.name}</h3>
 
 		<!-- <img {src} style="height:75px; margin: 1rem 0;" alt={project?.name} /> -->
@@ -90,7 +93,14 @@
 	<!-- <div class="website-iframe-container"> -->
 	<div class="featured-media">
 		{#if project?.videoUrls?.length}
-			<video playsinline bind:this={featuredVideoElement} class="featured-image" src={`/projects/${project?.id}/${currentVideoUrl}`} autoplay muted></video>
+			<video
+				playsinline
+				bind:this={featuredVideoElement}
+				class="featured-image"
+				src={`/projects/${project?.id}/${currentVideoUrl}`}
+				autoplay
+				muted
+			></video>
 		{/if}
 		{#if project?.videoConfiguration}<video
 				class="featured-image {videoFadeClass}"
@@ -106,20 +116,20 @@
 			></video>{/if}
 		{#if project?.hasGallery}
 			<img
-				style={`${project?.id === 'secret-clothing' ? 'filter: sepia(1)' : ''} ${project?.imgConfiguration ? `width:${project?.imgConfiguration.width}` : ''}`}
+				style={`${project?.id === 'secret-clothing' ? 'filter: sepia(1)' : ''} ${project?.imgConfiguration ? `width:${project?.imgConfiguration.width};height:${project?.imgConfiguration.height};` : ''}`}
 				class="featured-image {fadeClass}"
 				src={imagePrefix + images[currentFeaturedImageIndex]}
 				alt="featured"
 			/>
 		{/if}
-		{#if project?.url && !project?.hasGallery}
+		{#if project?.url?.length > 0 && !project?.hasGallery}
 			<!-- style="position:absolute;z-index:0;left:250px;top:200px;"><img alt="smiler" style="width:300px;height:300px;" -->
 			<div class="website-iframe-container">
 				<iframe
 					style="background:none;position:absolute;z-index:1;"
 					class="website-iframe {iframeFadeClass}"
 					title={`${project?.name} iframe`}
-					src={project?.url}
+					src={project?.url[0]}
 				></iframe>
 				<div class="smiler-wrapper fade-in">
 					<img class="smiler" alt="smiler" src="/animations/smiler-animated.svg" />
@@ -129,11 +139,16 @@
 	</div>
 	<div class="info-container">
 		{@render headline({ device: 'desktop' })}
-		{#if project?.url}<div style="margin:1rem 0rem; display:block;">
-				<a class="visit-site" href={project?.url} target="_blank" rel="noopener noreferrer"
+		{#if project?.url?.length > 0}<div style="margin:1rem 0rem; display:block;">
+				<a class="visit-site" href={project?.url[0]} target="_blank" rel="noopener noreferrer"
 					>visit site</a
 				>
 			</div>
+			{#if project.url.length > 1}
+				<a href={project.url[1]} class="visit-site" target="_blank" rel="noopener noreferrer"
+					>visit other version</a
+				>
+			{/if}
 		{/if}
 		<div style="margin:1.5rem 0;">{project?.description}</div>
 		{#if project?.descriptionLong}
@@ -197,6 +212,7 @@
 		justify-content: space-between;
 		margin: 1rem 0;
 		font-size: 1rem;
+		line-height: 1.1;
 	}
 	.headline.mobile {
 		display: flex;
@@ -207,7 +223,7 @@
 
 	.featured-image {
 		/* width: 300px; */
-		width: 100%;
+		width: 70%;
 	}
 	.content {
 		display: flex;
@@ -271,7 +287,7 @@
 		}
 		.featured-image {
 			width: 80%;
-			height: calc(100% - 370px);
+			/* height: calc(100% - 370px); */
 			margin: 2rem auto;
 			display: block;
 		}

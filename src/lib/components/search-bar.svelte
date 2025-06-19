@@ -7,16 +7,19 @@
 	}
 </script>
 
-<div>
+<div class="search-bar">
 	<input oninput={onInput} type="text" placeholder="Search" />
 	<img src="/icons/search-icon.svg" alt="search-icon" />
 </div>
 
 <style>
-	div {
+	.search-bar {
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		margin-top:1rem;
+		width:275px;
+		margin-left:1rem;
 	}
 	input {
 		width: 90%;
@@ -29,7 +32,9 @@
 		padding: 0.5rem;
 	}
 	input::placeholder {
+		opacity: 0.0;
 		font-family: monospace;
+		font-size: .75rem;
 		color: var(--secondary-color);
 	}
 	img {

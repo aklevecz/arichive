@@ -21,9 +21,11 @@
 		padding: 0;
 	} */
 	:global(.category-nugget) {
-		font-size: 0.75rem;
+		font-family: monospace;
+		font-size: .75rem;
 		background-color: var(--secondary-color);
 		color: var(--primary-color);
-		padding: 1px 4px;
+		margin-top: 8px;
+		padding: 2px 8px;
 	}
 </style>

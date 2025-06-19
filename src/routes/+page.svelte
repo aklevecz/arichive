@@ -47,9 +47,7 @@
 		<ApplyFilters />
 	</div>
 	<div class="content">
-		<div
-			style="margin-top:1rem; padding:1rem; border: 3px solid var(--secondary-color); width: 100%;"
-		>
+		<div class="project-items-container">
 			{#if filteredProjects.length === 0}
 				<div style="padding:1rem;">
 					<div>No projects found for filtered selected</div>
@@ -59,11 +57,8 @@
 				</div>
 			{/if}
 			{#snippet projectLine(/** @type {Project} */ project)}
-				<a
-					href={`/projects/${project.id}`}
-					style="display:block; justify-content:space-between; margin-bottom:1.25rem;"
-				>
-					<div style="flex: 1 0 50%;">{project.name}</div>
+				<a href={`/projects/${project.id}`} class="project-item" style="">
+					<div class="project-item-name">{project.name}</div>
 					<div style="display:flex;flex-wrap:wrap; align-items:center; gap:.5rem;margin-top:.2rem;">
 						{#each project.categories as category}
 							<div class="category-nugget" style="">
@@ -92,6 +87,22 @@
 		width: 100%;
 	}
 
+	.project-items-container {
+		padding: 1rem;
+		width: 100%;
+	}
+
+	.project-item {
+		display: block;
+		justify-content: space-between;
+		margin-bottom: 2.25rem;
+	}
+
+	.project-item-name {
+		flex: 1 0 50%;
+		font-size: 1.2rem;
+	}
+
 	@media (min-width: 768px) {
 		.container {
 			display: flex;
@@ -103,8 +114,25 @@
 			width: auto;
 			flex: 1 0 auto;
 		}
+		.project-items-container {
+			margin-top: 1.5rem;
+			margin-left: 4rem;
+			display: flex;
+			flex-wrap: wrap;
+			gap: 1rem;
+			width: 800px;
+		}
+		.project-item {
+			width: 300px;
+		}
+		.project-item-name {
+			font-size: 1rem;
+		}
 		.header-search-wrapper {
 			flex: 0 1 40%;
+			max-width: 370px;
+			position: sticky;
+			top:0;
 		}
 	}
 </style>

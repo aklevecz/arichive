@@ -40,21 +40,26 @@
 
 <style>
 	.container {
-		margin-top: 0.5rem;
+		margin-top: 1.25rem;
+		margin-left: 1rem;
 	}
 	.category-nugget-container {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 0.5rem;
 		padding: 0.5rem;
+		margin-top: 1rem;
 	}
 	.category-nugget.active {
 		background-color: rgba(var(--accent-color), 0.75);
 		color: var(--secondary-color);
 	}
+	button {
+		border-radius: 20px;
+	}
 	@media (min-width: 1200px) {
 		.container {
-			margin-left: 0.75rem;
+			/* margin-left: 0.75rem; */
 		}
 	}
 </style>

@@ -13,7 +13,7 @@
  * @property {string} name
  * @property {string} description
  * @property {string[]} [descriptionLong]
- * @property {string | null} url
+ * @property {string[] | null} url
  * @property {string[]} categories
  * @property {boolean} [hasGallery]
  * @property {string[]} [videoUrls]

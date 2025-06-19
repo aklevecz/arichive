@@ -37,12 +37,13 @@ export const projectsData = [
 			`I also created a experimental version of the AR experience in VisionOS, which was by far the best experience, but still needs to be refined.`,
 			`Technology used: Stable Diffusion, 8th Wall, Swift (ARKit, VisionOS), JavaScript, Cloudflare Workers`
 		],
-		url: 'https://flowers.yaytso.art',
+		url: ['https://flowers.yaytso.art'],
 		categories: ['ai', 'digital art', 'ar', 'event']
 	},
-	{id:"tix",
-		name:"Tickets V2",
-		description:"Ticketing web app including giveaways and bonding curve-esque pricing",
+	{
+		id: 'tix',
+		name: 'Tickets V2',
+		description: 'Ticketing web app including giveaways and bonding curve-esque pricing',
 		descriptionLong: [
 			`I built a newer version of my past ticketing app with improved coding patterns that allowed me to more easily scale its features.`,
 			`WIN TIX takes you to a page where each day there is a free ticket available at a random time to the first person to press the button at that random time.`,
@@ -50,33 +51,37 @@ export const projectsData = [
 			`Prices are additionally on a sliding scale and can be discounted with a code.`,
 			`Tickets are purchased through a custom checkout using the Stripe API.`,
 			`When someone either bought or won a ticket, a silly image is generated and applied as their profile picture.`,
-			`They can see their profile and also see the QR codes for their tickets by signing in using their phone number.`,
+			`They can see their profile and also see the QR codes for their tickets by signing in using their phone number.`
 		],
-		url: 'https://tix.raptor.pizza',
+		url: ['https://tix.raptor.pizza', 'https://tickets.yaytso.art'],
 		categories: ['web', 'ticketing', 'sveltekit', 'cloudflare', 'stripe', 'ar', 'events']
 	},
 	{
 		id: 'goodneighbor',
 		name: 'Good Neighbor Order Form',
-		description: `A custom order form for good neighbor music to improve their record pipeline and customer relationships`,
+		description: `A custom order form for good neighbor music to improve their record pipeline and customer relationship through creative touches and nice data persistence UX`,
 		descriptionLong: [
-			`Good Neighbor is a ecoloigcally friendly record pressing company that uses innovative injection technology to produce records`,
-			`The order form is a tool to improve their customer relationships and internal operations`,
-			`The form is a Sveltekit app hosted on Cloudflare and includes many UX features that save a user's progress to mitigate loss of work`,
-			`There are also fun easter eggs like being able to generate an album cover using Stable Diffusion`
+			`Good Neighbor is a ecoloigcally friendly record pressing company that uses innovative injection technology to produce records at a fraction of the carbon footprint of traditional vinyl.`,
+			`They asked me if I could build an improved version of their Google intake form, and so I got incredibly carried away and baked a bunch of creative and bleeding edge web app technology into it.`,
+			`I had always wanted to explore offline mode for a site, so I built a service worker and utilized the indexed db to persist form data in the browser that functions without an internet connection and will even send any changes made once internet connection is restored`,
+			`The form also saves remotely on submission and at a particular interval after each change where data is sent to a SQL database and the Monday CRM.`,
+			`For posterity I implemented the concept of a Project so that each form exists in its own project and a user can create multiple projects and switch between them`,
+			`The spinning album cover is rendered using Three.js and is interactive, allowing the user to upload an image or generate on using Flux in the dream section`
 		],
-		url: 'https://order-form.goodneighbormusic.com',
+		url: ['https://order-form.goodneighbormusic.com'],
 		categories: ['web', 'music', 'digital art', 'sveltekit', 'cloudflare', 'ai']
 	},
 	{
 		id: 'live-visuals',
 		name: 'Live TouchDesigner Visuals',
-		description: `Live audio reactive visuals textured with Stable Diffusion`,
+		description: `Live audio reactive visuals textured with ai at 30fps using Stream Diffusion`,
 		descriptionLong: [
-			`Live audio reactive visuals made with TouchDesigner.`,
-			`People in front of the camera are body tracked and then textured with audio reactive noise. That noisey silhouette is then textured with a Stable Diffusion prompt that can be changed live`
+			`I threw a party in SF on 5/2/2025 where I booked DJs and set up live visuals using TouchDesigner and XBox Kinect.`,
+			`I had one computer receiving the audio from the DJ controller and performing all of the audio analysis and another computer receiving the analysis over UDP and running all of the visuals`,
+			`The visual pipeline started with the simple player index from the Kinect that was then textured with noise and run through the Stream Diffusion pipeline`,
+			`From there the prompt and the amount of denoising could be manipulated live to create novel effects throughout the party. One super fun aspect of the event was people slowly figuring out that they could come behind the curtain and realize their own silly/trippy ideas.`
 		],
-		url: null,
+		url: [],
 		videoUrls: [
 			'live-visuals-krg.mp4',
 			'live-visuals2.mp4',
@@ -89,18 +94,29 @@ export const projectsData = [
 		categories: ['ai', 'digital art', 'audio reactive', 'touchdesigner']
 	},
 	{
+		id: 'office-hours-rec-center',
+		name: 'Office Hours Rec Center',
+		description: 'A virtual rec center for the Office Hours podcast',
+		descriptionLong: [
+			`The Office Hours podcast started a ritual of collecting recommendations from the hosts and guests at the end of each episode.`,
+			`At some point they expressed interest in creating a website to host and organize the content so I volunteered to create the site`,
+			`I built the website using SvelteKit and host it through an iframe on their SquareSpace site`,
+		],
+		url: ['https://officialofficehours.com/reccenter'],
+		categories: ['web', 'office hours', 'sveltekit', 'cloudflare']
+	},
+	{
 		id: 'raptor-app',
 		name: 'Raptor App',
-		description:
-			'An iOS app for raptorly events where attendees can both see their tickets and interact with AR artwork',
+		description: 'An iOS app to see tickets for an event and visualize AR artwork',
 		descriptionLong: [
-			`The Raptor App is an iOS app that allows attendees to see their tickets and interact with AR artwork at raptorly events.`,
+			`The Raptor App is an iOS app written in Swift that allows an event goer to see their purchased/won tickets and provides a camera to interact with AR artwork`,
 			`The app uses ARKit to image track posters present at the party and superimpose a trippy video on top of them to bring them to life.`,
 			`The app also fetches the tickets for the party the person is attending for easy check in`,
 			`Eventually the app will display a collection related to the person's attendance and easter eggs they have found`
 		],
-		// url:'https://apps.apple.com/us/app/raptor-app/id6741381341',
-		url: 'https://app.raptor.pizza',
+		// url:['https://apps.apple.com/us/app/raptor-app/id6741381341'],
+		url: ['https://app.raptor.pizza'],
 		categories: ['ios', 'ar', 'events', 'ticketing']
 	},
 	// {
@@ -112,68 +128,58 @@ export const projectsData = [
 	// 	categories: ['ai', 'digital art', 'ar', 'event']
 	// },
 	{
-		id: 'yaytso-gallery',
-		name: 'yaytso gallery',
-		description: 'my space for trippy art',
+		id: 'yaytso',
+		name: 'yaytso',
+		description: 'yaytso means egg',
 		descriptionLong: [
-			`The yaytso gallery is an evolving space of experimental art.`,
-			`I use it to showcase my art and experiments with AI and AR.`,
-			`Locaed at Lacy Studio Lofts in Los Angeles CA`,
-			`Come as you are.`
+			`I'm always trying to hatch weird stuff`,
 		],
-		url: 'https://yaytso.art/about',
-		categories: ['art', 'gallery']
+		url: ['https://yaytso.art'],
+		categories: ['egg', 'events', 'art', 'ai']
 	},
 	{
 		id: 'yaytso-egg-maker',
 		name: 'yaytso egg maker',
 		description: 'a silly creative toy for making producing your own unique eggs',
 		descriptionLong: [
-			`The yaytso egg maker is a tool for making eggs that can be minted as a NFT.`,
-			`You can upload an image or draw on a blank egg and bring your creative eggnergy into the world.`,
+			`I created the egg maker in a NFT hackathon and continued playing with it as a creative toy for making your own egg art.`,
+			`You can upload an image or draw on the small canvas, and then create patterns from those textures.`,
 			`Once you are happy with your egg you can save it, where it is then uploaded to IPFS. If you feel like immortalizing it as an NFT you can go ahead and pay some gas`,
-			`This project was funded by a grant from Filecoin Foundation`,
-			`Technology used: React.js, Solidity, IPFS, Three.js, Firebase`
+			`This project was funded by a grant from Filecoin Foundation.`,
 		],
-		url: 'https://fab.yaytso.art',
-		categories: ['3d', 'nft', 'eggs']
+		url: ['https://fab.yaytso.art'],
+		categories: ['3d', 'nft', 'eggs', 'react', 'ipfs', 'ethereum']
 	},
 	{
 		id: 'remi',
 		name: 'Remi Frogo',
-		description: "supporting Remi Frogo's art with AR and web experiences",
+		description: "A site for Remi to show off her art and tattoos, designed by Remi",
 		descriptionLong: [
-			`Remi Frogo is a talented artist who creates beautiful paintings that have a wonderful balance of realism and mysticism.`,
-			`She was a resident in yaytso gallery during the summer where she designed beautiful branding elements and painted original pieces`,
-			`I created a website for her to showcase her art and also created an augmented reality experience for people to see her paintings come to life.`,
-			`Technology used: Astro, 8th Wall, JavaScript, Cloudflare Workers`
+			`Remi Frogo is an incredible painter and designer who creates a wonderful balance of realism and mysticism in her work.`,
 		],
-		url: 'https://remifrogo.art',
-		categories: ['web', 'ai', 'ar', 'fine art', 'paintings']
+		url: ['https://remifrogo.art'],
+		categories: ['web', 'ai', 'ar', 'fine art', 'paintings', 'astro']
 	},
 	{
 		id: 'instabao',
 		name: 'instaBao',
 		description: "an iOS app to follow Bao's life",
 		descriptionLong: [
-			`iOS app to follow Bao's life`,
-			`People can chat with Bao`,
-			`People can see photos of Bao throughout his illustrious life`,
-			`People can also see his art through AR`
+			`You can chat with Bao`,
+			`You can see photos of Bao throughout his illustrious life`,
+			`And you can see him through AR do weird stuff`
 		],
-		url: 'https://insta.baos.haus',
+		url: ['https://insta.baos.haus'],
 		categories: ['ios', 'ar', 'art', 'llm', 'instagram']
 	},
 	{
 		id: 'bao',
 		name: 'Bao',
-		description: 'making art with bao the magical dog',
+		description: `Bao's website`,
 		descriptionLong: [
 			`Bao is a magical dog who creates chicken art.`,
-			`I created a website for him to showcase his art and also created an augmented reality experience for people to see his art come to life.`,
-			`Technology used: SvelteKit, 8th Wall, JavaScript, Open AI GPT-4 RAG functionality, Cloudflare Workers`
 		],
-		url: 'https://baos.haus',
+		url: ['https://baos.haus'],
 		categories: ['ai', 'dogs', 'chicken art']
 	},
 	{
@@ -181,10 +187,9 @@ export const projectsData = [
 		name: 'iBoopers',
 		description: 'iOS app that uses nfc tags for interative scavenger hunts',
 		descriptionLong: [
-			`iOS app that uses nfc tags for interative scavenger hunts`,
-			`Users find eggs that give them different amounts of points.`
+			`You search for eggs that give different amounts of points.`
 		],
-		url: 'https://iboopers.com',
+		url: ['https://iboopers.com'],
 		categories: ['ios', 'nfc', 'eggs', 'games']
 		// hasGallery: true
 	},
@@ -202,20 +207,20 @@ export const projectsData = [
 			`An iOS app for a better experience is under development.`,
 			`Technology used: SvelteKit, 8th Wall, JavaScript, Cloudflare Workers, Solidity, Base Ethereum, Stable Diffusion XL, Deforum, AnimateDiff`
 		],
-		url: 'https://boopers.pages.dev',
+		url: ['https://boopers.pages.dev'],
 		categories: ['scavenger hunts', 'nfc', 'booping']
 	},
-	{
-		id: '8thwall-projects',
-		name: '8thwall projects',
-		description: 'a collection of projects using 8th wall to crate fun ar experiences',
-		descriptionLong: [
-			`8th wall is a powerful tool for creating augmented reality experiences.`,
-			`I have created a number of projects using 8th wall to create fun and interactive experiences.`
-		],
-		url: 'https://www.8thwall.com/yaytso',
-		categories: ['ar', '8th wall']
-	},
+	// {
+	// 	id: '8thwall-projects',
+	// 	name: '8thwall projects',
+	// 	description: 'a collection of projects using 8th wall to crate fun ar experiences',
+	// 	descriptionLong: [
+	// 		`8th wall is a powerful tool for creating augmented reality experiences.`,
+	// 		`I have created a number of projects using 8th wall to create fun and interactive experiences.`
+	// 	],
+	// 	url: ['https://www.8thwall.com/yaytso'],
+	// 	categories: ['ar', '8th wall']
+	// },
 	// {
 	// 	id: 'jung',
 	// 	name: 'jung',
@@ -234,11 +239,12 @@ export const projectsData = [
 			`Tends to vary depending on what the prompt is generating.`,
 			`Technology used: Stable Diffusion, ComfyUI, ControlNets, IPAdapter`
 		],
-		url: null,
+		url: [],
 		categories: ['ai', 'qr code'],
 		hasGallery: true,
 		imgConfiguration: {
-			width: '400px'
+			width: '350px',
+			height: '350px'
 		}
 	},
 	{
@@ -252,7 +258,7 @@ export const projectsData = [
 			`I also helped build the website for the activation as part of Hifi Labs.`,
 			`Technology used: Next.js, Stable Diffusion, ComfyUI, ControlNets`
 		],
-		url: 'https://betterthingsbyaespa.com/',
+		url: ['https://betterthingsbyaespa.com/'],
 		categories: ['ai', 'music', 'digital art'],
 		hasGallery: true
 	},
@@ -268,8 +274,8 @@ export const projectsData = [
 			`I also helped build this website as part of Hifi Labs.`,
 			`Technology used: Next.js, Stable Diffusion, ComfyUI, ControlNets`
 		],
-		url: 'https://surv1val.com',
-		categories: ['ai', 'music', 'digital art'],
+		url: ['https://surv1val.com'],
+		categories: ['ai', 'music', 'digital art', 'nft'],
 		hasGallery: true
 	},
 	// {
@@ -287,9 +293,8 @@ export const projectsData = [
 			`Includes a fun NFT generator where you mint pieces of the logo in order to create a completed version of it.`,
 			`The ecommerce component is still under construction, but there was a short run of selling coffee beans using Base Ethereum`,
 			`It was an interesting problem to solve connecting a NFT contract to a Shopify backend`,
-			`Technology used: SvelteKit, Solidity, Base Ethereum, Shopify`
 		],
-		url: 'https://happyfriday.coffee',
+		url: ['https://happyfriday.coffee'],
 		categories: ['web', 'nft', 'ecommerce', 'coffee']
 	},
 	{
@@ -302,7 +307,7 @@ export const projectsData = [
 			`The workflow used IPAdapters and ControlNets to have the animation transition between cloud textured noggles into a mysical park`,
 			`The animations were projected onto the trees in the park and people could interact with them using their phones.`
 		],
-		url: null,
+		url: [],
 		videoConfiguration: {
 			host: 'https://fest-nouns.yaytso.art',
 			maxId: 100
@@ -326,20 +331,7 @@ export const projectsData = [
 	// 	categories: ['ai', 'fashion', 'digital art', 'finetuning', 'lora'],
 	// 	hasGallery: true
 	// },
-	{
-		id: 'office-hours-rec-center',
-		name: 'Office Hours Rec Center',
-		description: 'A virtual rec center for Office Hours',
-		descriptionLong: [
-			`The Office Hours is a podcast hosted by Tim Heidecker that tends to embrace interactivity with their guests and supporters.`,
-			`They started a ritual of collecting recommendations from the hosts and guests each episode.`,
-			`At some point they expressed interest in creating a website to host this content, and I volunteered for the task`,
-			`I built the website using SvelteKit and host it through an iframe on their SquareSpace site`,
-			`Technology used: SvelteKit, JavaScript, Cloudflare Workers`
-		],
-		url: 'https://officialofficehours.com/reccenter',
-		categories: ['web', 'office hours']
-	},
+
 	{
 		id: 'wovn',
 		name: 'Wovn formely known as Artifactor',
@@ -349,21 +341,20 @@ export const projectsData = [
 			`Artists would connect their wallet address and then their profile would automatically populate from their activity on the blockchain.`,
 			`I built the fullstack MVP using Next.js`
 		],
-		url: 'https://wovn.xyz',
+		url: ['https://wovn.xyz'],
 		categories: ['web', 'nft']
 	},
-	{
-		id: 'google-search-site',
-		name: 'Google Search Site',
-		description: 'A performant marketing site I worked on at Left Field Labs',
-		descriptionLong: [
-			'A performant marketing site I worked on at Left Field Labs',
-			'Technology used: Lit and EJS'
-		],
-		url: 'https://search.google',
-		categories: ['web'],
-		hasGallery: true
-	}
+	// {
+	// 	id: 'google-search-site',
+	// 	name: 'Google Search Site',
+	// 	description: 'A performant marketing site I worked on at Left Field Labs',
+	// 	descriptionLong: [
+	// 		'Technology used: Lit and EJS'
+	// 	],
+	// 	url: ['https://search.google'],
+	// 	categories: ['web'],
+	// 	hasGallery: true
+	// }
 ];
 
 /** @type {string[]} allCategories */
@@ -377,7 +368,7 @@ for (const project of projectsData) {
 }
 
 const createProjectsStore = () => {
-	/** @type {Project[]} projects */
+	/** @type {ProjectData[]} projects */
 	const projects = $state([...projectsData]);
 	const categories = $state(allCategories.sort((a, b) => a.localeCompare(b)));
 
