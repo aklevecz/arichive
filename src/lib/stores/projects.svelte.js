@@ -359,7 +359,9 @@ export const projectsData = [
 
 // HACK FOR YAYTSO GALLERY
 const yaytsoGalleryProxy = projectsData.find((project) => project.id === 'yaytso');
+// @ts-ignore
 yaytsoGalleryProxy.id = 'yaytso-gallery'
+// @ts-ignore
 projectsData.push({...yaytsoGalleryProxy});
 
 
