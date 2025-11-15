@@ -5,7 +5,7 @@
 	const meImg = 'https://eggs.yaytso.art/tokens/egg-token.png';
 
 	let webglEnabled = $state(true);
-	let webglEffect = $state('particles');
+	let webglMode = $state('particles');
 
 	const seo = {
 		title: 'Ariel Klevecz',
@@ -38,8 +38,8 @@
 	<meta name="twitter:image" content={seo.twitterImage} />
 </svelte:head>
 
-<WebglBackground bind:enabled={webglEnabled} effect={webglEffect} />
-<WebglControls bind:enabled={webglEnabled} bind:effect={webglEffect} />
+<WebglBackground bind:enabled={webglEnabled} mode={webglMode} />
+<WebglControls bind:enabled={webglEnabled} bind:mode={webglMode} />
 
 <div class="homepage">
 	<div class="nameplate">

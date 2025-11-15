@@ -1,9 +1,10 @@
 <script>
 	import { onMount, onDestroy } from 'svelte';
+	import { browser } from '$app/environment';
 	import * as THREE from 'three';
 
 	let {
-		effect = 'particles', // 'particles' | 'gradient' | 'displacement' | 'noise'
+		mode = 'particles', // 'particles' | 'gradient' | 'displacement' | 'noise'
 		enabled = $bindable(true)
 	} = $props();
 
@@ -16,11 +17,11 @@
 
 	// Performance monitoring
 	let fps = 60;
-	let lastFrameTime = performance.now();
+	let lastFrameTime = browser ? performance.now() : 0;
 	let frameCount = 0;
 
 	onMount(() => {
-		if (!enabled) return;
+		if (!browser || !enabled) return;
 
 		// Auto-disable on mobile
 		const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -36,10 +37,14 @@
 	});
 
 	onDestroy(() => {
-		cleanup();
+		if (browser) {
+			cleanup();
+		}
 	});
 
 	function initScene() {
+		if (!browser) return;
+
 		// Scene setup
 		scene = new THREE.Scene();
 		camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -270,14 +275,14 @@
 	}
 
 	function updateVisibility() {
-		if (particles) particles.visible = effect === 'particles';
-		if (gradientMesh) gradientMesh.visible = effect === 'gradient';
-		if (displacementMesh) displacementMesh.visible = effect === 'displacement';
-		if (noiseMesh) noiseMesh.visible = effect === 'noise';
+		if (particles) particles.visible = mode === 'particles';
+		if (gradientMesh) gradientMesh.visible = mode === 'gradient';
+		if (displacementMesh) displacementMesh.visible = mode === 'displacement';
+		if (noiseMesh) noiseMesh.visible = mode === 'noise';
 	}
 
 	function animate() {
-		if (!enabled) return;
+		if (!browser || !enabled) return;
 
 		animationFrameId = requestAnimationFrame(animate);
 		time += 0.01;
@@ -346,22 +351,27 @@
 	}
 
 	function addEventListeners() {
+		if (!browser) return;
 		window.addEventListener('mousemove', onMouseMove);
 		window.addEventListener('resize', onResize);
 	}
 
 	function onMouseMove(event) {
+		if (!browser) return;
 		mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
 		mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 	}
 
 	function onResize() {
+		if (!browser) return;
 		camera.aspect = window.innerWidth / window.innerHeight;
 		camera.updateProjectionMatrix();
 		renderer.setSize(window.innerWidth, window.innerHeight);
 	}
 
 	function cleanup() {
+		if (!browser) return;
+
 		if (animationFrameId) {
 			cancelAnimationFrame(animationFrameId);
 		}
@@ -389,13 +399,15 @@
 
 	// Watch for effect changes
 	$effect(() => {
-		if (enabled) {
+		if (browser && enabled) {
 			updateVisibility();
 		}
 	});
 
 	// Watch for enabled changes
 	$effect(() => {
+		if (!browser) return;
+
 		if (enabled && canvas && !animationFrameId) {
 			if (!scene) {
 				initScene();
@@ -409,7 +421,7 @@
 	});
 </script>
 
-{#if enabled}
+{#if browser && enabled}
 	<canvas bind:this={canvas} class="webgl-background"></canvas>
 {/if}
 

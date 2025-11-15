@@ -1,7 +1,7 @@
 <script>
 	let {
 		enabled = $bindable(true),
-		effect = $bindable('particles')
+		mode = $bindable('particles')
 	} = $props();
 
 	const effects = [
@@ -21,9 +21,9 @@
 		<div class="effect-selector">
 			{#each effects as effectOption}
 				<button
-					onclick={() => (effect = effectOption.id)}
+					onclick={() => (mode = effectOption.id)}
 					class="effect-btn"
-					class:active={effect === effectOption.id}
+					class:active={mode === effectOption.id}
 				>
 					{effectOption.name}
 				</button>
