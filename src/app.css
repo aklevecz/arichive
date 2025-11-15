@@ -1,28 +1,178 @@
-:root {
-	--grey: #c9c9c9;
-	--black: #202020;
-	/* --grey: #ff000093; */
+/* ========================================
+   BAUHAUS DESIGN SYSTEM - THREE VARIATIONS
+   Change data-theme on <body> to switch:
+   - "purist" (strict Bauhaus minimalism)
+   - "modern" (contemporary Bauhaus)
+   - "brutalist" (aggressive geometric)
+   ======================================== */
 
-	--primary-color: var(--black);
-	--secondary-color: whitesmoke;
-	--accent-color: 239, 239, 54;
+:root {
+	/* Strict B&W palette */
+	--pure-black: #000000;
+	--pure-white: #FFFFFF;
+	--medium-grey: #808080;
+
+	/* Bauhaus primary colors (optional accents) */
+	--bauhaus-red: #E6332A;
+	--bauhaus-yellow: #FFC72C;
+	--bauhaus-blue: #005CAB;
+
+	/* Grid system */
+	--grid-unit: 8px;
+	--grid-gutter: 24px;
 }
 
+/* ========================================
+   VARIATION 1: NYT × BAUHAUS
+   Editorial elegance meets geometric precision
+   Classic serif typography with clean Bauhaus structure
+   ======================================== */
+body[data-theme="purist"] {
+	--bg-color: #FAFAFA;
+	--text-color: #121212;
+	--accent-color: #000000;
+	--accent-bg: var(--pure-white);
+	--border-color: #CCCCCC;
+	--border-color-strong: #000000;
+	--border-width: 1px;
+
+	/* Typography - NYT editorial style */
+	--font-display: 'Libre Baskerville', 'Georgia', serif;
+	--font-display-alt: 'Work Sans', 'Franklin Gothic', sans-serif;
+	--font-body: 'Crimson Text', 'Georgia', serif;
+	--font-body-alt: 'Work Sans', 'Helvetica Neue', sans-serif;
+
+	/* Refined sizing - editorial hierarchy */
+	--font-size-hero: clamp(36px, 5vw, 60px);
+	--font-size-h1: clamp(28px, 3.5vw, 44px);
+	--font-size-h2: clamp(18px, 2vw, 28px);
+	--font-size-body: 17px;
+	--font-size-small: 14px;
+	--font-size-caption: 13px;
+
+	/* Line heights - optimized for reading */
+	--line-height-tight: 1.15;
+	--line-height-normal: 1.4;
+	--line-height-body: 1.7;
+
+	/* Generous spacing - NYT-inspired breathing room */
+	--space-xs: calc(var(--grid-unit) * 1);
+	--space-sm: calc(var(--grid-unit) * 2);
+	--space-md: calc(var(--grid-unit) * 5);
+	--space-lg: calc(var(--grid-unit) * 10);
+	--space-xl: calc(var(--grid-unit) * 16);
+}
+
+/* ========================================
+   VARIATION 2: MODERN BAUHAUS
+   Clean geometry with contemporary touches
+   ======================================== */
+body[data-theme="modern"] {
+	--bg-color: var(--pure-black);
+	--text-color: var(--pure-white);
+	--accent-color: var(--bauhaus-yellow);
+	--accent-bg: var(--pure-white);
+	--border-color: var(--pure-white);
+	--border-width: 3px;
+
+	/* Typography */
+	--font-display: 'Archivo Black', 'Arial Black', sans-serif;
+	--font-body: 'Work Sans', 'Helvetica Neue', sans-serif;
+	--font-size-hero: clamp(56px, 10vw, 140px);
+	--font-size-h1: clamp(40px, 6vw, 80px);
+	--font-size-h2: clamp(28px, 4vw, 56px);
+	--font-size-body: 18px;
+	--line-height-tight: 0.85;
+	--line-height-body: 1.6;
+
+	/* Spacing */
+	--space-xs: calc(var(--grid-unit) * 1.5);
+	--space-sm: calc(var(--grid-unit) * 3);
+	--space-md: calc(var(--grid-unit) * 5);
+	--space-lg: calc(var(--grid-unit) * 10);
+	--space-xl: calc(var(--grid-unit) * 16);
+}
+
+/* ========================================
+   VARIATION 3: BRUTALIST BAUHAUS
+   Raw, bold, maximum contrast, experimental
+   ======================================== */
+body[data-theme="brutalist"] {
+	--bg-color: var(--pure-white);
+	--text-color: var(--pure-black);
+	--accent-color: var(--bauhaus-red);
+	--accent-bg: var(--pure-black);
+	--border-color: var(--pure-black);
+	--border-width: 6px;
+
+	/* Typography - MORE EXTREME */
+	--font-display: 'Archivo Black', 'Impact', sans-serif;
+	--font-body: 'Work Sans', 'Arial', sans-serif;
+	--font-size-hero: clamp(64px, 12vw, 180px);
+	--font-size-h1: clamp(48px, 8vw, 96px);
+	--font-size-h2: clamp(32px, 5vw, 64px);
+	--font-size-body: 16px;
+	--line-height-tight: 0.8;
+	--line-height-body: 1.4;
+
+	/* Spacing - tighter, more aggressive */
+	--space-xs: calc(var(--grid-unit) * 1);
+	--space-sm: calc(var(--grid-unit) * 2);
+	--space-md: calc(var(--grid-unit) * 3);
+	--space-lg: calc(var(--grid-unit) * 6);
+	--space-xl: calc(var(--grid-unit) * 10);
+}
+
+/* ========================================
+   BASE STYLES (Applied to all themes)
+   ======================================== */
+
 .heading {
-	font-family: 'pragmatapro-fraktur', serif;
+	font-family: var(--font-display);
+	text-transform: uppercase;
+	letter-spacing: -0.02em;
+	line-height: var(--line-height-tight);
+	font-weight: 900;
+}
+
+/* Purist theme uses refined editorial typography */
+body[data-theme="purist"] .heading,
+body[data-theme="purist"] h1,
+body[data-theme="purist"] h2,
+body[data-theme="purist"] h3 {
+	font-family: var(--font-display);
+	font-weight: 700;
+	letter-spacing: -0.01em;
+	text-transform: none;
+}
+
+body[data-theme="purist"] {
+	font-family: var(--font-body);
+	line-height: var(--line-height-body);
+}
+
+/* Editorial labels use sans-serif */
+body[data-theme="purist"] .label,
+body[data-theme="purist"] .search-label,
+body[data-theme="purist"] .filters-title {
+	font-family: var(--font-display-alt);
+	font-weight: 600;
+	font-size: var(--font-size-small);
+	text-transform: uppercase;
+	letter-spacing: 0.15em;
 }
 
 html,
 body {
-	color: var(--secondary-color);
-	background-color: var(--primary-color);
-	font-family: monospace;
-	font-family: 'pt-mono', monospace;
+	color: var(--text-color);
+	background-color: var(--bg-color);
+	font-family: var(--font-body);
 	font-weight: 400;
-	font-style: normal;
-	font-size: 18px;
+	font-size: var(--font-size-body);
+	line-height: var(--line-height-body);
 	margin: 0;
 	padding: 0;
+	transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 * {
@@ -31,8 +181,13 @@ body {
 
 a {
 	text-decoration: none;
-	color: var(--secondary-color);
+	color: var(--text-color);
 	cursor: pointer;
+	transition: color 0.2s ease;
+}
+
+a:hover {
+	color: var(--accent-color);
 }
 
 h1,
@@ -40,24 +195,159 @@ h2,
 h3 {
 	margin: 0;
 	padding: 0;
+	font-family: var(--font-display);
+	text-transform: uppercase;
+	line-height: var(--line-height-tight);
+	font-weight: 900;
+}
+
+h1 {
+	font-size: var(--font-size-h1);
+}
+
+h2 {
+	font-size: var(--font-size-h2);
+}
+
+h3 {
+	font-size: var(--font-size-h2);
 }
 
 .flex-1 {
 	flex: 1 0 auto;
 }
 
+/* ========================================
+   BAUHAUS BUTTON SYSTEM
+   ======================================== */
 button {
-	border: none;
-	box-shadow: none;
-	font-family: monospace;
+	border: var(--border-width) solid var(--border-color);
+	background: var(--bg-color);
+	color: var(--text-color);
+	font-family: var(--font-body);
+	font-weight: 700;
+	text-transform: uppercase;
 	cursor: pointer;
+	transition: all 0.2s ease;
+	letter-spacing: 0.05em;
 }
-a.btn {
-	background-color: var(--secondary-color);
-	color: var(--primary-color);
-	border-radius: 30px;
-	padding: 0.3rem 0.6rem;
+
+button:hover {
+	background: var(--accent-bg);
+	color: var(--bg-color);
+	transform: translate(-2px, -2px);
+	box-shadow: 4px 4px 0 var(--border-color);
 }
+
+/* Purist/NYT theme - buttons become text links */
+body[data-theme="purist"] button {
+	border: none;
+	background: transparent;
+	color: var(--text-color);
+	font-family: var(--font-body-alt);
+	font-weight: 500;
+	letter-spacing: 0;
+	padding: 0;
+	text-decoration: underline;
+	text-underline-offset: 3px;
+	text-decoration-thickness: 1px;
+}
+
+body[data-theme="purist"] button:hover {
+	transform: none;
+	box-shadow: none;
+	background: transparent;
+	color: var(--text-color);
+	text-decoration-thickness: 2px;
+}
+
+/* Brutalist theme gets more extreme hover */
+body[data-theme="brutalist"] button:hover {
+	transform: translate(-4px, -4px);
+	box-shadow: 8px 8px 0 var(--border-color);
+}
+
+a.btn,
 button.btn {
-	padding: 0.35rem 0.5rem;
+	display: inline-block;
+	padding: var(--space-sm) var(--space-md);
+	border: var(--border-width) solid var(--border-color);
+	background-color: var(--text-color);
+	color: var(--bg-color);
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	transition: all 0.2s ease;
+}
+
+a.btn:hover,
+button.btn:hover {
+	background-color: var(--accent-color);
+	color: var(--pure-black);
+	transform: translate(-2px, -2px);
+	box-shadow: 4px 4px 0 var(--border-color);
+}
+
+/* ========================================
+   GEOMETRIC SHAPES (Bauhaus decoration)
+   ======================================== */
+.bauhaus-shape {
+	position: absolute;
+	pointer-events: none;
+	z-index: 0;
+}
+
+.bauhaus-circle {
+	border-radius: 50%;
+	border: var(--border-width) solid var(--border-color);
+}
+
+.bauhaus-square {
+	border: var(--border-width) solid var(--border-color);
+}
+
+.bauhaus-triangle {
+	width: 0;
+	height: 0;
+	border-style: solid;
+}
+
+/* Color variants for shapes */
+.shape-red {
+	background-color: var(--bauhaus-red);
+}
+
+.shape-yellow {
+	background-color: var(--bauhaus-yellow);
+}
+
+.shape-blue {
+	background-color: var(--bauhaus-blue);
+}
+
+.shape-black {
+	background-color: var(--pure-black);
+}
+
+.shape-white {
+	background-color: var(--pure-white);
+	border-color: var(--pure-black);
+}
+
+/* ========================================
+   GRID LINES (visible in brutalist mode)
+   ======================================== */
+body[data-theme="brutalist"]::before {
+	content: '';
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-image:
+		repeating-linear-gradient(0deg, transparent, transparent calc(var(--grid-unit) * 8 - 1px), var(--border-color) calc(var(--grid-unit) * 8 - 1px), var(--border-color) calc(var(--grid-unit) * 8)),
+		repeating-linear-gradient(90deg, transparent, transparent calc(var(--grid-unit) * 8 - 1px), var(--border-color) calc(var(--grid-unit) * 8 - 1px), var(--border-color) calc(var(--grid-unit) * 8));
+	opacity: 0.05;
+	pointer-events: none;
+	z-index: 9999;
 }
