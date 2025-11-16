@@ -11,7 +11,7 @@
 	let canvas = $state(null);
 	let scene, camera, renderer;
 	let animationFrameId;
-	let particles, gradientMesh, displacementMesh, noiseMesh;
+	let particles, particleLines, gradientMesh, displacementMesh, noiseMesh;
 	let mouse = { x: 0, y: 0 };
 	let time = 0;
 
@@ -65,9 +65,10 @@
 	}
 
 	function createParticleSystem() {
-		const particleCount = 2000;
+		const particleCount = 150;
 		const positions = new Float32Array(particleCount * 3);
 		const velocities = new Float32Array(particleCount * 3);
+		const sizes = new Float32Array(particleCount);
 
 		for (let i = 0; i < particleCount * 3; i += 3) {
 			positions[i] = (Math.random() - 0.5) * 20;
@@ -77,21 +78,70 @@
 			velocities[i] = (Math.random() - 0.5) * 0.02;
 			velocities[i + 1] = (Math.random() - 0.5) * 0.02;
 			velocities[i + 2] = (Math.random() - 0.5) * 0.02;
+
+			// Initialize with base size (in pixels)
+			sizes[i / 3] = 6.0;
 		}
 
 		const geometry = new THREE.BufferGeometry();
 		geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+		geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
 		geometry.userData.velocities = velocities;
+		geometry.userData.connectionCounts = new Float32Array(particleCount);
 
-		const material = new THREE.PointsMaterial({
-			color: 0x000000,
-			size: 0.05,
+		// Custom shader material for variable particle sizes
+		const vertexShader = `
+			attribute float size;
+			varying vec3 vColor;
+
+			void main() {
+				vColor = vec3(0.0, 0.0, 0.0);
+				vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+				gl_PointSize = size;
+				gl_Position = projectionMatrix * mvPosition;
+			}
+		`;
+
+		const fragmentShader = `
+			varying vec3 vColor;
+
+			void main() {
+				// Create circular particles
+				vec2 center = gl_PointCoord - vec2(0.5);
+				float dist = length(center);
+				if (dist > 0.5) discard;
+
+				// Smooth edges
+				float alpha = smoothstep(0.5, 0.3, dist) * 0.6;
+				gl_FragColor = vec4(vColor, alpha);
+			}
+		`;
+
+		const material = new THREE.ShaderMaterial({
+			vertexShader,
+			fragmentShader,
 			transparent: true,
-			opacity: 0.4
+			depthWrite: false
 		});
 
 		particles = new THREE.Points(geometry, material);
 		scene.add(particles);
+
+		// Create lines for connections
+		const maxConnections = particleCount * 3;
+		const linePositions = new Float32Array(maxConnections * 2 * 3);
+		const lineGeometry = new THREE.BufferGeometry();
+		lineGeometry.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
+		lineGeometry.setDrawRange(0, 0);
+
+		const lineMaterial = new THREE.LineBasicMaterial({
+			color: 0x000000,
+			transparent: true,
+			opacity: 0.15
+		});
+
+		particleLines = new THREE.LineSegments(lineGeometry, lineMaterial);
+		scene.add(particleLines);
 	}
 
 	function createGradientMesh() {
@@ -276,6 +326,7 @@
 
 	function updateVisibility() {
 		if (particles) particles.visible = mode === 'particles';
+		if (particleLines) particleLines.visible = mode === 'particles';
 		if (gradientMesh) gradientMesh.visible = mode === 'gradient';
 		if (displacementMesh) displacementMesh.visible = mode === 'displacement';
 		if (noiseMesh) noiseMesh.visible = mode === 'noise';
@@ -307,7 +358,13 @@
 		if (particles && particles.visible) {
 			const positions = particles.geometry.attributes.position.array;
 			const velocities = particles.geometry.userData.velocities;
+			const sizes = particles.geometry.attributes.size.array;
+			const connectionCounts = particles.geometry.userData.connectionCounts;
 
+			// Reset connection counts
+			connectionCounts.fill(0);
+
+			// Update positions
 			for (let i = 0; i < positions.length; i += 3) {
 				// Mouse influence
 				const dx = positions[i] - mouse.x * 10;
@@ -325,8 +382,56 @@
 				if (Math.abs(positions[i + 2]) > 10) positions[i + 2] *= -0.5;
 			}
 
+			// Update particle connections and count them
+			if (particleLines) {
+				const linePositions = particleLines.geometry.attributes.position.array;
+				let lineIndex = 0;
+				const maxDistance = 3.0;
+
+				for (let i = 0; i < positions.length; i += 3) {
+					for (let j = i + 3; j < positions.length; j += 3) {
+						const dx = positions[i] - positions[j];
+						const dy = positions[i + 1] - positions[j + 1];
+						const dz = positions[i + 2] - positions[j + 2];
+						const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
+
+						if (distance < maxDistance) {
+							// Add line
+							linePositions[lineIndex++] = positions[i];
+							linePositions[lineIndex++] = positions[i + 1];
+							linePositions[lineIndex++] = positions[i + 2];
+
+							linePositions[lineIndex++] = positions[j];
+							linePositions[lineIndex++] = positions[j + 1];
+							linePositions[lineIndex++] = positions[j + 2];
+
+							// Increment connection counts
+							connectionCounts[i / 3]++;
+							connectionCounts[j / 3]++;
+						}
+					}
+				}
+
+				particleLines.geometry.setDrawRange(0, lineIndex / 3);
+				particleLines.geometry.attributes.position.needsUpdate = true;
+			}
+
+			// Update particle sizes based on position and connections
+			for (let i = 0; i < positions.length; i += 3) {
+				const particleIndex = i / 3;
+
+				// Base size in pixels
+				const baseSize = 6.0;
+
+				// Size boost from connections (1.5 pixels per connection, max +12 pixels)
+				const connectionBoost = Math.min(connectionCounts[particleIndex] * 1.5, 12.0);
+
+				// Final size
+				sizes[particleIndex] = baseSize + connectionBoost;
+			}
+
 			particles.geometry.attributes.position.needsUpdate = true;
-			particles.rotation.z += 0.0002;
+			particles.geometry.attributes.size.needsUpdate = true;
 		}
 
 		// Update gradient mesh

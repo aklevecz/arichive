@@ -1,11 +1,7 @@
 <script>
 	import WebglBackground from '$lib/components/webgl-background.svelte';
-	import WebglControls from '$lib/components/webgl-controls.svelte';
 
 	const meImg = 'https://eggs.yaytso.art/tokens/egg-token.png';
-
-	let webglEnabled = $state(true);
-	let webglMode = $state('particles');
 
 	const seo = {
 		title: 'Ariel Klevecz',
@@ -38,8 +34,7 @@
 	<meta name="twitter:image" content={seo.twitterImage} />
 </svelte:head>
 
-<WebglBackground bind:enabled={webglEnabled} mode={webglMode} />
-<WebglControls bind:enabled={webglEnabled} bind:mode={webglMode} />
+<WebglBackground />
 
 <div class="homepage">
 	<div class="nameplate">
