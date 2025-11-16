@@ -23,13 +23,6 @@
 	onMount(() => {
 		if (!browser || !enabled) return;
 
-		// Auto-disable on mobile
-		const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-		if (isMobile) {
-			enabled = false;
-			return;
-		}
-
 		initScene();
 		createEffects();
 		animate();
