@@ -26,6 +26,7 @@ export const projectsData = [
 	{
 		id: 'flowers',
 		name: 'Flowers',
+		type: 'personal',
 		description:
 			'A series of psychedelic AI generated flowers with their own deforum animations. Brought to life through posters with image tracking AR for a interactive gallery show. The webpage to the right is a fun ThreeJS viewer for flipping through each poster.',
 		descriptionLong: [
@@ -43,6 +44,7 @@ export const projectsData = [
 	{
 		id: 'tix',
 		name: 'Tickets V2',
+		type: 'personal',
 		description: 'Ticketing web app including giveaways and bonding curve-esque pricing',
 		descriptionLong: [
 			`I built a newer version of my past ticketing app with improved coding patterns that allowed me to more easily scale its features.`,
@@ -59,6 +61,7 @@ export const projectsData = [
 	{
 		id: 'goodneighbor',
 		name: 'Good Neighbor Order Form',
+		type: 'technical',
 		description: `A custom order form for good neighbor music to improve their record pipeline and customer relationship through creative touches and nice data persistence UX`,
 		descriptionLong: [
 			`Good Neighbor is a ecoloigcally friendly record pressing company that uses innovative injection technology to produce records at a fraction of the carbon footprint of traditional vinyl.`,
@@ -74,6 +77,7 @@ export const projectsData = [
 	{
 		id: 'live-visuals',
 		name: 'Live TouchDesigner Visuals',
+		type: 'personal',
 		description: `Live audio reactive visuals textured with ai at 30fps using Stream Diffusion`,
 		descriptionLong: [
 			`I threw a party in SF on 5/2/2025 where I booked DJs and set up live visuals using TouchDesigner and XBox Kinect.`,
@@ -96,6 +100,7 @@ export const projectsData = [
 	{
 		id: 'office-hours-rec-center',
 		name: 'Office Hours Rec Center',
+		type: 'technical',
 		description: 'A virtual rec center for the Office Hours podcast',
 		descriptionLong: [
 			`The Office Hours podcast started a ritual of collecting recommendations from the hosts and guests at the end of each episode.`,
@@ -108,6 +113,7 @@ export const projectsData = [
 	{
 		id: 'raptor-app',
 		name: 'Raptor App',
+		type: 'personal',
 		description: 'An iOS app to see tickets for an event and visualize AR artwork',
 		descriptionLong: [
 			`The Raptor App is an iOS app written in Swift that allows an event goer to see their purchased/won tickets and provides a camera to interact with AR artwork`,
@@ -130,6 +136,7 @@ export const projectsData = [
 	{
 		id: 'yaytso',
 		name: 'yaytso',
+		type: 'personal',
 		description: 'yaytso means egg',
 		descriptionLong: [
 			`I'm always trying to hatch weird stuff`,
@@ -140,6 +147,7 @@ export const projectsData = [
 	{
 		id: 'yaytso-egg-maker',
 		name: 'yaytso egg maker',
+		type: 'personal',
 		description: 'a silly creative toy for making producing your own unique eggs',
 		descriptionLong: [
 			`I created the egg maker in a NFT hackathon and continued playing with it as a creative toy for making your own egg art.`,
@@ -150,19 +158,21 @@ export const projectsData = [
 		url: ['https://fab.yaytso.art'],
 		categories: ['3d', 'nft', 'eggs', 'react', 'ipfs', 'ethereum']
 	},
-	{
-		id: 'remi',
-		name: 'Remi Frogo',
-		description: "A site for Remi to show off her art and tattoos, designed by Remi",
-		descriptionLong: [
-			`Remi Frogo is an incredible painter and designer who creates a wonderful balance of realism and mysticism in her work.`,
-		],
-		url: ['https://remifrogo.art'],
-		categories: ['web', 'ai', 'ar', 'fine art', 'paintings', 'astro']
-	},
+	// {
+	// 	id: 'remi',
+	// 	name: 'Remi Frogo',
+	// 	type: 'technical',
+	// 	description: "A site for Remi to show off her art and tattoos, designed by Remi",
+	// 	descriptionLong: [
+	// 		`Remi Frogo is an incredible painter and designer who creates a wonderful balance of realism and mysticism in her work.`,
+	// 	],
+	// 	url: ['https://remifrogo.art'],
+	// 	categories: ['web', 'ai', 'ar', 'fine art', 'paintings', 'astro']
+	// },
 	{
 		id: 'instabao',
 		name: 'instaBao',
+		type: 'personal',
 		description: "an iOS app to follow Bao's life",
 		descriptionLong: [
 			`You can chat with Bao`,
@@ -175,6 +185,7 @@ export const projectsData = [
 	{
 		id: 'bao',
 		name: 'Bao',
+		type: 'personal',
 		description: `Bao's website`,
 		descriptionLong: [
 			`Bao is a magical dog who creates chicken art.`,
@@ -185,6 +196,7 @@ export const projectsData = [
 	{
 		id: 'iboopers',
 		name: 'iBoopers',
+		type: 'personal',
 		description: 'iOS app that uses nfc tags for interative scavenger hunts',
 		descriptionLong: [
 			`You search for eggs that give different amounts of points.`
@@ -196,6 +208,7 @@ export const projectsData = [
 	{
 		id: 'boopers',
 		name: 'Boopers',
+		type: 'personal',
 		description: 'Using nfc tags for interative scavenger hunts',
 		descriptionLong: [
 			`Currently skinned for a scavenger hunt that took place at FWB fest in August 2024.`,
@@ -231,6 +244,7 @@ export const projectsData = [
 	{
 		id: 'qr-codes',
 		name: 'QR codes',
+		type: 'technical',
 		description: 'special QR codes made using ai',
 		descriptionLong: [
 			`QR codes that seem to bend the possibilities using Stable Diffusion ControlNets and IPAdapter.`,
@@ -250,6 +264,7 @@ export const projectsData = [
 	{
 		id: 'aespa',
 		name: 'Aespa Better Things',
+		type: 'technical',
 		description: 'Generated thousands of versions of their flower album art using AI',
 		descriptionLong: [
 			`Aespa is a popular K-pop group that has been making waves in the music industry.`,
@@ -265,6 +280,7 @@ export const projectsData = [
 	{
 		id: 'surv1val',
 		name: 'Surv1val',
+		type: 'technical',
 		description:
 			"The Surv1val game for Mike Shinoda's latest album. An interactive game where people battled with their own monsters and witnessed them grow into their final form",
 		descriptionLong: [
@@ -288,6 +304,7 @@ export const projectsData = [
 	{
 		id: 'happy-friday',
 		name: 'Happy Friday Coffee',
+		type: 'technical',
 		description: 'An interactive ecommerce website for Happy Friday Coffee.',
 		descriptionLong: [
 			`Includes a fun NFT generator where you mint pieces of the logo in order to create a completed version of it.`,
@@ -300,6 +317,7 @@ export const projectsData = [
 	{
 		id: 'nouns-in-the-park',
 		name: 'Nouns in the Park',
+		type: 'technical',
 		description: 'A collection of AI generated nouns in the park',
 		descriptionLong: [
 			`A 3D rendering of the Nouns noggles was taken and dissolved into a smoke simulation using Blender.`,
@@ -335,6 +353,7 @@ export const projectsData = [
 	{
 		id: 'wovn',
 		name: 'Wovn formely known as Artifactor',
+		type: 'technical',
 		description: 'A platform for NFT artists to understand and support their fanbase',
 		descriptionLong: [
 			`The Wovn platform was a platform for NFT artists to understand and support their fanbase.`,
@@ -357,12 +376,6 @@ export const projectsData = [
 	// }
 ];
 
-// HACK FOR YAYTSO GALLERY
-const yaytsoGalleryProxy = projectsData.find((project) => project.id === 'yaytso');
-// @ts-ignore
-yaytsoGalleryProxy.id = 'yaytso-gallery'
-// @ts-ignore
-projectsData.push({...yaytsoGalleryProxy});
 
 
 /** @type {string[]} allCategories */

@@ -67,10 +67,12 @@
 	let currentVideoUrl = $state(project?.videoUrls ? project.videoUrls[0] : null);
 	let featuredVideoElement = $state(null);
 	onMount(() => {
-		featuredVideoElement.addEventListener('ended', () => {
-			const currentIndex = videoUrls.indexOf(currentVideoUrl);
-			currentVideoUrl = videoUrls[(currentIndex + 1) % videoUrls.length];
-		});
+		if (featuredVideoElement) {
+			featuredVideoElement.addEventListener('ended', () => {
+				const currentIndex = videoUrls.indexOf(currentVideoUrl);
+				currentVideoUrl = videoUrls[(currentIndex + 1) % videoUrls.length];
+			});
+		}
 		// currentVideoUrlInterval = setInterval(() => {
 		// 	currentVideoUrl = videoUrls[Math.floor(Math.random() * videoUrls.length)]
 		// }, 5000)

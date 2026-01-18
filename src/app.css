@@ -23,44 +23,46 @@
 }
 
 /* ========================================
-   VARIATION 1: NYT × BAUHAUS
-   Editorial elegance meets geometric precision
-   Classic serif typography with clean Bauhaus structure
+   VARIATION 1: WHITNEY-INSPIRED
+   Playful, bold, contemporary museum aesthetic
+   Dynamic typography with chaotic energy
    ======================================== */
 body[data-theme="purist"] {
-	--bg-color: #FAFAFA;
-	--text-color: #121212;
-	--accent-color: #000000;
-	--accent-bg: var(--pure-white);
-	--border-color: #CCCCCC;
+	--bg-color: #FFFFFF;
+	--text-color: #000000;
+	--accent-color: #FF4136;
+	--accent-secondary: #0074D9;
+	--accent-tertiary: #2ECC40;
+	--accent-bg: var(--pure-black);
+	--border-color: #000000;
 	--border-color-strong: #000000;
-	--border-width: 1px;
+	--border-width: 2px;
 
-	/* Typography - NYT editorial style */
-	--font-display: 'Libre Baskerville', 'Georgia', serif;
-	--font-display-alt: 'Work Sans', 'Franklin Gothic', sans-serif;
-	--font-body: 'Crimson Text', 'Georgia', serif;
+	/* Typography - Bold sans-serif, museum style */
+	--font-display: 'Work Sans', 'Helvetica Neue', 'Arial', sans-serif;
+	--font-display-alt: 'Work Sans', 'Helvetica Neue', sans-serif;
+	--font-body: 'Work Sans', 'Helvetica Neue', 'Arial', sans-serif;
 	--font-body-alt: 'Work Sans', 'Helvetica Neue', sans-serif;
 
-	/* Refined sizing - editorial hierarchy */
-	--font-size-hero: clamp(36px, 5vw, 60px);
-	--font-size-h1: clamp(28px, 3.5vw, 44px);
-	--font-size-h2: clamp(18px, 2vw, 28px);
-	--font-size-body: 17px;
+	/* Bold sizing - dramatic hierarchy */
+	--font-size-hero: clamp(48px, 10vw, 120px);
+	--font-size-h1: clamp(36px, 6vw, 72px);
+	--font-size-h2: clamp(24px, 4vw, 48px);
+	--font-size-body: 16px;
 	--font-size-small: 14px;
-	--font-size-caption: 13px;
+	--font-size-caption: 12px;
 
-	/* Line heights - optimized for reading */
-	--line-height-tight: 1.15;
-	--line-height-normal: 1.4;
-	--line-height-body: 1.7;
+	/* Line heights - tight for impact */
+	--line-height-tight: 0.95;
+	--line-height-normal: 1.2;
+	--line-height-body: 1.5;
 
-	/* Generous spacing - NYT-inspired breathing room */
+	/* Spacing - dynamic, less rigid */
 	--space-xs: calc(var(--grid-unit) * 1);
 	--space-sm: calc(var(--grid-unit) * 2);
-	--space-md: calc(var(--grid-unit) * 5);
-	--space-lg: calc(var(--grid-unit) * 10);
-	--space-xl: calc(var(--grid-unit) * 16);
+	--space-md: calc(var(--grid-unit) * 4);
+	--space-lg: calc(var(--grid-unit) * 8);
+	--space-xl: calc(var(--grid-unit) * 12);
 }
 
 /* ========================================
@@ -135,15 +137,15 @@ body[data-theme="brutalist"] {
 	font-weight: 900;
 }
 
-/* Purist theme uses refined editorial typography */
+/* Whitney-inspired bold typography */
 body[data-theme="purist"] .heading,
 body[data-theme="purist"] h1,
 body[data-theme="purist"] h2,
 body[data-theme="purist"] h3 {
 	font-family: var(--font-display);
-	font-weight: 700;
-	letter-spacing: -0.01em;
-	text-transform: none;
+	font-weight: 800;
+	letter-spacing: -0.03em;
+	text-transform: uppercase;
 }
 
 body[data-theme="purist"] {
@@ -151,15 +153,15 @@ body[data-theme="purist"] {
 	line-height: var(--line-height-body);
 }
 
-/* Editorial labels use sans-serif */
+/* Bold labels */
 body[data-theme="purist"] .label,
 body[data-theme="purist"] .search-label,
 body[data-theme="purist"] .filters-title {
 	font-family: var(--font-display-alt);
-	font-weight: 600;
+	font-weight: 700;
 	font-size: var(--font-size-small);
 	text-transform: uppercase;
-	letter-spacing: 0.15em;
+	letter-spacing: 0.05em;
 }
 
 html,
