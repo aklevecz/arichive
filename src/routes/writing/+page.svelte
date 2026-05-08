@@ -20,14 +20,12 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		align-items: center;
 		padding: 2rem;
 	}
 
 	.message {
 		font-size: clamp(24px, 5vw, 48px);
-		font-weight: 700;
-		text-align: center;
+		font-weight: 400;
 		margin: 0;
 		line-height: 1.3;
 	}
