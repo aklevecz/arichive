@@ -1,112 +1,65 @@
 <script>
+	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
-	import WebglBackground from '$lib/components/webgl-background.svelte';
-	import ApplyFilters from '$lib/components/apply-filters.svelte';
-	import SearchBar from '$lib/components/search-bar.svelte';
+	import { goto } from '$app/navigation';
 	import filter from '$lib/stores/filter.svelte';
-	import projects from '$lib/stores/projects.svelte';
+
+	let container;
 
 	const meImg = 'https://eggs.yaytso.art/tokens/egg-token.png';
 
-	let menuOpen = $state(false);
-	let showProjects = $state(false);
+	onMount(() => {
+		if (!browser || !container) return;
 
-	// Check sessionStorage on mount
-	$effect(() => {
-		if (browser) {
-			const stored = sessionStorage.getItem('showProjects');
-			if (stored === 'true') {
-				showProjects = true;
-			}
-		}
+		const groups = [
+			{ selector: '.anim-name path', baseDelay: 0 },
+			{ selector: '.anim-tagline path', baseDelay: 400 },
+			{ selector: '.anim-btn-writing path', baseDelay: 700 },
+			{ selector: '.anim-btn-ar path', baseDelay: 900 },
+			{ selector: '.anim-btn-ai path', baseDelay: 1100 },
+			{ selector: '.anim-beaker path', baseDelay: 1300 }
+		];
+
+		groups.forEach(({ selector, baseDelay }) => {
+			const paths = container.querySelectorAll(selector);
+			paths.forEach((path, i) => {
+				const length = path.getTotalLength();
+				path.style.strokeDasharray = `${length}`;
+				path.style.strokeDashoffset = `${length}`;
+			});
+		});
+
+		requestAnimationFrame(() => {
+			groups.forEach(({ selector, baseDelay }) => {
+				const paths = container.querySelectorAll(selector);
+				paths.forEach((path, i) => {
+					const duration = 0.6 + Math.random() * 0.3;
+					path.style.transition = `stroke-dashoffset ${duration}s cubic-bezier(0.4, 0, 0.2, 1) ${baseDelay + i * 35}ms, stroke 0.3s ease, stroke-width 0.3s ease`;
+					path.style.strokeDashoffset = '0';
+				});
+			});
+		});
 	});
 
-	// Persist state to sessionStorage when it changes
-	$effect(() => {
-		if (browser && showProjects) {
-			sessionStorage.setItem('showProjects', 'true');
+	function navigateTo(category) {
+		filter.resetFilters();
+		if (category) {
+			filter.toggleCategory(category);
 		}
-	});
-
-	let filteredProjects = $derived(
-		projects.state.filter(projects.searchFilter).filter(projects.categoryFilter)
-	);
-
-	// Group projects by type
-	let personalProjects = $derived(filteredProjects.filter(p => p.type === 'personal'));
-	let technicalProjects = $derived(filteredProjects.filter(p => p.type === 'technical'));
-
-	// Category descriptions
-	/** @type {Record<string, string>} */
-	const categoryDescriptions = {
-		'ai': 'utilizing advanced generative artificial intelligence systems',
-		'ar': 'implementing augmented reality technology',
-		'digital art': 'creating computational creative works',
-		'event': 'designing experiential gatherings',
-		'events': 'designing experiential gatherings',
-		'web': 'developing modern web applications',
-		'ticketing': 'building event ticketing systems',
-		'sveltekit': 'architected using SvelteKit',
-		'cloudflare': 'deployed on Cloudflare',
-		'stripe': 'integrating Stripe payments',
-		'music': 'exploring technology and music',
-		'audio reactive': 'responding dynamically to audio',
-		'touchdesigner': 'utilizing TouchDesigner',
-		'office hours': 'collaborating with Office Hours',
-		'ios': 'developing native iOS applications',
-		'egg': 'incorporating egg-themed elements',
-		'eggs': 'incorporating egg-themed elements',
-		'art': 'pursuing artistic endeavors',
-		'3d': 'creating three-dimensional content',
-		'nft': 'developing blockchain collectibles',
-		'react': 'built using React',
-		'ipfs': 'leveraging IPFS storage',
-		'ethereum': 'utilizing Ethereum',
-		'fine art': 'showcasing traditional art',
-		'paintings': 'featuring painted works',
-		'astro': 'developed with Astro',
-		'llm': 'integrating large language models',
-		'instagram': 'connecting with Instagram',
-		'dogs': 'celebrating canine companions',
-		'chicken art': 'featuring poultry-inspired artwork',
-		'nfc': 'implementing NFC technology',
-		'games': 'designing interactive games',
-		'scavenger hunts': 'creating treasure-seeking adventures',
-		'booping': 'encouraging tactile NFC interaction',
-		'qr code': 'generating machine-readable codes',
-		'ecommerce': 'building online commerce',
-		'coffee': 'celebrating coffee culture',
-		'fashion': 'exploring fashion and technology',
-		'finetuning': 'employing ML model refinement',
-		'lora': 'utilizing low-rank adaptation'
-	};
-
-	/**
-	 * @param {string} category
-	 */
-	function getCategoryDescription(category) {
-		return categoryDescriptions[category.toLowerCase()] || category;
+		goto('/projects');
 	}
 
-	/**
-	 * @param {MouseEvent} e
-	 */
-	function scrollToProjects(e) {
-		e.preventDefault();
-		showProjects = true;
-		// Small delay to let the section render before scrolling
-		setTimeout(() => {
-			const projectsSection = document.getElementById('projects-section');
-			if (projectsSection) {
-				projectsSection.scrollIntoView({ behavior: 'smooth' });
-			}
-		}, 50);
+	function handleKeydown(e, category) {
+		if (e.key === 'Enter' || e.key === ' ') {
+			e.preventDefault();
+			navigateTo(category);
+		}
 	}
 
 	const seo = {
 		title: 'Ariel Klevecz',
 		description: 'Ariel Klevecz - Mad Scientist',
-		keywords: 'web development, ai, stable diffusion, finetuning, lora, nfts, web3',
+		keywords: 'web development, ai, augmented reality, stable diffusion, finetuning, lora',
 		author: 'Ariel Klevecz',
 		ogTitle: 'Ariel Klevecz',
 		ogDescription: 'Ariel Klevecz - Mad Scientist',
@@ -134,318 +87,293 @@
 	<meta name="twitter:image" content={seo.twitterImage} />
 </svelte:head>
 
-<WebglBackground />
+<div class="homepage" bind:this={container}>
 
-<div class="homepage">
-	<div class="hero-section">
-		<h1 class="site-name">ARIEL<br/>KLEVECZ</h1>
-		<p class="tagline">Mad Scientist</p>
+	<!-- Desktop SVG -->
+	<svg class="design-svg desktop-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 906.11 541.93">
+		<g class="anim-name">
+			<path d="M91.8,64.48c-.55-2.16-3.6-2.37-5.68-1.58-3.86,1.48-6.93,4.87-8.02,8.86-.42,1.52-.54,3.22.16,4.63s2.44,2.39,3.92,1.83c4.51-1.71,6.18-7.11,7.26-11.82-.56,3.11.92,6.49,3.59,8.19,1.15-.46,2.02-1.54,2.24-2.76"/>
+			<path d="M98.98,75.12c.34-1.65-.73-3.22-1.27-4.82s-.1-3.94,1.58-4.1c.82-.08,1.56.43,2.32.71s1.84.25,2.17-.5"/>
+			<path d="M108.38,67.63c-.15,2.33.16,4.69.91,6.91"/>
+			<path d="M106.94,57.82c-1.22,1.32.35,3.9,2.09,3.43.62-1.63-.72-3.66-2.46-3.75"/>
+			<path d="M116.49,70.07l4.53-1c.12-1.96-2.82-3.02-4.26-1.7s-1.15,3.88.26,5.24,3.55,1.7,5.49,1.45"/>
+			<path d="M126.34,54.49c.8,7.76,1.6,15.52,2.4,23.28"/>
+			<path d="M159.07,55.32c.06,8.94.69,17.87,1.87,26.73"/>
+			<path d="M173.14,59.13c-4.38,4.31-9.09,8.29-14.06,11.9,4.5,3.11,8.73,6.62,12.61,10.47"/>
+			<path d="M178.83,57.4l3.68,22.86"/>
+			<path d="M187.66,69.21l5.93-.42c-1.06-1.54-2.51-3.27-4.38-3.06-2.35.27-3.12,3.68-1.76,5.61s3.86,2.63,6.18,3.06"/>
+			<path d="M196.78,66.67l5.15,9.56c-.12-3.28.19-6.56.91-9.76"/>
+			<path d="M209.59,70.73l5.57-1.03c.34-1.98-2.4-3.5-4.13-2.46s-2.01,3.64-.92,5.33,3.15,2.54,5.16,2.7"/>
+			<path d="M229.15,68.78c-1.23-1.85-4.27-1.97-5.8-.36s-1.4,4.43.12,6.06,4.11,2.03,6.16,1.16"/>
+			<path d="M232.99,68.06l8.63.75c-3.49,2.48-6.28,5.95-7.96,9.89,2.88-.09,5.76-.18,8.64-.27"/>
+		</g>
 
-		<button class="enter-button" onclick={scrollToProjects}>
-			Enter
-		</button>
-	</div>
+		<g class="anim-tagline">
+			<path d="M154.71,119.12l.63-13.26c1.43,3.64,3.53,7.02,6.17,9.92,1.4-3.62,2.8-7.24,4.2-10.86.05,6.67.73,13.34,2.02,19.89"/>
+			<path d="M171.18,114.85l2.44-14.36c3.15,6.08,5.66,12.5,7.46,19.1"/>
+			<path d="M191.08,119.1c-1.47-4.75-2.13-9.75-1.96-14.73,3.38-.79,1.16-.7,4.62-.5,2.43.14,5.14.7,6.46,2.74,1.74,2.69.02,6.36-2.37,8.5s-5.45,3.56-7.39,6.1-2.07,6.98.84,8.33"/>
+			<path d="M167.77,107.68l13.78-.53"/>
+			<path d="M229.42,109.75c-1.95-.75-4.02-1.52-6.09-1.18s-4.03,2.24-3.64,4.3c.72,3.79,6.68,2.73,9.8,5.01,2.57,1.88,2.3,6.47-.48,8.04-1.19.67-2.62.8-3.87,1.36s-2.4,1.86-2.01,3.17"/>
+			<path d="M241.49,111.89c-3.22-.33-6.4,2.52-6.41,5.76-.01,3.24,3.14,6.12,6.36,5.82"/>
+			<path d="M249.99,111.98c.48,3.96.96,7.92,1.44,11.88"/>
+			<path d="M246.73,101.53c-1.31,1.18-.21,3.79,1.55,3.83s3.03-2.23,2.22-3.8-3.17-1.95-4.56-.86"/>
+			<path d="M259.02,116.37l6.43-1.06c.2-2.78-3.46-4.81-5.92-3.49s-3.03,4.98-1.45,7.28,4.78,3.15,7.47,2.43"/>
+			<path d="M274.65,125.28c.14-2.29-1.28-4.36-1.79-6.6s.74-5.31,3.02-5.02c.86.11,1.58.7,2.21,1.31,2.65,2.56,4.58,5.85,5.53,9.41"/>
+			<path d="M285.54,100.12c1.68,8.57,3.37,17.13,5.05,25.7"/>
+			<path d="M277.06,109.51c6.34-.8,12.67-1.6,19.01-2.4"/>
+			<path d="M309.22,110.37c-2.54-1.61-6.47.94-6.04,3.91,2.09,1,4.57.38,6.86.68s4.75,2.65,3.57,4.64c-1.02,1.72-3.58,1.33-5.48.72"/>
+			<path d="M316.67,98.63c2.68,8.08,5.35,16.17,8.03,24.25"/>
+			<path d="M314.14,110.08c4.23-.33,8.41-1.29,12.36-2.84"/>
+			<path d="M295.08,113.41c.05,3.1.73,6.18,1.99,9.01"/>
+			<path d="M291.07,98.85c-1.03,1.3-.18,3.57,1.45,3.88s3.25-1.5,2.76-3.09-2.84-2.18-4.02-1.02"/>
+		</g>
 
-	{#if showProjects}
-		<div id="projects-section" class="projects-section">
-			<div class="projects-header">
-				<button onclick={() => menuOpen = !menuOpen} class="menu-toggle">
-					{menuOpen ? '× Close' : '+ Filter'}
-				</button>
-			</div>
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
+		<g class="anim-btn-ar btn-link" role="button" tabindex="0" aria-label="View AR projects"
+			 onclick={() => navigateTo('ar')} onkeydown={(e) => handleKeydown(e, 'ar')}>
+			<path d="M478.01,264.83c4.68-15.77,9.37-31.55,14.05-47.32,5.77,15.07,10.2,30.65,13.21,46.51"/>
+			<path d="M462.12,243.52c14.66,1.56,29.48,1.72,44.17.47"/>
+			<path d="M513.76,219.84c2.52,15.17,3.77,30.55,3.74,45.93"/>
+			<path d="M502.71,219.42c13.99,1.89,28.08,3,42.2,3.32-9.63,5.49-19.26,10.98-28.89,16.47,9.06,5.2,17.4,11.64,24.71,19.09,2.36,2.4,4.71,4.97,7.81,6.27s7.23.88,9.11-1.91"/>
+			<rect class="click-area" x="453.2" y="196.72" width="117.63" height="81.64"/>
+		</g>
 
-			{#if menuOpen}
-				<div class="utility-section">
-					<SearchBar />
-					<ApplyFilters />
-				</div>
-			{/if}
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
+		<g class="anim-btn-ai btn-link" role="button" tabindex="0" aria-label="View AI projects"
+			 onclick={() => navigateTo('ai')} onkeydown={(e) => handleKeydown(e, 'ai')}>
+			<path d="M484.13,384.54c.86-15.39,3.23-30.7,7.06-45.63,8.47,17.05,17.95,33.59,28.39,49.51"/>
+			<path d="M465.81,373.76c25.95-1.22,51.81-4.49,77.25-9.78"/>
+			<path d="M535.59,337.76c1.74,12.56,4.71,24.96,8.86,36.94"/>
+			<path d="M517.57,341.2c11-.3,21.96-1.86,32.6-4.64"/>
+			<path d="M536.64,379.96c6.15-4.43,13.52-7.16,21.07-7.8"/>
+			<rect class="click-area" x="460.07" y="323.95" width="111.12" height="73.94"/>
+		</g>
 
-			{#if filteredProjects.length === 0}
-				<div class="empty-state">
-					<div>Nothing found</div>
-					<button onclick={filter.resetFilters}>Reset</button>
-				</div>
-			{/if}
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
+		<g class="anim-btn-writing btn-link" role="button" tabindex="0" aria-label="View writing"
+			 onclick={() => navigateTo(null)} onkeydown={(e) => handleKeydown(e, null)}>
+			<path d="M433.04,92.57c2.54,10.82,5.83,21.46,9.86,31.82.77-6.39,2.45-12.66,4.99-18.57,5.1,6.58,10.19,13.16,15.29,19.74-2.75-13.76-3.74-27.87-2.94-41.88"/>
+			<path d="M472.49,122.24c.46-9.34.14-18.71-.93-28,4.94,1.16,9.87,2.32,14.81,3.49-5.74,2.86-11.36,5.96-16.84,9.28,9.44,2.63,18.21,7.63,25.28,14.42"/>
+			<path d="M502.21,98.31c-.36,8.02.37,16.09,2.17,23.92"/>
+			<path d="M501.45,90.44l1.8-3.57"/>
+			<path d="M517.93,85.82c-.05,14.47-.03,28.94.07,43.41,3.97-3.59,8.35-6.72,13.02-9.32"/>
+			<path d="M508.63,105.51c6.79-.06,13.57-.11,20.36-.17"/>
+			<path d="M539.7,102.96c0,8.09,0,16.19,0,24.28"/>
+			<path d="M540.77,94.74l4.64-4.64"/>
+			<path d="M551.48,100.1v25.71"/>
+			<path d="M551.18,107.51c4.02-.8,7.94-2.11,11.64-3.88.52,8.82,1.05,17.64,1.57,26.47"/>
+			<path d="M588.99,121.87c-5.07-3.85-9.69-8.29-13.73-13.2,7.13.07,14.27-1.91,20.35-5.64-4.09,16.16-8.19,32.32-12.28,48.48-12.47-5.85-27.12-6.91-40.31-2.91"/>
+			<rect class="click-area" x="415.33" y="70.37" width="199.35" height="88.08"/>
+		</g>
 
-			{#if personalProjects.length > 0}
-				<div class="type-section">
-					<h2 class="type-heading">Projects</h2>
-					<div class="projects-grid">
-						{#each personalProjects as project, i}
-							<a href={`/projects/${project.id}`} class="project-card" style="--delay: {i * 0.05}s; --rotate: {(i % 3 - 1) * 1.5}deg">
-								<span class="project-name">{project.name}</span>
-							</a>
-						{/each}
-					</div>
-				</div>
-			{/if}
+		<g class="anim-beaker">
+			<path d="M157.43,302.91c8.64,43.59-13.92,87.31-41.06,122.5-3.93,5.1-8.2,11.58-5.58,17.46,2.43,5.47,9.36,6.96,15.3,7.69,47.24,5.85,94.88,8.49,142.48,7.91,7.22-.09,15.83-1.07,19.16-7.48,1.77-3.41,1.47-7.53.48-11.24-4.85-18.27-23.23-28.79-37.44-41.24-28.68-25.13-43.49-65.18-38.08-102.92-13.71,13.47-36.22,9.29-54.75,4.18-2.98-3.86,3.27-8.18,8.1-8.89,13.44-1.97,27.2-1.76,40.58.6"/>
+			<g class="bubble" style="--float-delay: 0s; --float-dur: 3.2s">
+				<path d="M160.17,232.59c-4.37,3.46-.75,11.93,4.82,11.73,5.57-.2,8.96-7.78,5.92-12.46s-10.49-5.18-14.68-1.5"/>
+			</g>
+			<g class="bubble" style="--float-delay: 0.7s; --float-dur: 3.8s">
+				<path d="M203.82,251.07c-5.07,2.68-8.89,8.3-8.05,13.97.84,5.67,7.47,10.14,12.65,7.68,4.49-2.13,5.93-8.3,4.04-12.9s-6.24-7.75-10.79-9.76"/>
+			</g>
+			<g class="bubble" style="--float-delay: 1.4s; --float-dur: 2.8s">
+				<path d="M156.22,269.72c-2.69,2.29-3.09,6.8-.84,9.52s6.75,3.19,9.51.98c1.31-4.81-2.42-10.34-7.37-10.94"/>
+			</g>
+			<path d="M142.35,385.09c5.8-11,23.42-12.93,31.47-3.46,4.49-2.58,8.16-6.58,10.33-11.28,5.55,6.28,11.11,12.57,16.66,18.85,1.47-9.42-.03-19.27-4.22-27.83,4.75-1.17,9.16,2.97,11.55,7.23s4.07,9.26,8.09,12.05,14.18-1.26,14.01-6.15"/>
+		</g>
+	</svg>
 
-			{#if technicalProjects.length > 0}
-				<div class="type-section">
-					<h2 class="type-heading">Other Work</h2>
-					<div class="projects-grid">
-						{#each technicalProjects as project, i}
-							<a href={`/projects/${project.id}`} class="project-card" style="--delay: {i * 0.05}s; --rotate: {(i % 3 - 1) * 1.5}deg">
-								<span class="project-name">{project.name}</span>
-							</a>
-						{/each}
-					</div>
-				</div>
-			{/if}
-		</div>
-	{/if}
+	<!-- Mobile SVG -->
+	<svg class="design-svg mobile-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 335.96 560.68">
+		<g class="anim-name">
+			<path d="M57.65,61.64c-.55-2.16-3.6-2.37-5.68-1.58-3.86,1.48-6.93,4.87-8.02,8.86-.42,1.52-.54,3.22.16,4.63s2.44,2.39,3.92,1.83c4.51-1.71,6.18-7.11,7.26-11.82-.56,3.11.92,6.49,3.59,8.19,1.15-.46,2.02-1.54,2.24-2.76"/>
+			<path d="M64.83,72.28c.34-1.65-.73-3.22-1.27-4.82s-.1-3.94,1.58-4.1c.82-.08,1.56.43,2.32.71s1.84.25,2.17-.5"/>
+			<path d="M74.23,64.79c-.15,2.33.16,4.69.91,6.91"/>
+			<path d="M72.79,54.98c-1.22,1.32.35,3.9,2.09,3.43.62-1.63-.72-3.66-2.46-3.75"/>
+			<path d="M82.34,67.23l4.53-1c.12-1.96-2.82-3.02-4.26-1.7s-1.15,3.88.26,5.24,3.55,1.7,5.49,1.45"/>
+			<path d="M92.19,51.64c.8,7.76,1.6,15.52,2.4,23.28"/>
+			<path d="M124.92,52.48c.06,8.94.69,17.87,1.87,26.73"/>
+			<path d="M138.99,56.29c-4.38,4.31-9.09,8.29-14.06,11.9,4.5,3.11,8.73,6.62,12.61,10.47"/>
+			<path d="M144.68,54.55l3.68,22.86"/>
+			<path d="M153.51,66.37l5.93-.42c-1.06-1.54-2.51-3.27-4.38-3.06-2.35.27-3.12,3.68-1.76,5.61s3.86,2.63,6.18,3.06"/>
+			<path d="M162.63,63.83l5.15,9.56c-.12-3.28.19-6.56.91-9.76"/>
+			<path d="M175.44,67.88l5.57-1.03c.34-1.98-2.4-3.5-4.13-2.46s-2.01,3.64-.92,5.33,3.15,2.54,5.16,2.7"/>
+			<path d="M195,65.93c-1.23-1.85-4.27-1.97-5.8-.36s-1.4,4.43.12,6.06,4.11,2.03,6.16,1.16"/>
+			<path d="M198.84,65.21l8.63.75c-3.49,2.48-6.28,5.95-7.96,9.89,2.88-.09,5.76-.18,8.64-.27"/>
+		</g>
+
+		<g class="anim-tagline">
+			<path d="M120.56,116.28l.63-13.26c1.43,3.64,3.53,7.02,6.17,9.92,1.4-3.62,2.8-7.24,4.2-10.86.05,6.67.73,13.34,2.02,19.89"/>
+			<path d="M137.03,112.01l2.44-14.36c3.15,6.08,5.66,12.5,7.46,19.1"/>
+			<path d="M156.93,116.26c-1.47-4.75-2.13-9.75-1.96-14.73,3.38-.79,1.16-.7,4.62-.5,2.43.14,5.14.7,6.46,2.74,1.74,2.69.02,6.36-2.37,8.5s-5.45,3.56-7.39,6.1-2.07,6.98.84,8.33"/>
+			<path d="M133.62,104.84l13.78-.53"/>
+			<path d="M195.27,106.91c-1.95-.75-4.02-1.52-6.09-1.18s-4.03,2.24-3.64,4.3c.72,3.79,6.68,2.73,9.8,5.01,2.57,1.88,2.3,6.47-.48,8.04-1.19.67-2.62.8-3.87,1.36s-2.4,1.86-2.01,3.17"/>
+			<path d="M207.34,109.05c-3.22-.33-6.4,2.52-6.41,5.76-.01,3.24,3.14,6.12,6.36,5.82"/>
+			<path d="M215.84,109.14c.48,3.96.96,7.92,1.44,11.88"/>
+			<path d="M212.58,98.69c-1.31,1.18-.21,3.79,1.55,3.83s3.03-2.23,2.22-3.8-3.17-1.95-4.56-.86"/>
+			<path d="M224.87,113.53l6.43-1.06c.2-2.78-3.46-4.81-5.92-3.49s-3.03,4.98-1.45,7.28,4.78,3.15,7.47,2.43"/>
+			<path d="M240.5,122.44c.14-2.29-1.28-4.36-1.79-6.6s.74-5.31,3.02-5.02c.86.11,1.58.7,2.21,1.31,2.65,2.56,4.58,5.85,5.53,9.41"/>
+			<path d="M251.39,97.28c1.68,8.57,3.37,17.13,5.05,25.7"/>
+			<path d="M242.91,106.66c6.34-.8,12.67-1.6,19.01-2.4"/>
+			<path d="M275.07,107.53c-2.54-1.61-6.47.94-6.04,3.91,2.09,1,4.57.38,6.86.68s4.75,2.65,3.57,4.64c-1.02,1.72-3.58,1.33-5.48.72"/>
+			<path d="M282.52,95.78c2.68,8.08,5.35,16.17,8.03,24.25"/>
+			<path d="M279.99,107.24c4.23-.33,8.41-1.29,12.36-2.84"/>
+			<path d="M260.93,110.57c.05,3.1.73,6.18,1.99,9.01"/>
+			<path d="M256.92,96c-1.03,1.3-.18,3.57,1.45,3.88s3.25-1.5,2.76-3.09-2.84-2.18-4.02-1.02"/>
+		</g>
+
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
+		<g class="anim-btn-ar btn-link" role="button" tabindex="0" aria-label="View AR projects"
+			 onclick={() => navigateTo('ar')} onkeydown={(e) => handleKeydown(e, 'ar')}>
+			<path d="M199.53,265.01c4.68-15.77,9.37-31.55,14.05-47.32,5.77,15.07,10.2,30.65,13.21,46.51"/>
+			<path d="M183.64,243.7c14.66,1.56,29.48,1.72,44.17.47"/>
+			<path d="M235.29,220.03c2.52,15.17,3.77,30.55,3.74,45.93"/>
+			<path d="M224.24,219.6c13.99,1.89,28.08,3,42.2,3.32-9.63,5.49-19.26,10.98-28.89,16.47,9.06,5.2,17.4,11.64,24.71,19.09,2.36,2.4,4.71,4.97,7.81,6.27s7.23.88,9.11-1.91"/>
+			<rect class="click-area" x="174.73" y="196.9" width="117.63" height="81.64"/>
+		</g>
+
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
+		<g class="anim-btn-ai btn-link" role="button" tabindex="0" aria-label="View AI projects"
+			 onclick={() => navigateTo('ai')} onkeydown={(e) => handleKeydown(e, 'ai')}>
+			<path d="M46.56,257.49c.86-15.39,3.23-30.7,7.06-45.63,8.47,17.05,17.95,33.59,28.39,49.51"/>
+			<path d="M28.24,246.71c25.95-1.22,51.81-4.49,77.25-9.78"/>
+			<path d="M98.02,210.71c1.74,12.56,4.71,24.96,8.86,36.94"/>
+			<path d="M80,214.15c11-.3,21.96-1.86,32.6-4.64"/>
+			<path d="M99.07,252.91c6.15-4.43,13.52-7.16,21.07-7.8"/>
+			<rect class="click-area" x="22.5" y="196.9" width="111.12" height="73.94"/>
+		</g>
+
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
+		<g class="anim-btn-writing btn-link" role="button" tabindex="0" aria-label="View writing"
+			 onclick={() => navigateTo(null)} onkeydown={(e) => handleKeydown(e, null)}>
+			<path d="M70.08,319.14c2.54,10.82,5.83,21.46,9.86,31.82.77-6.39,2.45-12.66,4.99-18.57,5.1,6.58,10.19,13.16,15.29,19.74-2.75-13.76-3.74-27.87-2.94-41.88"/>
+			<path d="M109.52,348.81c.46-9.34.14-18.71-.93-28,4.94,1.16,9.87,2.32,14.81,3.49-5.74,2.86-11.36,5.96-16.84,9.28,9.44,2.63,18.21,7.63,25.28,14.42"/>
+			<path d="M139.24,324.88c-.36,8.02.37,16.09,2.17,23.92"/>
+			<path d="M138.49,317.01l1.8-3.57"/>
+			<path d="M154.96,312.38c-.05,14.47-.03,28.94.07,43.41,3.97-3.59,8.35-6.72,13.02-9.32"/>
+			<path d="M145.67,332.08c6.79-.06,13.57-.11,20.36-.17"/>
+			<path d="M176.73,329.53c0,8.09,0,16.19,0,24.28"/>
+			<path d="M177.81,321.31l4.64-4.64"/>
+			<path d="M188.52,326.67v25.71"/>
+			<path d="M188.21,334.08c4.02-.8,7.94-2.11,11.64-3.88.52,8.82,1.05,17.64,1.57,26.47"/>
+			<path d="M226.03,348.44c-5.07-3.85-9.69-8.29-13.73-13.2,7.13.07,14.27-1.91,20.35-5.64-4.09,16.16-8.19,32.32-12.28,48.48-12.47-5.85-27.12-6.91-40.31-2.91"/>
+			<rect class="click-area" x="52.36" y="296.94" width="199.35" height="88.08"/>
+		</g>
+
+		<g class="anim-beaker">
+			<path d="M127.72,440.08c5.58,28.14-8.99,56.37-26.51,79.08-2.54,3.29-5.3,7.48-3.6,11.27,1.57,3.53,6.04,4.49,9.88,4.97,30.5,3.78,61.25,5.48,91.98,5.1,4.66-.06,10.22-.69,12.37-4.83,1.14-2.2.95-4.86.31-7.26-3.13-11.8-15-18.58-24.17-26.63-18.51-16.22-28.08-42.08-24.59-66.44-8.85,8.69-23.38,6-35.35,2.7-1.92-2.49,2.11-5.28,5.23-5.74,8.68-1.27,17.56-1.14,26.2.39"/>
+			<g class="bubble" style="--float-delay: 0s; --float-dur: 3.2s">
+				<path d="M129.49,394.69c-2.82,2.24-.49,7.7,3.11,7.57s5.79-5.02,3.82-8.04-6.77-3.35-9.48-.97"/>
+			</g>
+			<g class="bubble" style="--float-delay: 0.7s; --float-dur: 3.8s">
+				<path d="M157.67,406.61c-3.27,1.73-5.74,5.36-5.19,9.02s4.82,6.55,8.17,4.96c2.9-1.38,3.83-5.36,2.61-8.33s-4.03-5-6.96-6.3"/>
+			</g>
+			<g class="bubble" style="--float-delay: 1.4s; --float-dur: 2.8s">
+				<path d="M126.94,418.65c-1.74,1.48-1.99,4.39-.54,6.15s4.36,2.06,6.14.63c.84-3.11-1.56-6.68-4.76-7.06"/>
+			</g>
+			<path d="M117.99,493.14c3.75-7.1,15.12-8.35,20.32-2.23,2.9-1.67,5.26-4.25,6.67-7.29,3.59,4.06,7.17,8.11,10.76,12.17.95-6.08-.02-12.44-2.73-17.97,3.06-.76,5.91,1.92,7.45,4.67s2.63,5.98,5.22,7.78,9.15-.81,9.04-3.97"/>
+		</g>
+	</svg>
+
 </div>
 
 <style>
 	.homepage {
-		max-width: 1400px;
-		margin: 0 auto;
-		padding: var(--space-lg);
-	}
-
-	/* Hero - bold, centered, playful */
-	.hero-section {
-		min-height: 80vh;
+		width: 100%;
+		min-height: calc(100vh - 96px);
 		display: flex;
-		flex-direction: column;
-		justify-content: center;
 		align-items: center;
-		text-align: center;
-		position: relative;
+		justify-content: center;
+		padding: 2rem;
 	}
 
-	.site-name {
-		font-family: var(--font-display);
-		font-size: clamp(60px, 15vw, 180px);
-		font-weight: 900;
-		line-height: 0.85;
-		margin: 0;
-		letter-spacing: -0.04em;
-		text-transform: uppercase;
-		color: white;
-		mix-blend-mode: difference;
+	.design-svg {
+		width: 100%;
+		max-height: 85vh;
 	}
 
-	.tagline {
-		font-family: var(--font-body);
-		font-size: clamp(14px, 2vw, 20px);
-		font-weight: 500;
-		text-transform: uppercase;
-		letter-spacing: 0.3em;
-		margin: var(--space-md) 0 0 0;
-		opacity: 0.8;
-		color: white;
-		mix-blend-mode: difference;
+	.design-svg path {
+		fill: none;
+		stroke: #231f20;
+		stroke-miterlimit: 10;
+		stroke-linecap: round;
+		stroke-linejoin: round;
 	}
 
-	.enter-button {
-		margin-top: var(--space-xl);
-		font-family: var(--font-display);
-		font-size: clamp(16px, 2vw, 20px);
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.2em;
-		padding: var(--space-md) var(--space-xl);
-		border: 3px solid white;
-		background: transparent;
-		color: white;
+	.click-area {
+		fill: transparent;
+		stroke: none !important;
 		cursor: pointer;
-		transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-		mix-blend-mode: difference;
 	}
 
-	.enter-button:hover {
-		background: var(--text-color);
-		color: var(--bg-color);
-		transform: scale(1.05) rotate(-2deg);
-		box-shadow: none;
+	.mobile-svg {
+		display: none;
 	}
 
-	/* Projects section */
-	.projects-section {
-		padding-top: var(--space-xl);
-		animation: slideUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-	}
-
-	@keyframes slideUp {
-		from {
-			opacity: 0;
-			transform: translateY(60px);
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-
-	.projects-header {
-		margin-bottom: var(--space-lg);
-		display: flex;
-		justify-content: flex-end;
-	}
-
-	.menu-toggle {
-		font-family: var(--font-display);
-		font-size: 14px;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		padding: var(--space-sm) var(--space-md);
-		border: 2px solid var(--text-color);
-		background: transparent;
-		color: var(--text-color);
+	/* Button interactivity */
+	.btn-link {
 		cursor: pointer;
-		transition: all 0.2s ease;
+		outline: none;
 	}
 
-	.menu-toggle:hover {
-		background: var(--text-color);
-		color: var(--bg-color);
-		transform: none;
-		box-shadow: none;
+	.btn-link path {
+		transition: stroke 0.3s ease, stroke-width 0.3s ease;
 	}
 
-	.utility-section {
-		margin-bottom: var(--space-lg);
-		padding: var(--space-md);
-		border: 2px solid var(--text-color);
-		display: flex;
-		flex-direction: column;
-		gap: var(--space-md);
+	.btn-link:hover path,
+	.btn-link:focus-visible path {
+		stroke-width: 1.8;
 	}
 
-	/* Type sections */
-	.type-section {
-		margin-bottom: var(--space-xl);
+	.anim-btn-ar:hover path,
+	.anim-btn-ar:focus-visible path {
+		stroke: #E6332A;
 	}
 
-	.type-heading {
-		font-family: var(--font-display);
-		font-size: clamp(36px, 8vw, 80px);
-		font-weight: 900;
-		margin: 0 0 var(--space-lg) 0;
-		letter-spacing: -0.03em;
-		text-transform: uppercase;
-		line-height: 0.9;
+	.anim-btn-ai:hover path,
+	.anim-btn-ai:focus-visible path {
+		stroke: #005CAB;
 	}
 
-	/* Projects grid - playful, varied layout */
-	.projects-grid {
-		display: flex;
-		flex-wrap: wrap;
-		gap: var(--space-sm);
+	.anim-btn-writing:hover path,
+	.anim-btn-writing:focus-visible path {
+		stroke: #2ECC40;
 	}
 
-	.project-card {
-		display: inline-block;
-		padding: var(--space-sm) var(--space-md);
-		border: 2px solid var(--text-color);
-		text-decoration: none;
-		color: var(--text-color);
-		transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-		animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) backwards;
-		animation-delay: var(--delay, 0s);
-		transform: rotate(var(--rotate, 0deg));
+	.btn-link:hover .click-area,
+	.btn-link:focus-visible .click-area {
+		fill: rgba(0, 0, 0, 0.02);
 	}
 
-	.project-card:hover {
-		background: var(--text-color);
-		color: var(--bg-color);
-		transform: scale(1.1) rotate(calc(var(--rotate, 0deg) * -2));
-		z-index: 10;
+	.btn-link:focus-visible {
+		outline: 2px solid #005CAB;
+		outline-offset: 4px;
+		border-radius: 4px;
 	}
 
-	@keyframes popIn {
-		from {
-			opacity: 0;
-			transform: scale(0.8) rotate(var(--rotate, 0deg));
-		}
-		to {
-			opacity: 1;
-			transform: scale(1) rotate(var(--rotate, 0deg));
-		}
+	/* Bubble float animation */
+	.bubble {
+		animation: float var(--float-dur, 3s) ease-in-out infinite;
+		animation-delay: var(--float-delay, 0s);
 	}
 
-	.project-name {
-		font-family: var(--font-display);
-		font-size: clamp(14px, 2vw, 18px);
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.02em;
+	@keyframes float {
+		0%, 100% { transform: translateY(0); }
+		50% { transform: translateY(-4px); }
 	}
 
-	/* Color accents for different sections */
-	.type-section:nth-child(2) .project-card:hover {
-		background: #0074D9;
-		border-color: #0074D9;
-	}
-
-	.type-section:nth-child(3) .project-card:hover {
-		background: #FF4136;
-		border-color: #FF4136;
-	}
-
-	.empty-state {
-		padding: var(--space-xl);
-		text-align: center;
-		font-family: var(--font-display);
-		font-size: 24px;
-		text-transform: uppercase;
-	}
-
-	.empty-state button {
-		margin-top: var(--space-md);
-		font-family: var(--font-display);
-		font-size: 14px;
-		padding: var(--space-sm) var(--space-md);
-		border: 2px solid var(--text-color);
-		background: transparent;
-		text-transform: uppercase;
-	}
-
-	.empty-state button:hover {
-		background: var(--text-color);
-		color: var(--bg-color);
-	}
-
-	/* Mobile */
+	/* Responsive */
 	@media (max-width: 768px) {
 		.homepage {
-			padding: var(--space-md);
+			padding: 1rem;
+			min-height: calc(100vh - 48px);
 		}
 
-		.hero-section {
-			min-height: 70vh;
+		.desktop-svg {
+			display: none;
 		}
 
-		.site-name {
-			font-size: clamp(48px, 18vw, 100px);
-		}
-
-		.enter-button {
-			padding: var(--space-sm) var(--space-lg);
-		}
-
-		.type-heading {
-			font-size: clamp(28px, 10vw, 48px);
-		}
-
-		.projects-grid {
-			gap: var(--space-xs);
-		}
-
-		.project-card {
-			padding: var(--space-xs) var(--space-sm);
-			transform: none;
-		}
-
-		.project-card:hover {
-			transform: scale(1.05);
-		}
-
-		.project-name {
-			font-size: 12px;
+		.mobile-svg {
+			display: block;
+			max-width: 100%;
 		}
 	}
 </style>
