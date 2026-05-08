@@ -11,6 +11,8 @@
 	onMount(() => {
 		if (!browser || !container) return;
 
+		if (sessionStorage.getItem('svgAnimated')) return;
+
 		const groups = [
 			{ selector: '.anim-name path', baseDelay: 0 },
 			{ selector: '.anim-tagline path', baseDelay: 400 },
@@ -39,12 +41,18 @@
 				});
 			});
 		});
+
+		sessionStorage.setItem('svgAnimated', 'true');
 	});
 
-	function navigateTo(category) {
+	function navigateTo(destination) {
+		if (destination === 'ai' || destination === 'ar' || destination === 'writing') {
+			goto(`/${destination}`);
+			return;
+		}
 		filter.resetFilters();
-		if (category) {
-			filter.toggleCategory(category);
+		if (destination) {
+			filter.toggleCategory(destination);
 		}
 		goto('/projects');
 	}
@@ -151,7 +159,7 @@
 
 		<!-- svelte-ignore a11y_no_static_element_interactions -->
 		<g class="anim-btn-writing btn-link" role="button" tabindex="0" aria-label="View writing"
-			 onclick={() => navigateTo(null)} onkeydown={(e) => handleKeydown(e, null)}>
+			 onclick={() => navigateTo('writing')} onkeydown={(e) => handleKeydown(e, 'writing')}>
 			<path d="M433.04,92.57c2.54,10.82,5.83,21.46,9.86,31.82.77-6.39,2.45-12.66,4.99-18.57,5.1,6.58,10.19,13.16,15.29,19.74-2.75-13.76-3.74-27.87-2.94-41.88"/>
 			<path d="M472.49,122.24c.46-9.34.14-18.71-.93-28,4.94,1.16,9.87,2.32,14.81,3.49-5.74,2.86-11.36,5.96-16.84,9.28,9.44,2.63,18.21,7.63,25.28,14.42"/>
 			<path d="M502.21,98.31c-.36,8.02.37,16.09,2.17,23.92"/>
@@ -243,7 +251,7 @@
 
 		<!-- svelte-ignore a11y_no_static_element_interactions -->
 		<g class="anim-btn-writing btn-link" role="button" tabindex="0" aria-label="View writing"
-			 onclick={() => navigateTo(null)} onkeydown={(e) => handleKeydown(e, null)}>
+			 onclick={() => navigateTo('writing')} onkeydown={(e) => handleKeydown(e, 'writing')}>
 			<path d="M70.08,319.14c2.54,10.82,5.83,21.46,9.86,31.82.77-6.39,2.45-12.66,4.99-18.57,5.1,6.58,10.19,13.16,15.29,19.74-2.75-13.76-3.74-27.87-2.94-41.88"/>
 			<path d="M109.52,348.81c.46-9.34.14-18.71-.93-28,4.94,1.16,9.87,2.32,14.81,3.49-5.74,2.86-11.36,5.96-16.84,9.28,9.44,2.63,18.21,7.63,25.28,14.42"/>
 			<path d="M139.24,324.88c-.36,8.02.37,16.09,2.17,23.92"/>
