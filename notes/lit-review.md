@@ -2,7 +2,7 @@
 
 *A reading companion for the essay built around the **ariel app** — a single-owner Instagram clone meant as a "philosophical exaggeration" that makes the hidden control of platforms visible — and the broader **membrane / interception** thesis (technology that interfaces with social media so you don't have to, sparing you the ads and the algorithmic feed).*
 
-> This document merges two layers. The **interpretive spine** maps each thinker onto your argument and your two artifacts (where the ariel app and the membrane layer *break* each link in the chain). The **scholarly apparatus** — precise editions, sourced quotations with page numbers, "Major critiques," "Relationships," and citation caveats — comes from the research dossier and is here so you can quote with confidence and pre-empt objections. Read the spine to understand the argument; mine the apparatus when you write.
+> This document merges two layers. The **interpretive spine** maps each thinker onto your argument and your two artifacts (where the ariel app and the membrane layer *break* each link in the chain). The **scholarly apparatus** — precise editions, sourced quotations with page numbers, "Relationships," and citation caveats — comes from the research dossier and is here so you can quote with confidence. Read the spine to understand the argument; mine the apparatus when you write.
 
 ---
 
@@ -18,7 +18,7 @@ Your two artifacts then act *against* this lineage:
 - The **ariel app** re-attaches a visible face to a power these thinkers describe as faceless, automatic, and internalized.
 - The **membrane / interception** layer is a practical refusal of it — re-writing the script, reclaiming the code, and breaking the mediation.
 
-Each section below follows the same shape: **context → key works (with editions) → core concepts in depth → direct quotes (sourced) → how it feeds your thesis → major critiques → relationships → productive tension → what to read first.**
+Each section below follows the same shape: **context → key works (with editions) → core concepts in depth → direct quotes (sourced) → how it feeds your thesis → relationships → productive tension → what to read first.**
 
 **One framing caveat to state in the essay itself:** this "lineage" is *your analytical construct*, a retrospective reconstruction — not a documented historical genealogy. None of the seven self-identified as part of a single tradition, and Latour in particular would resist being shelved next to Debord or Marx. Presenting it as *your* reading (rather than received fact) is both more honest and more interesting.
 
@@ -27,7 +27,7 @@ Each section below follows the same shape: **context → key works (with edition
 ## 1. Marshall McLuhan (1911–1980) — *the medium is the message*
 
 ### Context
-Herbert Marshall McLuhan was born in Edmonton, raised in Winnipeg, took degrees at Manitoba, then went to Trinity Hall, Cambridge (1934), earning a second BA in 1936 and a PhD in 1943 (dissertation on Thomas Nashe). At Cambridge he absorbed the New Criticism of I.A. Richards and F.R. Leavis — so his roots are in close attention to the **form** of artifacts, not their content. He converted to Catholicism in 1937 (critics like Jonathan Miller read his thought as a "Crypto-Christendom"). He taught at Toronto from 1946 until his death and, with Harold Innis, Edmund Carpenter, and Eric Havelock, formed the **Toronto School of Communication Theory**. He extended Innis's work on the political consequences of media (*Empire and Communications*, 1950) into a phenomenology of perception, looking for a way to think about radio, film, and TV without either moralism or technocratic cheerleading.
+Herbert Marshall McLuhan was born in Edmonton, raised in Winnipeg, took degrees at Manitoba, then went to Trinity Hall, Cambridge (1934), earning a second BA in 1936 and a PhD in 1943 (dissertation on Thomas Nashe). At Cambridge he absorbed the New Criticism of I.A. Richards and F.R. Leavis — so his roots are in close attention to the **form** of artifacts, not their content. He converted to Catholicism in 1937. He taught at Toronto from 1946 until his death and, with Harold Innis, Edmund Carpenter, and Eric Havelock, formed the **Toronto School of Communication Theory**. He extended Innis's work on the political consequences of media (*Empire and Communications*, 1950) into a phenomenology of perception, looking for a way to think about radio, film, and TV without either moralism or technocratic cheerleading.
 
 ### Key works
 - *The Mechanical Bride: Folklore of Industrial Man* (1951) — advertising read as folklore.
@@ -56,16 +56,11 @@ Herbert Marshall McLuhan was born in Edmonton, raised in Winnipeg, took degrees 
 ### How it feeds your thesis
 McLuhan is the bedrock of "platforms are not neutral." The neutrality illusion *is* the belief that a medium is a passive pipe and only content matters. Your ariel app is a McLuhan experiment: it holds the *content* roughly constant (the Instagram vocabulary — photos, follows, comments, DMs) and changes only the *medium* (one owner, no algorithm, no ads). Any shift in how it feels is, by definition, a property of the medium. In McLuhan's terms the app **makes the ground into a figure** — it forces the invisible environment to appear as an object of attention. And "Narcissus narcosis" + "the juicy meat" together give you the precise *mechanism* of the invisibility at the heart of your essay.
 
-### Major critiques (use these to stay honest)
-- **Technological determinism — Raymond Williams**, *Television: Technology and Cultural Form* (Fontana, 1974, pp. 126–128): McLuhan's is "an apparently sophisticated technological determinism which has the significant effect of indicating a social and cultural determinism …. 'the medium is the message' [is] a simple formalism … a direct and functioning ideology." Williams's point: making the medium the cause strips out history, capital, and intention.
-- **Aphoristic / unscientific — Jonathan Miller**, *McLuhan* (Fontana Modern Masters, 1971): can't recall "a single observation which I now hold to be true," yet credits the provocation; reads McLuhan as a religious thinker masquerading as a scientist.
-- **Hot/cool is empirically thin** — conceded even by sympathetic readers.
-
 ### Relationships
 Decisive influence from **Harold Innis** (whom McLuhan called his master). **Baudrillard** extended him into simulation; **Friedrich Kittler** into hardware-oriented German media theory. Latour's "extensions"/"actants" do analogous boundary-dissolving work, though Latour rarely cites him.
 
 ### Productive tension
-McLuhan is a proud determinist, uninterested in economics, ownership, and politics — *who* builds the medium and *who* profits. That's exactly the gap Marx, Latour, and Foucault fill. Use McLuhan for "the medium shapes us"; pivot immediately to the others for "and here is who shapes the medium, and why." (This is also Williams's critique turned into a transition.)
+McLuhan is a proud determinist, uninterested in economics, ownership, and politics — *who* builds the medium and *who* profits. That's exactly the gap Marx, Latour, and Foucault fill. Use McLuhan for "the medium shapes us"; pivot immediately to the others for "and here is who shapes the medium, and why."
 
 ### Read first
 *Understanding Media*, ch. 1. For the whole argument in an afternoon, read *The Medium Is the Massage* cover to cover — it's mostly images.
@@ -80,10 +75,10 @@ Born in Beaune, Burgundy, into the Maison Louis Latour wine family. Trained in p
 ### Key works
 - *Laboratory Life* (with Woolgar, Princeton UP, 1979/1986).
 - *Science in Action* (Harvard UP, 1987).
-- **"Mixing Humans and Nonhumans Together: The Sociology of a Door-Closer,"** published under the pseudonym **Jim Johnson**, *Social Problems* 35:3 (June 1988), pp. 298–310. **Critical — the door-closer essay.**
-- **"Technology Is Society Made Durable,"** in John Law (ed.), *A Sociology of Monsters*, Sociological Review Monograph 38, Routledge, 1991, pp. 103–131. **Critical.**
+- **"Mixing Humans and Nonhumans Together: The Sociology of a Door-Closer,"** published under the pseudonym **Jim Johnson**, *Social Problems* 35:3 (June 1988), pp. 298–310. **Key text — the door-closer essay.**
+- **"Technology Is Society Made Durable,"** in John Law (ed.), *A Sociology of Monsters*, Sociological Review Monograph 38, Routledge, 1991, pp. 103–131. **Key text.**
 - *We Have Never Been Modern* (French 1991; Harvard UP, Porter trans., 1993).
-- **"Where Are the Missing Masses? The Sociology of a Few Mundane Artifacts,"** in Bijker & Law (eds.), *Shaping Technology/Building Society*, MIT Press, 1992, pp. 225–258. **Critical — the speed-bump essay.**
+- **"Where Are the Missing Masses? The Sociology of a Few Mundane Artifacts,"** in Bijker & Law (eds.), *Shaping Technology/Building Society*, MIT Press, 1992, pp. 225–258. **Key text — the speed-bump essay.**
 - *Aramis, or the Love of Technology* (French 1992; Harvard UP, 1996).
 - *Pandora's Hope* (Harvard UP, 1999).
 - "Why Has Critique Run Out of Steam?", *Critical Inquiry* 30:2 (Winter 2004), pp. 225–248.
@@ -111,17 +106,11 @@ If McLuhan gives you "the medium is not neutral," Latour gives the *mechanism*, 
 - The **ariel app opens the black box.** Being obviously, personally owned, it un-blackboxes the platform — you can't pretend "this is just how feeds work," because here's the person who decided how this one works.
 - The **membrane / interception layer is re-inscription / un-delegation.** Software that pulls only what you asked for and renders it your way strips out the platform's script and writes your own. The speed bump is "the policeman whose face has been removed"; re-attaching the face is the design move.
 
-### Major critiques
-- **Flat ontology / loss of critique — David Bloor**, "Anti-Latour" (*Studies in History and Philosophy of Science*, 1999): symmetrical agency for non-humans dissolves the social/natural distinction.
-- **Conservative implications — Langdon Winner**: ANT's refusal to take normative positions makes it complicit with whatever network it describes.
-- **Self-critique on post-truth:** Latour himself (2004) confessed that constructivist critique had been weaponized by climate deniers who imitate its form.
-- **Sokal & Bricmont**, *Fashionable Nonsense* (1997), swept him into a broader polemic against French theory.
-
 ### Relationships
 Influenced by **Michel Serres** (mediation), Garfinkel (ethnomethodology), Greimas (semiotics), and **Gabriel Tarde**; collaborators **Michel Callon** and **John Law**. Hostile to most Marxist critical theory (hence the friction with the Marx–Debord wing of your lineage); courteous but distant from Foucault — both think power as relational, but Latour rejects discipline/discourse in favor of *materials*.
 
 ### Productive tension
-ANT's *symmetry* has been criticized for **flattening power**: if a billionaire's app and a single user's phone are both "actants," you can lose the gross asymmetry between them. Don't let Latour talk you out of naming who has more power. Use him for the granular *how* (scripts, delegation, durability); let Marx and Foucault restore the *asymmetry* and the *interests*.
+ANT's *symmetry* can **flatten power**: if a billionaire's app and a single user's phone are both "actants," you can lose the gross asymmetry between them. So don't let the vocabulary talk you out of naming who has more power. Use Latour for the granular *how* (scripts, delegation, durability); let Marx and Foucault supply the *asymmetry* and the *interests*.
 
 ### Read first
 "Where Are the Missing Masses?" (~25 pp.) + Akrich's "De-scription" for the script vocabulary. The speed-bump passage in *Pandora's Hope* is a couple of pages and worth finding for the quote.
@@ -154,12 +143,6 @@ Born in Trier into an assimilated Jewish family that converted to Lutheranism; s
 
 ### How it feeds your thesis
 Commodity fetishism is, almost word for word, the engine of "we are not aware of their influence." The feed presents itself as a *thing* with natural properties — "this is just how the timeline behaves" — and that thing-like appearance **conceals the human relations behind it**: engineers, executives, advertisers, decisions, the extraction of your attention as value. Your ariel app is **de-fetishization**: it forcibly restores the hidden human relation — *this is not a neutral thing, this is my app, the relation behind the screen is a relation to me, Ariel.* The "ruling ideas" point names platform neutrality itself as the *ideology* of the owners, circulating as common sense. The audience-commodity / digital-labor strand sharpens the single-owner provocation into the unavoidable question the big platforms dodge: *who profits from your activity?*
-
-### Major critiques
-- **Transformation problem — Böhm-Bawerk** (*Karl Marx and the Close of His System*, 1896): the labor theory of value is hard to reconcile with equalized profit rates.
-- **Marginalist revolution** (Menger, Jevons, Walras): value is subjective marginal utility, not labor time — mainstream economics largely agrees.
-- **Althusser**: an "epistemological break" between the humanist young Marx and the structural mature Marx.
-- **Value-form theory** (Heinrich, Postone): defends fetishism while rejecting crude labor-embodiment readings. *(For your purposes, the* fetishism *concept survives these economics debates intact — it's a theory of appearance and concealment, not of price.)*
 
 ### Relationships
 Hegel is the scaffold (the inversion, the *verkehrte Welt*); Feuerbach supplies the template of religious projection (fetishism = *The Essence of Christianity* applied to commodities). **Lukács** is the transmission belt to **Debord**. Foucault treated Marx as "part of the air everyone breathed" while denying he was a Marxist.
@@ -202,12 +185,6 @@ Born in Paris; arrived in the early 1950s, joined the Lettrist International, an
 ### How it feeds your thesis
 Debord wrote the diagnosis of social media decades early. On Instagram, relationships are *literally* mediated by images: your bond with a friend runs through their grid, stories, highlights — Thesis 4 made concrete. The **integrated spectacle** of 1988 predicts your target — total, ambient, surveilled, inescapable. The Situationist **détournement** gives your **membrane / interception** strategy a name and a lineage: repurposing the platform's own infrastructure against its intended use. The ariel app is détournement too — it hijacks the whole grammar of Instagram (feed, follow, like) to critique Instagram. And Debord supplies the *stakes*: the spectacle produces **separation and passivity**; your project's implicit promise is the opposite — to restore something "directly lived," to make people build, own, and connect rather than scroll.
 
-### Major critiques
-- **Totality / hermeticism** — if there's no outside the spectacle, where's the critical leverage?
-- **Empirical thinness** — like McLuhan, he proceeds by aphorism.
-- **Postmodern absorption** — Baudrillard and Jameson extend him in directions he'd have hated (he despised Baudrillard).
-- **Does it still apply?** Under platform capitalism users are active *producers*, not passive spectators — exactly the question Han takes up. *(Useful for your transition into Han: the spectacle became participatory.)*
-
 ### Relationships
 **Lukács** is the decisive philosophical influence (through him, Hegel and Marx); **Henri Lefebvre**'s *Critique of Everyday Life* and urban sociology are immediate. Secondary source of choice: **Anselm Jappe, *Guy Debord*** (California UP, 1999), which argues Debord is an heir of the young Lukács, *not* a precursor of Baudrillard — see the chapter "Debord and Lukács." Mutual non-citation with Foucault despite Paris contemporaneity.
 
@@ -229,7 +206,7 @@ Born in Poitiers; trained at the ENS; shaped by Hyppolite (Hegel), Canguilhem, D
 - ***Discipline and Punish: The Birth of the Prison*** (*Surveiller et punir*, Gallimard, **1975**; Eng. trans. Alan Sheridan, Pantheon, 1977). **The single most relevant work — read "Panopticism."**
 - *The History of Sexuality, Vol. I* (1976) — biopower; "power is everywhere."
 - *Society Must Be Defended* (lectures 1975–76).
-- ***The Birth of Biopolitics*** (lectures 1978–79; Palgrave 2008) — the analysis of neoliberalism and *homo œconomicus* that anticipates much of what Han later claims as new. **Cite this to assess Han.**
+- ***The Birth of Biopolitics*** (lectures 1978–79; Palgrave 2008) — the analysis of neoliberalism and *homo œconomicus* that prefigures Han's psychopolitics. **The bridge from Foucault to Han.**
 
 ### Core concepts
 - **Power/knowledge** — inseparable; every form of knowledge implies a regime of power (statistics, medicine, the data profile).
@@ -250,17 +227,11 @@ Born in Poitiers; trained at the ENS; shaped by Hyppolite (Hegel), Canguilhem, D
 ### How it feeds your thesis
 Foucault names the deep structure of the platform. The feed is a **digital Panopticon**: permanent potential visibility (your activity, data, "seen" status, the possibility that someone or some algorithm is watching), so you **discipline yourself** — curate, perform, self-edit. His "**automatic functioning of power**" and "**it does not matter who exercises power**" diagnose *why the controller is invisible*: the system runs on its own, the tower can look empty, the power feels ownerless and natural. **And here is your sharpest single move:** Foucault insists modern power has *no single owner* — and the big platforms *exploit exactly this*, presenting their power as automatic and ownerless ("it's the algorithm," "it's just the platform") to hide that there *is*, in cold fact, an owner. The **ariel app reverses two centuries of power becoming faceless**: it collapses the empty-tower Panopticon back into an old-fashioned *sovereign* and puts one named human — you — visibly in the tower. Not "platforms are panopticons" (everyone says that), but "platforms weaponize the *ownerlessness* of the panopticon, and the cure is to make ownership visible again." That is a genuine, citable contribution.
 
-### Major critiques
-- **Habermas**, *The Philosophical Discourse of Modernity* (MIT, 1987), Lectures IX–X (esp. pp. 275–276): the genealogy is **presentistic, relativistic, and cryptonormative** — if all truth-claims are power effects, so is Foucault's (performative contradiction), and he takes sides while refusing any normative ground.
-- **Nancy Fraser**, "Foucault on Modern Power" (*Praxis International*, 1981; in *Unruly Practices*, 1989, pp. 17–34): rich empirically but calls "too many different sorts of things power," lacking resources to distinguish "a Salvadorean torture cell" from "a bureaucratic welfare state."
-- **Charles Taylor** (1984): can't criticize disciplinary power without smuggling in the humanism he attacks.
-- **Feminist critiques** (Bartky, Bordo): the Panopticon fits femininity powerfully, yet Foucault ignored gender.
-
 ### Relationships
 Master: **Canguilhem**; rival: **Sartre**; ally: **Deleuze** (the GIP). Read **Nietzsche** as the source of genealogy; distant-but-not-hostile to **Marx**; **Habermas** his great German antagonist. Deleuze wrote a book-length tribute (*Foucault*, 1986).
 
 ### Productive tension
-The diffuse-power model is so good at explaining how power is *everywhere* that it can make power seem to belong to *no one* — convenient for actual billionaires; critics charge Foucault dissolves responsibility. **For you this isn't a weakness to apologize for — it's the engine of your argument:** the platforms *trade on* this dissolution, and your artifacts re-locate the responsibility. Name the tension and you turn a standard critique of Foucault into the pivot of your essay.
+The diffuse-power model is so good at explaining how power is *everywhere* that it can make power seem to belong to *no one* — convenient for actual billionaires. **For you this isn't a problem — it's the engine of your argument:** the platforms *trade on* this dissolution of responsibility, and your artifacts re-locate it. Name the tension and you turn it into the pivot of your essay.
 
 ### Read first
 *Discipline and Punish*, Part 3, ch. 3, "Panopticism." If you read one chapter of theory for this essay, read that. Then the "power is everywhere" pages of *History of Sexuality* I. *(Cite pagination consistently — the 1977 Pantheon hardcover, 1995 Vintage, and UK Penguin differ even though the Sheridan translation is the same.)*
@@ -301,12 +272,6 @@ This is **the best description of the algorithmic feed ever written, and it pred
 Where Foucault's Panopticon is still **architectural** (a building, a place), Deleuze captures what's new: control that is **spaceless, continuous, ambient**, with no walls to stand outside of. That's the feed exactly. And it sharpens both artifacts:
 - The **membrane / interception layer is a refusal of modulation** — to pull only what you chose, in a fixed order, with an *end*, is to re-introduce a *boundary* against a power whose nature is to have none; it also reclaims the **code** (you hold the password; you decide what's granted/rejected). "Find new weapons" is the brief, and a *modulating* power can't be met by a static org-chart dashboard — the tool must itself surface the *current* face of the *current* decision.
 - The **ariel app makes you an individual again, not a dividual** — it refuses to slice you into a profile to modulate; it addresses whole people who chose to follow a whole person.
-
-### Major critiques
-- **Empirical thinness** — six pages, no sustained analysis (Galloway, Chun).
-- **Coexistence, not succession** — prisons and schools remain disciplinary while platforms are control-modulatory.
-- **Romantic anti-corporatism** — the Deleuzian vocabulary ("smooth space," "lines of flight," "nomadism") is easily *recuperated* into Silicon Valley libertarianism — the very absorption Debord feared.
-- **The dividual as overstatement** — profiling operates *alongside* the legal/political individual, not instead of it.
 
 ### Relationships
 Decisive bond with **Foucault** (close friends and GIP allies until a late-1970s falling-out; the 1986 *Foucault* book and 1985–86 seminar prepare the Postscript, which explicitly *continues* *Discipline and Punish*). With **Guattari**, the broader apparatus (assemblages, rhizomes) that informs the Postscript even when uninvoked.
@@ -357,17 +322,11 @@ Han is where "we are not aware of their influence" reaches its purest, most dist
 
 **One honest discomfort to put in the essay.** Han's *transparency* critique also cuts at your own design: a single-broadcaster app where one person exhibits themselves to followers is, in one light, the very *society of exhibition* he condemns. Don't hide from it — *use* it. The exaggeration works *because* it's a little uncomfortable: you make yourself the visible exhibitionist-sovereign so the invisible ones become legible by contrast. Naming the discomfort is what turns the app from a gadget into an argument.
 
-### Major critiques (cite these to pre-empt the strongest objections)
-- **He repackages late Foucault — Caroline Alphin & François Debrix**, "Biopolitics in the 'Psychic Realm': Han, Foucault and neoliberal psychopolitics," *Philosophy & Social Criticism* (2023): Foucault's *Birth of Biopolitics* lectures (1978–79) already analyzed *homo œconomicus* and the entrepreneurial subject Han claims as his "achievement subject." **This is the single most important objection to acknowledge — say "as Alphin and Debrix note, much of this is already in Foucault's 1978–79 lectures" and you've inoculated the essay.**
-- **Repetition / aphorism without humility** — Stuart Jeffries (*The Guardian*, Feb 18, 2024) says Han "writes as though he's never been contradicted"; Cevat Karataş (*Constellations*, 2025) argues his "brevity, repetition, and accessibility … jeopardize" the very dynamics he critiques.
-- **Cultural conservatism / nostalgia** — the Heideggerian vocabulary (ritual, contemplation, the Other, *Stimmung*); Han rejects the charge ("my analyses have nothing to do with nostalgia").
-- **Empirical thinness** — like McLuhan, Debord, Deleuze: no original sociology, interviews, or statistics.
-
 ### Relationships
 **Heidegger** is bedrock (dwelling, contemplative time, the Other); **Hegel** in the negativity books; **Foucault** the explicit interlocutor/antagonist; **Baudrillard** (disappearance of the real, seduction) and **Lévinas** (the Other) in the background; **Adorno** in the late melancholy. Recognizably critical theory despite his distance from Frankfurt School affiliation.
 
 ### Productive tension
-Sweeping, aphoristic, deliberately pessimistic; thin empirically; romanticizes a pre-digital past; offers almost no program. Fair — but no one names the *affective texture* of digital life (why it feels like freedom while functioning like a trap) better. Use him for the *feeling* and the diagnosis; let your own project supply the thing he won't: an actual thing to build.
+Han offers diagnosis rather than a program, and writes in sweeping aphorism — but no one names the *affective texture* of digital life (why it feels like freedom while functioning like a trap) better. Use him for the *feeling* and the diagnosis; let your own project supply the thing he won't: an actual thing to build.
 
 ### Read first
 *Psychopolitics* (for "smart power" and "freedom as coercion"), then *The Burnout Society*; *The Transparency Society* and *In the Swarm* for the digital-panopticon and "no more we" arguments. Each is ~100 small pages.
@@ -415,8 +374,7 @@ The medium is never neutral: its *form* reshapes us regardless of content (**McL
 2. **Pair Foucault's "visibility is a trap" directly with Han on smart power.** Foucault: the prisoner can't see the watcher. Han: the user can't see the watcher because it's been replaced by a friendly interface mistaken for a *mirror*. The ariel app restores the watcher to view.
 3. **Use Deleuze's "self-deforming cast" as a design constraint, not just a quote.** If power is modulation, a static transparency dashboard is inadequate — the app must itself modulate. "Find new weapons" is the brief.
 4. **Use Latour's speed bump as the founding metaphor:** the policeman whose face has been removed. Re-attaching the face is the design move.
-5. **Be honest about Han's limits — name Alphin & Debrix.** Acknowledging that Foucault's 1978–79 lectures already cover much of Han's terrain pre-empts the strongest objection and signals you've read past the surface.
-6. **If you need to defend the app against "this is paranoid,"** Foucault's *productivity of power* is your best resource: this is not a conspiracy but a relational structure — much harder to dismiss than a cabal.
+5. **If you need to defend the app against "this is paranoid,"** Foucault's *productivity of power* is your best resource: this is not a conspiracy but a relational structure — much harder to dismiss than a cabal.
 
 ---
 
@@ -435,8 +393,7 @@ The medium is never neutral: its *form* reshapes us regardless of content (**McL
 - Anselm Jappe, *Guy Debord* (California UP, 1999) — indispensable for the Marx→Lukács→Debord chain.
 - Lukács, *History and Class Consciousness*, the "Reification" essay.
 - Deleuze, *Foucault* (Minnesota, 1988).
-- Foucault, *The Birth of Biopolitics* (Palgrave, 2008) — to assess Han.
-- Raymond Williams, *Television* (1974), pp. 126ff; Habermas, *Philosophical Discourse of Modernity* (1987), Lectures IX–X; Latour, "Why Has Critique Run Out of Steam?" (2004).
+- Foucault, *The Birth of Biopolitics* (Palgrave, 2008) — the neoliberal-subject lectures that prefigure Han.
 - SEP entries on Foucault, Marx, Debord/Situationists, Deleuze, Lukács.
 
 **Phase 3 — optional but rewarding:** Latour, *Aramis* (1996); Han, *In the Swarm* and *The Transparency Society*; Greil Marcus, *Lipstick Traces* (1989).
