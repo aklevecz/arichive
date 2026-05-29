@@ -1,0 +1,38 @@
+{
+	// Cloudflare Workers config (NOT Pages).
+	// `wrangler deploy` ships the SvelteKit app as a Worker with Static Assets.
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "research-tool",
+	"main": ".svelte-kit/cloudflare/_worker.js",
+	"compatibility_date": "2025-01-01",
+	"compatibility_flags": ["nodejs_compat"],
+	"assets": {
+		"binding": "ASSETS",
+		"directory": ".svelte-kit/cloudflare"
+	},
+	// D1: canonical store for knowledge-base entries.
+	// Create with: wrangler d1 create research_kb  → paste the returned database_id below.
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "research_kb",
+			"database_id": "REPLACE_WITH_D1_DATABASE_ID",
+			"migrations_dir": "migrations"
+		}
+	],
+	// Vectorize: semantic search over entries. 768 dims = Workers AI bge-base-en-v1.5.
+	// Create with: wrangler vectorize create research-kb-index --dimensions=768 --metric=cosine
+	"vectorize": [
+		{
+			"binding": "VECTORIZE",
+			"index_name": "research-kb-index"
+		}
+	],
+	// Workers AI: generates embeddings (no external key needed).
+	"ai": {
+		"binding": "AI"
+	}
+	// ANTHROPIC_API_KEY is a secret, NOT a var. Set it with:
+	//   wrangler secret put ANTHROPIC_API_KEY
+	// For local dev, put it in .dev.vars (gitignored).
+}

@@ -1,0 +1,29 @@
+{
+	"name": "research-tool",
+	"version": "0.0.1",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build",
+		"preview": "wrangler dev",
+		"deploy": "npm run build && wrangler deploy",
+		"db:migrate:local": "wrangler d1 migrations apply research_kb --local",
+		"db:migrate": "wrangler d1 migrations apply research_kb --remote",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json"
+	},
+	"devDependencies": {
+		"@cloudflare/workers-types": "^4.20250121.0",
+		"@sveltejs/adapter-cloudflare": "^4.7.1",
+		"@sveltejs/kit": "^2.0.0",
+		"@sveltejs/vite-plugin-svelte": "^3.0.0",
+		"svelte": "^5.0.0-next.1",
+		"svelte-check": "^3.6.0",
+		"typescript": "^5.0.0",
+		"vite": "^5.0.3",
+		"wrangler": "^3.99.0"
+	},
+	"dependencies": {
+		"@anthropic-ai/sdk": "^0.68.0"
+	}
+}
