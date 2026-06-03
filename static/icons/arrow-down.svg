@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="arrow-down" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #231f20;
+        stroke-miterlimit: 10;
+      }
+    </style>
+  </defs>
+  <g id="arrow-down-2" data-name="arrow-down">
+    <path class="cls-1" d="M33.79,14.11c1.14,14.56,1.56,29.18,1.24,43.78,4.33-6.28,9.78-11.79,16.03-16.16"/>
+    <path class="cls-1" d="M34.54,57.05c-1.93-2.81-4.17-5.4-6.66-7.72-1.94-1.8-4.3-3.53-6.94-3.37"/>
+  </g>
+</svg>

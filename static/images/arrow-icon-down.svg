@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 308.41 474.93">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #fff;
+        stroke-width: 3.03px;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-3 {
+        fill: #202020;
+      }
+    </style>
+  </defs>
+  <rect class="cls-3" x="128.52" y="102.25" width="43.9" height="202.76"/>
+  <rect class="cls-2" x="132.71" y="106.43" width="35.54" height="194.4"/>
+  <rect class="cls-3" x="136.62" y="110.09" width="27.7" height="187.08"/>
+  <rect class="cls-2" x="140.54" y="114.27" width="19.86" height="178.72"/>
+  <rect class="cls-3" x="144.46" y="117.93" width="12.02" height="171.41"/>
+  <line class="cls-1" x1="150.47" y1="282.02" x2="150.47" y2="125.24"/>
+  <g>
+    <polygon class="cls-3" points="150.92 394.26 101.4 308.47 200.45 308.47 150.92 394.26"/>
+    <polygon class="cls-2" points="150.92 388.23 106.61 311.47 195.23 311.47 150.92 388.23"/>
+    <polygon class="cls-3" points="150.92 382.21 111.82 314.48 190.03 314.48 150.92 382.21"/>
+    <polygon class="cls-2" points="150.92 376.2 117.04 317.5 184.81 317.5 150.92 376.2"/>
+    <polygon class="cls-3" points="150.92 370.18 122.25 320.5 179.59 320.5 150.92 370.18"/>
+    <polygon class="cls-2" points="150.92 364.16 127.46 323.52 174.38 323.52 150.92 364.16"/>
+    <polygon class="cls-3" points="150.92 358.14 132.68 326.53 169.17 326.53 150.92 358.14"/>
+    <polygon class="cls-2" points="150.92 352.12 137.88 329.54 163.96 329.54 150.92 352.12"/>
+    <polygon class="cls-3" points="150.92 346.1 143.1 332.55 158.74 332.55 150.92 346.1"/>
+    <polygon class="cls-2" points="153.53 335.56 150.92 340.08 148.32 335.56 153.53 335.56"/>
+  </g>
+</svg>

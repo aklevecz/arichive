@@ -16,7 +16,7 @@
 		{
 			"binding": "DB",
 			"database_name": "research_kb",
-			"database_id": "REPLACE_WITH_D1_DATABASE_ID",
+			"database_id": "c012d868-80b2-4259-a4b6-9642c791c8ef",
 			"migrations_dir": "migrations"
 		}
 	],
