@@ -99,11 +99,6 @@
 		font-weight: 400;
 	}
 
-	/* Brutalist mode - thicker border */
-	:global(body[data-theme="brutalist"]) .search-input {
-		border-bottom-width: calc(var(--border-width) * 1.5);
-	}
-
 	@media (max-width: 768px) {
 		.search-label {
 			font-size: var(--font-size-small);

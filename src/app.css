@@ -1,9 +1,6 @@
 /* ========================================
-   BAUHAUS DESIGN SYSTEM - THREE VARIATIONS
-   Change data-theme on <body> to switch:
-   - "purist" (strict Bauhaus minimalism)
-   - "modern" (contemporary Bauhaus)
-   - "brutalist" (aggressive geometric)
+   BAUHAUS DESIGN SYSTEM
+   Theme: "purist" (set via data-theme on <body>)
    ======================================== */
 
 :root {
@@ -66,67 +63,7 @@ body[data-theme="purist"] {
 }
 
 /* ========================================
-   VARIATION 2: MODERN BAUHAUS
-   Clean geometry with contemporary touches
-   ======================================== */
-body[data-theme="modern"] {
-	--bg-color: var(--pure-black);
-	--text-color: var(--pure-white);
-	--accent-color: var(--bauhaus-yellow);
-	--accent-bg: var(--pure-white);
-	--border-color: var(--pure-white);
-	--border-width: 3px;
-
-	/* Typography */
-	--font-display: 'Archivo Black', 'Arial Black', sans-serif;
-	--font-body: 'Work Sans', 'Helvetica Neue', sans-serif;
-	--font-size-hero: clamp(56px, 10vw, 140px);
-	--font-size-h1: clamp(40px, 6vw, 80px);
-	--font-size-h2: clamp(28px, 4vw, 56px);
-	--font-size-body: 18px;
-	--line-height-tight: 0.85;
-	--line-height-body: 1.6;
-
-	/* Spacing */
-	--space-xs: calc(var(--grid-unit) * 1.5);
-	--space-sm: calc(var(--grid-unit) * 3);
-	--space-md: calc(var(--grid-unit) * 5);
-	--space-lg: calc(var(--grid-unit) * 10);
-	--space-xl: calc(var(--grid-unit) * 16);
-}
-
-/* ========================================
-   VARIATION 3: BRUTALIST BAUHAUS
-   Raw, bold, maximum contrast, experimental
-   ======================================== */
-body[data-theme="brutalist"] {
-	--bg-color: var(--pure-white);
-	--text-color: var(--pure-black);
-	--accent-color: var(--bauhaus-red);
-	--accent-bg: var(--pure-black);
-	--border-color: var(--pure-black);
-	--border-width: 6px;
-
-	/* Typography - MORE EXTREME */
-	--font-display: 'Archivo Black', 'Impact', sans-serif;
-	--font-body: 'Work Sans', 'Arial', sans-serif;
-	--font-size-hero: clamp(64px, 12vw, 180px);
-	--font-size-h1: clamp(48px, 8vw, 96px);
-	--font-size-h2: clamp(32px, 5vw, 64px);
-	--font-size-body: 16px;
-	--line-height-tight: 0.8;
-	--line-height-body: 1.4;
-
-	/* Spacing - tighter, more aggressive */
-	--space-xs: calc(var(--grid-unit) * 1);
-	--space-sm: calc(var(--grid-unit) * 2);
-	--space-md: calc(var(--grid-unit) * 3);
-	--space-lg: calc(var(--grid-unit) * 6);
-	--space-xl: calc(var(--grid-unit) * 10);
-}
-
-/* ========================================
-   BASE STYLES (Applied to all themes)
+   BASE STYLES
    ======================================== */
 
 .heading {
@@ -263,12 +200,6 @@ body[data-theme="purist"] button:hover {
 	text-decoration-thickness: 2px;
 }
 
-/* Brutalist theme gets more extreme hover */
-body[data-theme="brutalist"] button:hover {
-	transform: translate(-4px, -4px);
-	box-shadow: 8px 8px 0 var(--border-color);
-}
-
 a.btn,
 button.btn {
 	display: inline-block;
@@ -336,20 +267,3 @@ button.btn:hover {
 	border-color: var(--pure-black);
 }
 
-/* ========================================
-   GRID LINES (visible in brutalist mode)
-   ======================================== */
-body[data-theme="brutalist"]::before {
-	content: '';
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background-image:
-		repeating-linear-gradient(0deg, transparent, transparent calc(var(--grid-unit) * 8 - 1px), var(--border-color) calc(var(--grid-unit) * 8 - 1px), var(--border-color) calc(var(--grid-unit) * 8)),
-		repeating-linear-gradient(90deg, transparent, transparent calc(var(--grid-unit) * 8 - 1px), var(--border-color) calc(var(--grid-unit) * 8 - 1px), var(--border-color) calc(var(--grid-unit) * 8));
-	opacity: 0.05;
-	pointer-events: none;
-	z-index: 9999;
-}
