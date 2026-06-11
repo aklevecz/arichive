@@ -14,16 +14,10 @@
 		loading = false;
 	}
 
-	const seo = {
-		title: 'AI - Ariel Klevecz',
-		description: 'AI solutions by Ariel Klevecz'
-	};
+	import Seo from '$lib/components/seo.svelte';
 </script>
 
-<svelte:head>
-	<title>{seo.title}</title>
-	<meta name="description" content={seo.description} />
-</svelte:head>
+<Seo title="AI - Ariel Klevecz" description="AI solutions by Ariel Klevecz" />
 
 <div class="ai-page">
 	<p class="message">hi i can help you with ai solutions</p>

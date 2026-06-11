@@ -3,6 +3,7 @@
 	import { browser } from '$app/environment';
 	import { goto } from '$app/navigation';
 	import filter from '$lib/stores/filter.svelte';
+	import Seo from '$lib/components/seo.svelte';
 
 	let container;
 
@@ -64,36 +65,10 @@
 		}
 	}
 
-	const seo = {
-		title: 'Ariel Klevecz',
-		description: 'Ariel Klevecz - Mad Scientist',
-		keywords: 'web development, ai, augmented reality, stable diffusion, finetuning, lora',
-		author: 'Ariel Klevecz',
-		ogTitle: 'Ariel Klevecz',
-		ogDescription: 'Ariel Klevecz - Mad Scientist',
-		ogImage: meImg,
-		ogUrl: 'https://klevecz.net',
-		twitterCard: 'summary_large_image',
-		twitterTitle: 'Ariel Klevecz',
-		twitterDescription: 'Ariel Klevecz - Mad Scientist',
-		twitterImage: meImg
-	};
+
 </script>
 
-<svelte:head>
-	<title>{seo.title}</title>
-	<meta name="description" content={seo.description} />
-	<meta name="keywords" content={seo.keywords} />
-	<meta name="author" content={seo.author} />
-	<meta property="og:title" content={seo.ogTitle} />
-	<meta property="og:description" content={seo.ogDescription} />
-	<meta property="og:image" content={seo.ogImage} />
-	<meta property="og:url" content={seo.ogUrl} />
-	<meta name="twitter:card" content={seo.twitterCard} />
-	<meta name="twitter:title" content={seo.twitterTitle} />
-	<meta name="twitter:description" content={seo.twitterDescription} />
-	<meta name="twitter:image" content={seo.twitterImage} />
-</svelte:head>
+<Seo title="Ariel Klevecz" description="Ariel Klevecz - Mad Scientist" image={meImg} />
 
 <div class="homepage" bind:this={container}>
 

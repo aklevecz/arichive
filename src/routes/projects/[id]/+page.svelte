@@ -1,5 +1,6 @@
 <script>
 	import projectToImages from '$lib/projectToImages.json';
+	import Seo from '$lib/components/seo.svelte';
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 	/** @type {{data:import('./$types').LayoutData}} */
@@ -26,16 +27,13 @@
 	};
 	/** @type {*} */
 	let imageInterval = null;
+	const resetImageInterval = () => {
+		clearInterval(imageInterval);
+		imageInterval = setInterval(randomImage, 5000);
+	};
 	onMount(() => {
-		imageInterval = setInterval(randomImage, 3000);
+		resetImageInterval();
 		return () => clearInterval(imageInterval);
-	});
-
-	$effect(() => {
-		if (currentFeaturedImageIndex) {
-			clearInterval(imageInterval);
-			imageInterval = setInterval(randomImage, 5000);
-		}
 	});
 
 	let currentFeaturedVideoId = $state(2);
@@ -79,6 +77,12 @@
 	});
 </script>
 
+<Seo
+	title={project?.name ? `${project.name} - Ariel Klevecz` : 'Projects - Ariel Klevecz'}
+	description={project?.description || 'A project by Ariel Klevecz'}
+	image="https://klevecz.net{src}"
+/>
+
 <div style="margin:1rem 0;">
 	<a href="/" style="margin-top:1rem;"> {'<-'} home</a>
 </div>
@@ -112,7 +116,6 @@
 				loop
 				src="https://fest-nouns.yaytso.art/{currentFeaturedVideoId}.mp4"
 				onloadeddata={() => {
-					console.log('LOADINED');
 					firstVideoLoaded = true;
 				}}
 			></video>{/if}
@@ -121,7 +124,7 @@
 				style={`${project?.id === 'secret-clothing' ? 'filter: sepia(1)' : ''} ${project?.imgConfiguration ? `width:${project?.imgConfiguration.width};height:${project?.imgConfiguration.height};` : ''}`}
 				class="featured-image {fadeClass}"
 				src={imagePrefix + images[currentFeaturedImageIndex]}
-				alt="featured"
+				alt="{project?.name} featured image"
 			/>
 		{/if}
 		{#if project?.url?.length > 0 && !project?.hasGallery}
@@ -181,6 +184,7 @@
 					const imageIndex = images.indexOf(image);
 					clickedArray.push(imageIndex);
 					currentFeaturedImageIndex = imageIndex;
+					resetImageInterval();
 					window.scrollTo({ top: 0, behavior: 'smooth' });
 				}}
 			>
@@ -200,8 +204,8 @@
 		{#each Array.from({ length: project?.videoConfiguration.maxId }, (_, i) => i + 1) as id}
 			<!-- <video class="gallery-image" src="https://fest-nouns.yaytso.art/{id}.mp4"></video> -->
 			<img
-				src={`${project.id}/thumbnails/${id}.webp`}
-				alt="video thumbnail"
+				src={`/projects/${project.id}/thumbnails/${id}.webp`}
+				alt="{project?.name} video thumbnail {id}"
 				class="gallery-image"
 			/>
 		{/each}

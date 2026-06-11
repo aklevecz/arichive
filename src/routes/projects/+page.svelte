@@ -4,6 +4,7 @@
 	import SearchBar from '$lib/components/search-bar.svelte';
 	import filter from '$lib/stores/filter.svelte';
 	import projects from '$lib/stores/projects.svelte';
+	import Seo from '$lib/components/seo.svelte';
 
 	let filteredProjects = $derived(
 		projects.state.filter(projects.searchFilter).filter(projects.categoryFilter)
@@ -65,36 +66,10 @@
 		return categoryDescriptions[category.toLowerCase()] || category;
 	}
 
-	const seo = {
-		title: 'Ariel Klevecz',
-		description: 'Ariel Klevecz - Mad Scientist',
-		keywords: 'web development, ai, stable diffusion, finetuning, lora, nfts, web3',
-		author: 'Ariel Klevecz',
-		ogTitle: 'Ariel Klevecz',
-		ogDescription: 'Ariel Klevecz - Mad Scientist',
-		ogImage: meImg,
-		ogUrl: 'https://klevecz.net',
-		twitterCard: 'summary_large_image',
-		twitterTitle: 'Ariel Klevecz',
-		twitterDescription: 'Ariel Klevecz - Mad Scientist',
-		twitterImage: meImg
-	};
+
 </script>
 
-<svelte:head>
-	<title>{seo.title}</title>
-	<meta name="description" content={seo.description} />
-	<meta name="keywords" content={seo.keywords} />
-	<meta name="author" content={seo.author} />
-	<meta property="og:title" content={seo.ogTitle} />
-	<meta property="og:description" content={seo.ogDescription} />
-	<meta property="og:image" content={seo.ogImage} />
-	<meta property="og:url" content={seo.ogUrl} />
-	<meta name="twitter:card" content={seo.twitterCard} />
-	<meta name="twitter:title" content={seo.twitterTitle} />
-	<meta name="twitter:description" content={seo.twitterDescription} />
-	<meta name="twitter:image" content={seo.twitterImage} />
-</svelte:head>
+<Seo title="Projects - Ariel Klevecz" description="Projects by Ariel Klevecz - Mad Scientist" image={meImg} />
 <div class="newspaper-page">
 	<!-- All content flows in newspaper columns -->
 	<div class="newspaper-columns">

@@ -1,10 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
 
-	const seo = {
-		title: 'AR Posters — Ariel Klevecz',
-		description: 'Scroll to explore. Scan to see them come alive.'
-	};
+	import Seo from '$lib/components/seo.svelte';
 
 	const posters = [
 		// — Bao's Dreams (bao2.baos.haus) —
@@ -24,24 +21,10 @@
 		{ src: '/images/ar-posters/gn-record-cover.jpeg', title: 'Ruth', titleSvg:'/headings/ruth.svg', description: 'Ruth going on a trippy adventure', qr: '/images/qr-gn.svg', arUrl: 'https://gn.yaytso.art' },
 		{ src: '/images/ar-posters/gn-tobi-cover.jpeg', title: 'Tobi', titleSvg: '/headings/tobi.svg',  description: 'Tobi distinegrating into the noise', qr: '/images/qr-gn.svg', arUrl: 'https://gn.yaytso.art' },
 		// — Remi (remi.yaytso.art) —
-		{ src: '/images/ar-posters/remi-lambcityoil.jpeg', title: 'Lamb City', description: 'Mirrored lambs by Remi Frogo', qr: '/images/qr-remi.svg', arUrl: 'https://remi.yaytso.art' },
-		// — Jung (jung.yaytso.art) —
-		{ src: '/images/ar-posters/jung-anita-1.jpeg', title: 'Anita I', description: 'Anita in the blue room', qr: '/images/qr-jung.svg', arUrl: 'https://jung.yaytso.art' },
-		{ src: '/images/ar-posters/jung-anita-2.jpeg', title: 'Anita II', description: 'Anita continued', qr: '/images/qr-jung.svg', arUrl: 'https://jung.yaytso.art' },
-		{ src: '/images/ar-posters/jung-anita-3.jpeg', title: 'Anita III', description: 'Anita continued', qr: '/images/qr-jung.svg', arUrl: 'https://jung.yaytso.art' },
-		// — Viavacca (viavacca.yaytso.art) —
-		{ src: '/images/ar-posters/viavacca-barn_door.jpeg', title: 'Barn Door', description: 'A door into somewhere else', qr: '/images/qr-viavacca.svg', arUrl: 'https://viavacca.yaytso.art' },
-		{ src: '/images/ar-posters/viavacca-humming_bird.jpeg', title: 'Hummingbird', description: 'Caught mid-flight', qr: '/images/qr-viavacca.svg', arUrl: 'https://viavacca.yaytso.art' },
-		{ src: '/images/ar-posters/viavacca-poppies_3_daytime.jpeg', title: 'Poppies', description: 'Poppies in the daytime', qr: '/images/qr-viavacca.svg', arUrl: 'https://viavacca.yaytso.art' },
-		{ src: '/images/ar-posters/viavacca-seaweed_door.jpeg', title: 'Seaweed Door', description: 'Overgrown entrance', qr: '/images/qr-viavacca.svg', arUrl: 'https://viavacca.yaytso.art' },
-		{ src: '/images/ar-posters/viavacca-rug.jpeg', title: 'Rug', description: 'Patterns underfoot', qr: '/images/qr-viavacca.svg', arUrl: 'https://viavacca.yaytso.art' },
+		{ src: '/images/ar-posters/remi-lambcityoil.jpeg', title: 'Lamb City', titleSvg: '/headings/lamb-city.svg', description: 'Lamb City is a wonderful place where lambs multiply into frogs and shifting shapes. Not for the faint of heart, those brave enough to wander into the green expanse will be rewarded with much wisdom and reverie.', qr: '/images/qr-remi.svg', arUrl: 'https://remi.yaytso.art' },
 		// — Park Noggles (park-noggles.yaytso.art) —
-		{ src: '/images/ar-posters/noggles-1.jpeg', title: 'Noggles I', description: 'Noggles in the clouds', qr: '/images/qr-noggles.svg', arUrl: 'https://park-noggles.yaytso.art' },
-		{ src: '/images/ar-posters/noggles-3.jpeg', title: 'Noggles III', description: 'Noggles continued', qr: '/images/qr-noggles.svg', arUrl: 'https://park-noggles.yaytso.art' },
-		// — Fest 2024 (fest2024.yaytso.art) —
-		{ src: '/images/ar-posters/fest2024-fullfrag.jpeg', title: 'FWB Fest', description: 'FWB Fest 2024 poster', qr: '/images/qr-fest2024.svg', arUrl: 'https://fest2024.yaytso.art' },
-		// — Emma Drawings (emma-drawings.yaytso.art) —
-		{ src: '/images/ar-posters/emma-emmaguy.png', title: 'Emma Guy', description: 'A drawing by Emma', qr: '/images/qr-emma.svg', arUrl: 'https://emma-drawings.yaytso.art' }
+		{ src: '/images/ar-posters/noggles-1.jpeg', title: 'Noggles', titleSvg: '/headings/noggles.svg', description: 'Noggles in the clouds', qr: '/images/qr-noggles.svg', arUrl: 'https://park-noggles.yaytso.art' },
+		{ src: '/images/ar-posters/noggles-3.jpeg', title: 'Noggles III', titleSvg: '/headings/noggles.svg', description: 'Noggles continued', qr: '/images/qr-noggles.svg', arUrl: 'https://park-noggles.yaytso.art' },
 	];
 
 	onMount(() => {
@@ -69,10 +52,11 @@
 	});
 </script>
 
-<svelte:head>
-	<title>{seo.title}</title>
-	<meta name="description" content={seo.description} />
-</svelte:head>
+<Seo
+	title="AR Posters — Ariel Klevecz"
+	description="Scroll to explore. Scan to see them come alive."
+	image="https://klevecz.net{posters[0].src}"
+/>
 
 <div class="posters-page">
 	<!-- intro -->
@@ -116,7 +100,7 @@
 	<!-- outro -->
 	<section class="outro">
 		<p>Want to experience it in person?</p>
-		<a href="/contact" class="cta">Get in touch</a>
+		<a href="https://yaytso.art/calendar" class="cta">See upcoming events</a>
 	</section>
 </div>
 

@@ -1,4 +1,6 @@
 <script>
+	import Seo from '$lib/components/seo.svelte';
+
 	const { data } = $props();
 
 	const Content = $derived(data.component);
@@ -15,10 +17,11 @@
 	}
 </script>
 
-<svelte:head>
-	<title>{meta.title ? `${meta.title} - Ariel Klevecz` : 'Writing - Ariel Klevecz'}</title>
-	{#if meta.description}<meta name="description" content={meta.description} />{/if}
-</svelte:head>
+<Seo
+	title={meta.title ? `${meta.title} - Ariel Klevecz` : 'Writing - Ariel Klevecz'}
+	description={meta.description || 'Writing and research by Ariel Klevecz'}
+	type="article"
+/>
 
 <article class="post">
 	<a href="/writing" class="back-link">&larr; Writing</a>

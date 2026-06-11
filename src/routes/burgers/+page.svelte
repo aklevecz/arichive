@@ -1,5 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
+	import Seo from '$lib/components/seo.svelte';
 
 	const burgers = [
 		'burger_bite_underneath',
@@ -71,9 +72,7 @@
 	});
 </script>
 
-<svelte:head>
-	<title>burgers</title>
-</svelte:head>
+<Seo title="Burgers - Ariel Klevecz" description="AI-generated burger videos on loop" />
 
 <div class="page">
 	{#if current}

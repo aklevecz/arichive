@@ -1,10 +1,7 @@
 <script>
-	const { data } = $props();
+	import Seo from '$lib/components/seo.svelte';
 
-	const seo = {
-		title: 'Writing - Ariel Klevecz',
-		description: 'Writing and research by Ariel Klevecz'
-	};
+	const { data } = $props();
 
 	/** @param {string} date */
 	function fmtDate(date) {
@@ -17,10 +14,7 @@
 	}
 </script>
 
-<svelte:head>
-	<title>{seo.title}</title>
-	<meta name="description" content={seo.description} />
-</svelte:head>
+<Seo title="Writing - Ariel Klevecz" description="Writing and research by Ariel Klevecz" />
 
 <div class="writing-page">
 	<header class="page-head">
