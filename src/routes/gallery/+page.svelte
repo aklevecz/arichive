@@ -1,79 +1,24 @@
 <script>
-	// Sample gallery images - replace with your actual image data
-	let images = [
-		{
-			id: 1,
-			src: 'https://picsum.photos/300/400?random=1',
-			alt: 'Gallery image 1',
-			title: 'Image Title 1'
-		},
-		{
-			id: 2,
-			src: 'https://picsum.photos/300/600?random=2',
-			alt: 'Gallery image 2',
-			title: 'Image Title 2'
-		},
-		{
-			id: 3,
-			src: 'https://picsum.photos/300/300?random=3',
-			alt: 'Gallery image 3',
-			title: 'Image Title 3'
-		},
-		{
-			id: 4,
-			src: 'https://picsum.photos/300/500?random=4',
-			alt: 'Gallery image 4',
-			title: 'Image Title 4'
-		},
-		{
-			id: 5,
-			src: 'https://picsum.photos/300/450?random=5',
-			alt: 'Gallery image 5',
-			title: 'Image Title 5'
-		},
-		{
-			id: 6,
-			src: 'https://picsum.photos/300/350?random=6',
-			alt: 'Gallery image 6',
-			title: 'Image Title 6'
-		},
-		{
-			id: 7,
-			src: 'https://picsum.photos/300/550?random=7',
-			alt: 'Gallery image 7',
-			title: 'Image Title 7'
-		},
-		{
-			id: 8,
-			src: 'https://picsum.photos/300/400?random=8',
-			alt: 'Gallery image 8',
-			title: 'Image Title 8'
-		},
-		{
-			id: 9,
-			src: 'https://picsum.photos/300/480?random=9',
-			alt: 'Gallery image 9',
-			title: 'Image Title 9'
-		},
-		{
-			id: 10,
-			src: 'https://picsum.photos/300/320?random=10',
-			alt: 'Gallery image 10',
-			title: 'Image Title 10'
-		},
-		{
-			id: 11,
-			src: 'https://picsum.photos/300/420?random=11',
-			alt: 'Gallery image 11',
-			title: 'Image Title 11'
-		},
-		{
-			id: 12,
-			src: 'https://picsum.photos/300/380?random=12',
-			alt: 'Gallery image 12',
-			title: 'Image Title 12'
-		}
-	];
+	import projectToImages from '$lib/projectToImages.json';
+	import Seo from '$lib/components/seo.svelte';
+
+	/** @param {string} id */
+	const humanize = (id) =>
+		id
+			.split('-')
+			.map((/** @type {string} */ w) => w.charAt(0).toUpperCase() + w.slice(1))
+			.join(' ');
+
+	// One representative image per project, served from static/projects
+	let images = Object.entries(projectToImages)
+		.filter(([, files]) => files.length > 0)
+		.map(([projectId, files], i) => ({
+			id: i + 1,
+			projectId,
+			src: `/projects/${projectId}/${files[0]}`,
+			alt: `${humanize(projectId)} project image`,
+			title: humanize(projectId)
+		}));
 
 	let selectedImage = $state(null);
 
@@ -85,20 +30,10 @@
 		selectedImage = null;
 	}
 
-	const seo = {
-		title: 'Gallery - Ariel Klevecz',
-		description: 'Image gallery with masonry layout',
-		keywords: 'gallery, images, photography, portfolio',
-		author: 'Ariel Klevecz'
-	};
+
 </script>
 
-<svelte:head>
-	<title>{seo.title}</title>
-	<meta name="description" content={seo.description} />
-	<meta name="keywords" content={seo.keywords} />
-	<meta name="author" content={seo.author} />
-</svelte:head>
+<Seo title="Gallery - Ariel Klevecz" description="A gallery of images from projects by Ariel Klevecz" />
 
 <div class="gallery-container">
 	<h1 class="gallery-title">Gallery</h1>
