@@ -27,11 +27,14 @@
 	<a href="/writing" class="back-link">&larr; Writing</a>
 
 	<header class="post-head">
-		<h1 class="post-title">
-			{meta.title}
+		<div class="post-meta">
+			{#if meta.date}<time class="post-date">{fmtDate(meta.date)}</time>{/if}
 			{#if meta.draft}<span class="draft-tag">Draft</span>{/if}
-		</h1>
-		{#if meta.date}<time class="post-date">{fmtDate(meta.date)}</time>{/if}
+		</div>
+		<h1 class="post-title">{meta.title}</h1>
+		{#if meta.description}
+			<p class="post-dek">{meta.description}</p>
+		{/if}
 	</header>
 
 	<div class="prose">
@@ -43,7 +46,7 @@
 	.post {
 		max-width: 680px;
 		margin: 0 auto;
-		padding: var(--space-lg) var(--space-md);
+		padding: var(--space-lg) var(--space-md) var(--space-xl);
 	}
 
 	.back-link {
@@ -58,37 +61,40 @@
 	.post-head {
 		margin-bottom: var(--space-lg);
 		padding-bottom: var(--space-md);
-		border-bottom: 1px solid var(--border-color);
+		border-bottom: var(--border-width) solid var(--border-color);
 	}
 
-	.post-title {
-		font-family: var(--font-display);
-		font-size: clamp(28px, 5vw, 44px);
-		font-weight: 700;
-		text-transform: none;
-		letter-spacing: -0.01em;
-		line-height: 1.1;
-	}
-
-	.draft-tag {
-		font-size: 11px;
-		font-weight: 700;
+	.post-meta {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		font-size: var(--font-size-caption);
 		text-transform: uppercase;
-		letter-spacing: 0.08em;
-		border: 1px solid var(--border-color);
-		padding: 2px 6px;
-		margin-left: 8px;
-		vertical-align: middle;
-		opacity: 0.5;
+		letter-spacing: 0.1em;
+		margin-bottom: var(--space-sm);
 	}
 
 	.post-date {
-		display: block;
-		font-size: var(--font-size-caption);
-		text-transform: uppercase;
-		letter-spacing: 0.08em;
 		opacity: 0.5;
-		margin-top: var(--space-xs);
+	}
+
+	.draft-tag {
+		font-weight: 700;
+		color: var(--accent-color);
+		border: 1px solid var(--accent-color);
+		padding: 2px 7px;
+	}
+
+	.post-title {
+		font-size: clamp(32px, 6vw, 56px);
+		line-height: var(--line-height-tight);
+	}
+
+	.post-dek {
+		margin: var(--space-sm) 0 0;
+		font-size: clamp(16px, 2vw, 19px);
+		line-height: var(--line-height-body);
+		opacity: 0.65;
 	}
 
 	.prose {
@@ -98,19 +104,20 @@
 
 	.prose :global(h2) {
 		font-family: var(--font-display);
+		font-weight: 800;
+		text-transform: uppercase;
+		letter-spacing: -0.01em;
 		font-size: clamp(20px, 3vw, 26px);
-		font-weight: 700;
-		text-transform: none;
-		letter-spacing: 0;
+		line-height: 1.15;
 		margin: var(--space-lg) 0 var(--space-sm);
 	}
 
 	.prose :global(h3) {
 		font-family: var(--font-display);
-		font-size: clamp(17px, 2.5vw, 20px);
 		font-weight: 700;
-		text-transform: none;
-		letter-spacing: 0;
+		text-transform: uppercase;
+		font-size: clamp(16px, 2.5vw, 19px);
+		line-height: 1.2;
 		margin: var(--space-md) 0 var(--space-xs);
 	}
 
@@ -135,10 +142,13 @@
 
 	.prose :global(blockquote) {
 		margin: var(--space-md) 0;
-		padding-left: var(--space-md);
-		border-left: 3px solid var(--border-color);
-		opacity: 0.8;
-		font-style: italic;
+		padding: var(--space-sm) var(--space-md);
+		border-left: var(--border-width) solid var(--accent-color);
+		background: rgba(0, 0, 0, 0.03);
+	}
+
+	.prose :global(blockquote p:last-child) {
+		margin-bottom: 0;
 	}
 
 	.prose :global(code) {
@@ -146,11 +156,10 @@
 		font-size: 0.9em;
 		background: rgba(0, 0, 0, 0.06);
 		padding: 1px 5px;
-		border-radius: 3px;
 	}
 
 	.prose :global(pre) {
-		background: rgba(0, 0, 0, 0.06);
+		border: var(--border-width) solid var(--border-color);
 		padding: var(--space-sm) var(--space-md);
 		overflow-x: auto;
 		margin: 0 0 var(--space-md);
@@ -161,9 +170,37 @@
 		padding: 0;
 	}
 
+	.prose :global(img) {
+		max-width: 100%;
+		height: auto;
+		border: var(--border-width) solid var(--border-color);
+	}
+
 	.prose :global(hr) {
 		border: none;
-		border-top: 1px solid var(--border-color);
+		border-top: var(--border-width) solid var(--border-color);
 		margin: var(--space-lg) 0;
+	}
+
+	.prose :global(table) {
+		border-collapse: collapse;
+		width: 100%;
+		margin: 0 0 var(--space-md);
+		font-size: var(--font-size-small);
+	}
+
+	.prose :global(th),
+	.prose :global(td) {
+		border: 1px solid var(--border-color);
+		padding: 6px 10px;
+		text-align: left;
+		vertical-align: top;
+	}
+
+	.prose :global(th) {
+		font-family: var(--font-display-alt);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		font-size: var(--font-size-caption);
 	}
 </style>

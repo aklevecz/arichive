@@ -1,3 +1,4 @@
+import { dev } from '$app/environment';
 import { error } from '@sveltejs/kit';
 
 const modules = import.meta.glob('/src/lib/content/**/*.md');
@@ -14,6 +15,8 @@ export async function load({ params }) {
 	if (!importer) throw error(404, `Not found: ${params.slug}`);
 
 	const post = await importer();
+	// Drafts are reachable in dev only
+	if (!dev && post.metadata?.draft) throw error(404, `Not found: ${params.slug}`);
 	return {
 		component: post.default,
 		meta: post.metadata ?? {}

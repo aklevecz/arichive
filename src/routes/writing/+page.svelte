@@ -3,12 +3,19 @@
 
 	const { data } = $props();
 
+	// One chronological list; the section badge does the categorizing
+	const entries = $derived(
+		[...data.writing, ...data.research].sort(
+			(a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+		)
+	);
+
 	/** @param {string} date */
 	function fmtDate(date) {
 		if (!date) return '';
 		return new Date(date).toLocaleDateString('en-US', {
 			year: 'numeric',
-			month: 'long',
+			month: 'short',
 			day: 'numeric'
 		});
 	}
@@ -18,156 +25,189 @@
 
 <div class="writing-page">
 	<header class="page-head">
+		<a href="/" class="back-link">&larr; home</a>
 		<h1 class="page-title">Writing</h1>
-		<p class="page-dek">Notes, essays, and research from the lab.</p>
+		<p class="page-dek">Notes, essays, and research from the lab</p>
 	</header>
 
-	<section class="section">
-		<h2 class="section-title">Essays</h2>
-		{#if data.writing.length === 0}
-			<p class="empty">Nothing published yet.</p>
-		{:else}
-			<ul class="entry-list">
-				{#each data.writing as entry}
-					<li class="entry">
-						<a href={`/writing/${entry.slug}`} class="entry-link">
-							<span class="entry-title">
-								{entry.title}
+	{#if entries.length === 0}
+		<p class="empty">Nothing published yet.</p>
+	{:else}
+		<ol class="entry-list">
+			{#each entries as entry, i}
+				<li class="entry">
+					<a href={`/writing/${entry.slug}`} class="entry-link">
+						<span class="entry-index">{String(i + 1).padStart(2, '0')}</span>
+						<span class="entry-body">
+							<span class="entry-meta">
+								<span class="entry-kind">{entry.section}</span>
+								{#if entry.date}<time class="entry-date">{fmtDate(entry.date)}</time>{/if}
 								{#if entry.draft}<span class="draft-tag">Draft</span>{/if}
 							</span>
-							{#if entry.date}<time class="entry-date">{fmtDate(entry.date)}</time>{/if}
+							<span class="entry-title">{entry.title}</span>
 							{#if entry.description}<span class="entry-desc">{entry.description}</span>{/if}
-						</a>
-					</li>
-				{/each}
-			</ul>
-		{/if}
-	</section>
-
-	<section class="section">
-		<h2 class="section-title">Research</h2>
-		{#if data.research.length === 0}
-			<p class="empty">Coming soon.</p>
-		{:else}
-			<ul class="entry-list">
-				{#each data.research as entry}
-					<li class="entry">
-						<a href={`/writing/${entry.slug}`} class="entry-link">
-							<span class="entry-title">
-								{entry.title}
-								{#if entry.draft}<span class="draft-tag">Draft</span>{/if}
-							</span>
-							{#if entry.date}<time class="entry-date">{fmtDate(entry.date)}</time>{/if}
-							{#if entry.description}<span class="entry-desc">{entry.description}</span>{/if}
-						</a>
-					</li>
-				{/each}
-			</ul>
-		{/if}
-	</section>
+						</span>
+						<span class="entry-arrow" aria-hidden="true">&rarr;</span>
+					</a>
+				</li>
+			{/each}
+		</ol>
+	{/if}
 </div>
 
 <style>
 	.writing-page {
-		max-width: 720px;
+		max-width: 860px;
 		margin: 0 auto;
-		padding: var(--space-lg) var(--space-md);
+		padding: var(--space-lg) var(--space-md) var(--space-xl);
+	}
+
+	.back-link {
+		display: inline-block;
+		font-size: var(--font-size-small);
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		opacity: 0.55;
+		margin-bottom: var(--space-md);
 	}
 
 	.page-head {
 		margin-bottom: var(--space-lg);
-		padding-bottom: var(--space-md);
-		border-bottom: 1px solid var(--border-color);
 	}
 
 	.page-title {
-		font-family: var(--font-display);
-		font-size: clamp(28px, 4vw, 40px);
-		font-weight: 700;
-		text-transform: none;
-		letter-spacing: 0;
-		line-height: 1.1;
+		font-size: var(--font-size-h1);
+		line-height: var(--line-height-tight);
 	}
 
 	.page-dek {
-		margin: var(--space-xs) 0 0;
+		margin: var(--space-sm) 0 0;
 		font-size: var(--font-size-body);
 		opacity: 0.6;
-	}
-
-	.section {
-		margin-bottom: var(--space-lg);
-	}
-
-	.section-title {
-		font-family: var(--font-body-alt);
-		font-size: var(--font-size-small);
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		opacity: 0.55;
-		margin-bottom: var(--space-sm);
 	}
 
 	.entry-list {
 		list-style: none;
 		margin: 0;
 		padding: 0;
+		border-top: var(--border-width) solid var(--border-color);
 	}
 
 	.entry {
-		border-top: 1px solid var(--border-color);
+		border-bottom: var(--border-width) solid var(--border-color);
 	}
 
 	.entry-link {
-		display: block;
-		padding: var(--space-sm) 0;
+		display: flex;
+		align-items: baseline;
+		gap: var(--space-md);
+		padding: var(--space-md) 0;
 		color: var(--text-color);
 	}
 
 	.entry-link:hover {
-		opacity: 0.65;
 		color: var(--text-color);
 	}
 
-	.entry-title {
-		display: block;
-		font-size: clamp(18px, 2.5vw, 22px);
-		font-weight: 600;
-		line-height: 1.25;
+	.entry-index {
+		font-family: var(--font-display);
+		font-weight: 800;
+		font-size: clamp(28px, 4vw, 44px);
+		line-height: 1;
+		opacity: 0.15;
+		flex: 0 0 auto;
+		transition: opacity 0.2s ease;
 	}
 
-	.draft-tag {
-		font-size: 10px;
-		font-weight: 700;
+	.entry-link:hover .entry-index {
+		opacity: 1;
+		color: var(--accent-color);
+	}
+
+	.entry-body {
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+		min-width: 0;
+	}
+
+	.entry-meta {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		font-size: var(--font-size-caption);
 		text-transform: uppercase;
-		letter-spacing: 0.08em;
+		letter-spacing: 0.1em;
+	}
+
+	.entry-kind {
+		font-weight: 700;
 		border: 1px solid var(--border-color);
-		padding: 1px 5px;
-		margin-left: 6px;
-		vertical-align: middle;
-		opacity: 0.5;
+		padding: 2px 7px;
 	}
 
 	.entry-date {
-		display: block;
-		font-size: var(--font-size-caption);
-		text-transform: uppercase;
-		letter-spacing: 0.08em;
 		opacity: 0.5;
-		margin-top: 2px;
+	}
+
+	.draft-tag {
+		font-weight: 700;
+		color: var(--accent-color);
+		border: 1px solid var(--accent-color);
+		padding: 2px 7px;
+	}
+
+	.entry-title {
+		font-family: var(--font-display);
+		font-weight: 800;
+		text-transform: uppercase;
+		letter-spacing: -0.01em;
+		font-size: clamp(22px, 3.5vw, 34px);
+		line-height: 1.05;
+		transition: color 0.2s ease;
+	}
+
+	.entry-link:hover .entry-title {
+		color: var(--accent-color);
 	}
 
 	.entry-desc {
-		display: block;
 		font-size: var(--font-size-body);
 		line-height: var(--line-height-body);
-		opacity: 0.75;
-		margin-top: 4px;
+		opacity: 0.7;
+		max-width: 60ch;
+	}
+
+	.entry-arrow {
+		margin-left: auto;
+		font-family: var(--font-display);
+		font-weight: 800;
+		font-size: clamp(20px, 3vw, 30px);
+		opacity: 0;
+		transform: translateX(-8px);
+		transition:
+			opacity 0.2s ease,
+			transform 0.2s ease;
+		flex: 0 0 auto;
+	}
+
+	.entry-link:hover .entry-arrow {
+		opacity: 1;
+		transform: translateX(0);
+		color: var(--accent-color);
 	}
 
 	.empty {
 		opacity: 0.5;
 		font-style: italic;
+	}
+
+	@media (max-width: 600px) {
+		.entry-link {
+			gap: var(--space-sm);
+		}
+		.entry-arrow {
+			display: none;
+		}
 	}
 </style>
