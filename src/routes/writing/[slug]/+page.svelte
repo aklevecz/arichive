@@ -156,13 +156,13 @@
 	.prose :global(code) {
 		font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
 		font-size: 0.82em;
-		background: rgba(0, 0, 0, 0.05);
+		background: rgba(128, 128, 128, 0.15);
 		padding: 1px 5px;
 		border-radius: 2px;
 	}
 	.prose :global(pre) {
 		font-size: 0.95em;
-		background: rgba(0, 0, 0, 0.04);
+		background: rgba(128, 128, 128, 0.12);
 		padding: var(--space-sm) var(--space-md);
 		overflow-x: auto;
 		margin: 0 0 var(--space-md);
@@ -201,7 +201,7 @@
 		vertical-align: top;
 	}
 	.prose :global(tbody tr:nth-child(odd)) {
-		background: rgba(0, 0, 0, 0.03);
+		background: rgba(128, 128, 128, 0.1);
 	}
 	.prose :global(th) {
 		font-family: var(--sans);

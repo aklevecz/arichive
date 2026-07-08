@@ -309,7 +309,7 @@
 	}
 	.app-svg path {
 		fill: none;
-		stroke: #231f20;
+		stroke: var(--text-color, #231f20);
 		stroke-miterlimit: 10;
 		stroke-linecap: round;
 		stroke-linejoin: round;
@@ -332,7 +332,7 @@
 
 	.design-svg path {
 		fill: none;
-		stroke: #231f20;
+		stroke: var(--text-color, #231f20);
 		stroke-miterlimit: 10;
 		stroke-linecap: round;
 		stroke-linejoin: round;
@@ -380,7 +380,7 @@
 
 	.btn-link:hover .click-area,
 	.btn-link:focus-visible .click-area {
-		fill: rgba(0, 0, 0, 0.02);
+		fill: rgba(128, 128, 128, 0.06);
 	}
 
 	.btn-link:focus-visible {

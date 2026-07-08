@@ -60,6 +60,19 @@ body[data-theme="purist"] {
 	--space-md: calc(var(--grid-unit) * 4);
 	--space-lg: calc(var(--grid-unit) * 8);
 	--space-xl: calc(var(--grid-unit) * 12);
+
+	color-scheme: light;
+}
+
+/* Dark mode: same system, inverted ink.
+   data-mode is set pre-paint in app.html and toggled by mode-toggle.svelte. */
+body[data-theme="purist"][data-mode="dark"] {
+	color-scheme: dark;
+	--bg-color: #111111;
+	--text-color: #f5f5f2;
+	--accent-bg: var(--pure-white);
+	--border-color: #f5f5f2;
+	--border-color-strong: #f5f5f2;
 }
 
 /* ========================================
