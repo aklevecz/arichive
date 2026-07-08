@@ -61,9 +61,9 @@
 <div class="posters-page">
 	<!-- intro -->
 	<section class="intro">
-		<img alt="AR Posters" src="/headings/ar-header.svg"/>
+		<img alt="AR Posters" src="/headings/ar-header.svg" class="ink-svg"/>
 		<div class="scroll-hint">
-			<img style="width:200px; height:200px;" src="/icons/arrow-down.svg" alt="scroll down" class="arrow" />
+			<img style="width:200px; height:200px;" src="/icons/arrow-down.svg" alt="scroll down" class="arrow ink-svg" />
 		</div>
 	</section>
 
@@ -82,7 +82,7 @@
 				<div class="poster-meta" data-meta>
 					<div class="meta-inner">
 						{#if poster.titleSvg}
-						<img src={poster.titleSvg} alt={poster.title}/>
+						<img src={poster.titleSvg} alt={poster.title} class="ink-svg"/>
 						{:else}
 						<h2>{poster.title}</h2>
 						{/if}
@@ -108,6 +108,11 @@
 	.posters-page {
 		position: relative;
 		overflow-x: hidden;
+	}
+
+	/* hand-drawn ink SVGs are <img>s with #231f20 strokes — invert them in dark mode */
+	:global(body[data-mode='dark']) .ink-svg {
+		filter: invert(1);
 	}
 
 	/* ---- intro ---- */
