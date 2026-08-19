@@ -1,16 +1,14 @@
-import { entries } from '$lib/content';
 import projectToImages from '$lib/projectToImages.json';
 
 const SITE = 'https://klevecz.net';
 
-const staticPaths = ['/', '/projects', '/writing', '/gallery', '/ar', '/ai', '/burgers'];
+const staticPaths = ['/', '/projects', '/gallery', '/ar', '/ai', '/burgers'];
 
 /** @type {import('./$types').RequestHandler} */
 export function GET() {
 	const paths = [
 		...staticPaths,
-		...Object.keys(projectToImages).map((id) => `/projects/${id}`),
-		...entries.filter((e) => !e.draft).map((e) => `/writing/${e.slug}`)
+		...Object.keys(projectToImages).map((id) => `/projects/${id}`)
 	];
 
 	const body = `<?xml version="1.0" encoding="UTF-8"?>
