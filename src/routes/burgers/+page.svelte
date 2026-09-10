@@ -58,7 +58,7 @@
 <Seo
 	title="Burgers - Ariel Klevecz"
 	description="Ten variations on one photograph, each run backwards through a diffusion model into pure noise and played in reverse."
-	image="https://klevecz.net/burgers/posters/burger_blooming.jpg"
+	image="https://klevecz.net/burgers/noise/burger_blooming.jpg"
 />
 
 <div class="page">
@@ -84,15 +84,21 @@
 			<h2>The set</h2>
 		</div>
 		<p class="lede">
-			Every burger below is the same photograph with exactly one thing changed. The name is the only
-			hint you get. Click any of them to watch it resolve — it takes about forty seconds.
+			Ten burgers that haven't arrived yet. Each tile is the last frame of its own inversion — the
+			noise a burger was taken apart into — and each one is the same photograph with exactly one thing
+			changed. The name is the only hint you get before it comes back. Press one and give it about
+			forty seconds.
 		</p>
 
 		<ul class="grid">
 			{#each burgers as name, i}
 				<li>
 					<button class="tile" onclick={() => show(i)}>
-						<img src="/burgers/posters/{name}.jpg" alt={label(name)} loading="lazy" />
+						<img
+							src="/burgers/noise/{name}.jpg"
+							alt="Unresolved noise — {label(name)}"
+							loading="lazy"
+						/>
 						<span class="tile-meta">
 							<span class="tile-name">{label(name)}</span>
 							<span class="tile-cue">Play</span>
@@ -223,7 +229,7 @@
 				<video
 					bind:this={videoEl}
 					src="/burgers/{current}.mp4"
-					poster="/burgers/posters/{current}.jpg"
+					poster="/burgers/noise/{current}.jpg"
 					ontimeupdate={onTime}
 					autoplay
 					muted
@@ -374,13 +380,12 @@
 		width: 100%;
 		aspect-ratio: 1408 / 768;
 		object-fit: cover;
-		filter: grayscale(0.15);
-		transition: filter 0.25s ease;
+		transition: opacity 0.25s ease;
 	}
 
 	.tile:hover img,
 	.tile:focus-visible img {
-		filter: grayscale(0);
+		opacity: 0.72;
 	}
 
 	.tile:focus-visible {
