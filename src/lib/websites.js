@@ -92,6 +92,16 @@ export const featuredSites = [
 /** @type {Website[]} */
 export const moreSites = [
 	{
+		id: 'pandaemonium-architecture',
+		name: 'Pandaemonium Architecture 6.0',
+		url: 'https://a211h.yaytso.art',
+		client: 'CalArts · Scott Benzel',
+		year: '2026',
+		description:
+			'The course site for a CalArts seminar on AI, cybernetics and art, which Scott Benzel teaches and I run the labs for. It holds the syllabus and a reader for the texts. Students get notes, highlights, a Claude assistant scoped to the reading, and a shared feed of highlights.',
+		stack: ['SvelteKit', 'Cloudflare', 'Claude']
+	},
+	{
 		id: 'abmnemonic',
 		name: 'abmnemonic',
 		url: 'https://abmnemonic.com',
