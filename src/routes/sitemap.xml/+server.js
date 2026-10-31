@@ -2,7 +2,7 @@ import projectToImages from '$lib/projectToImages.json';
 
 const SITE = 'https://klevecz.net';
 
-const staticPaths = ['/', '/projects', '/gallery', '/ar', '/ai', '/burgers'];
+const staticPaths = ['/', '/projects', '/gallery', '/ar', '/ai', '/burgers', '/websites'];
 
 /** @type {import('./$types').RequestHandler} */
 export function GET() {
