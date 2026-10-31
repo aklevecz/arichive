@@ -5,7 +5,8 @@
 		title = 'Ariel Klevecz',
 		description = 'Ariel Klevecz — interactive art, AR experiences, and software in Los Angeles',
 		image = 'https://eggs.yaytso.art/tokens/egg-token.png',
-		type = 'website'
+		type = 'website',
+		twitterCard = 'summary'
 	} = $props();
 
 	const SITE = 'https://klevecz.net';
@@ -22,7 +23,7 @@
 	<meta property="og:description" content={description} />
 	<meta property="og:image" content={image} />
 	<meta property="og:url" content={url} />
-	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:card" content={twitterCard} />
 	<meta name="twitter:title" content={title} />
 	<meta name="twitter:description" content={description} />
 	<meta name="twitter:image" content={image} />

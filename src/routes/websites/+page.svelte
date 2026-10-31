@@ -8,7 +8,8 @@
 <Seo
 	title="Websites - Ariel Klevecz"
 	description="Websites designed and built by Ariel Klevecz: Good Neighbor, Office Hours Rec Center, Open Art Institute, Repare, Scott Benzel and more."
-	image="https://klevecz.net/websites/open-art-institute.jpg"
+	image="https://klevecz.net/websites/og-websites.png"
+	twitterCard="summary_large_image"
 />
 
 <div class="page">
