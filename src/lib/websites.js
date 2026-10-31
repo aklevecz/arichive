@@ -30,6 +30,16 @@ export const featuredSites = [
 		project: 'goodneighbor'
 	},
 	{
+		id: 'good-neighbor-shop',
+		name: 'Good Neighbor Shop',
+		url: 'https://shop.goodneighbormusic.com',
+		client: 'Good Neighbor',
+		year: '2025',
+		description:
+			"Good Neighbor's record and merch store: a headless Shopify storefront with color-variant product pages, an optimistic cart, customer accounts, and a chat agent that lives in the shop.",
+		stack: ['Shopify Hydrogen', 'React Router', 'AI SDK', 'MCP']
+	},
+	{
 		id: 'rec-center',
 		name: 'Rec Center',
 		url: 'https://officialofficehours.com/reccenter',
@@ -91,16 +101,6 @@ export const featuredSites = [
 
 /** @type {Website[]} */
 export const moreSites = [
-	{
-		id: 'good-neighbor-shop',
-		name: 'Good Neighbor Shop',
-		url: 'https://shop.goodneighbormusic.com',
-		client: 'Good Neighbor',
-		year: '2025',
-		description:
-			"Good Neighbor's record and merch store: a headless Shopify storefront with color-variant product pages, an optimistic cart, customer accounts, and a chat agent that lives in the shop.",
-		stack: ['Shopify Hydrogen', 'React Router', 'AI SDK', 'MCP']
-	},
 	{
 		id: 'pandaemonium-architecture',
 		name: 'Pandaemonium Architecture 6.0',
