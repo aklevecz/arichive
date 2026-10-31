@@ -19,6 +19,9 @@
 			Sites I've designed and built for a vinyl pressing plant, a podcast, an art institute, artists,
 			album drops and my own experiments. Every one of them is live, so click through.
 		</p>
+		<div class="links profile">
+			<a href="https://www.linkedin.com/in/ariel-klevecz/" target="_blank" rel="noopener">LinkedIn ↗</a>
+		</div>
 	</header>
 
 	<section>
@@ -140,6 +143,10 @@
 		line-height: 1.45;
 		max-width: 36em;
 		margin: var(--space-md) 0 0;
+	}
+
+	.profile {
+		margin-top: var(--space-md);
 	}
 
 	section + section {
