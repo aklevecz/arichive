@@ -116,6 +116,8 @@
 		max-width: 1120px;
 		margin: 0 auto;
 		padding: 0 var(--space-md) var(--space-xl);
+		/* Nothing on this page should ever pan sideways on a phone. */
+		overflow-x: clip;
 	}
 
 	/* ---------- masthead ---------- */
@@ -190,8 +192,12 @@
 		transition: transform 0.4s ease;
 	}
 
-	.shot:hover img {
-		transform: scale(1.02);
+	/* Mouse only: on touch, a scroll that starts on a screenshot counts as hover,
+	   and the zoom made the page wobble sideways. */
+	@media (hover: hover) and (pointer: fine) {
+		.shot:hover img {
+			transform: scale(1.02);
+		}
 	}
 
 	.meta {

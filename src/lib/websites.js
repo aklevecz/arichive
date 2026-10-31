@@ -40,17 +40,6 @@ export const featuredSites = [
 		stack: ['Shopify Hydrogen', 'React Router', 'AI SDK', 'MCP']
 	},
 	{
-		id: 'rec-center',
-		name: 'Rec Center',
-		url: 'https://officialofficehours.com/reccenter',
-		client: 'Office Hours Live with Tim Heidecker',
-		year: '2024',
-		description:
-			'Every recommendation from the hosts and guests of the Office Hours podcast, collected into a filterable rec center, with a button that gives you a random rec.',
-		stack: ['Svelte', 'Vite', 'Cloudflare'],
-		project: 'office-hours-rec-center'
-	},
-	{
 		id: 'open-art-institute',
 		name: 'Open Art Institute',
 		url: 'https://openartinstitute.org',
@@ -91,6 +80,17 @@ export const featuredSites = [
 
 /** @type {Website[]} */
 export const moreSites = [
+	{
+		id: 'rec-center',
+		name: 'Rec Center',
+		url: 'https://officialofficehours.com/reccenter',
+		client: 'Office Hours Live with Tim Heidecker',
+		year: '2024',
+		description:
+			'Every recommendation from the hosts and guests of the Office Hours podcast, collected into a filterable rec center, with a button that gives you a random rec.',
+		stack: ['Svelte', 'Vite', 'Cloudflare'],
+		project: 'office-hours-rec-center'
+	},
 	{
 		id: 'pandaemonium-architecture',
 		name: 'Pandaemonium Architecture 6.0',
