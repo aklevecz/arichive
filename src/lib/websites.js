@@ -67,20 +67,30 @@ export const featuredSites = [
 		description:
 			'A portfolio and archive for the Los Angeles interdisciplinary artist: exhibitions, selected texts, video and an editable catalogue of works.',
 		stack: ['Astro', 'EmDash CMS', 'Cloudflare Workers', 'D1 + R2']
+	},
+	{
+		id: 'yaytso',
+		name: 'yaytso',
+		url: 'https://yaytso.art',
+		description:
+			'The home of yaytso gallery: posters, installations, shows and whatever weird stuff I hatch next.',
+		stack: ['Astro', 'Cloudflare'],
+		project: 'yaytso'
+	},
+	{
+		id: 'flowers',
+		name: 'Flowers',
+		url: 'https://flowers.yaytso.art',
+		year: '2024',
+		description:
+			'A Three.js viewer for flipping through 21 psychedelic AI lilies from the Flowers show at yaytso gallery.',
+		stack: ['Three.js', 'Stable Diffusion', '8th Wall'],
+		project: 'flowers'
 	}
 ];
 
 /** @type {Website[]} */
 export const moreSites = [
-	{
-		id: 'art-knights',
-		name: 'Art Knights',
-		url: 'https://wheresthefuckingparty.com',
-		year: '2024',
-		description:
-			'A private order in service of art girls. Includes an application funnel, paid dues, artist profiles, grant auctions and gatherings with RSVPs and door check-in.',
-		stack: ['SvelteKit', 'Cloudflare Workers', 'Gemini']
-	},
 	{
 		id: 'abmnemonic',
 		name: 'abmnemonic',
@@ -137,23 +147,6 @@ export const moreSites = [
 			'An interactive store where you mint pieces of the logo to complete it, with a short run of coffee sold onchain through Shopify.',
 		stack: ['Shopify', 'Base', 'NFTs'],
 		project: 'happy-friday'
-	},
-	{
-		id: 'flowers',
-		name: 'Flowers',
-		url: 'https://flowers.yaytso.art',
-		description:
-			'A Three.js viewer for flipping through 21 psychedelic AI lilies from the Flowers show at yaytso gallery.',
-		stack: ['Three.js', 'Stable Diffusion', '8th Wall'],
-		project: 'flowers'
-	},
-	{
-		id: 'yaytso',
-		name: 'yaytso',
-		url: 'https://yaytso.art',
-		description: 'The home of yaytso gallery: posters, installations and shows.',
-		stack: ['Astro', 'Cloudflare'],
-		project: 'yaytso'
 	},
 	{
 		id: 'egg-maker',
