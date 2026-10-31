@@ -69,16 +69,6 @@ export const featuredSites = [
 		stack: ['SvelteKit', 'Gemini', 'Veo', 'Three.js']
 	},
 	{
-		id: 'scott-benzel',
-		name: 'Scott Benzel',
-		url: 'https://scottbenzel.net',
-		client: 'Scott Benzel',
-		year: '2026',
-		description:
-			'A portfolio and archive for the Los Angeles interdisciplinary artist: exhibitions, selected texts, video and an editable catalogue of works.',
-		stack: ['Astro', 'EmDash CMS', 'Cloudflare Workers', 'D1 + R2']
-	},
-	{
 		id: 'yaytso',
 		name: 'yaytso',
 		url: 'https://yaytso.art',
@@ -110,6 +100,16 @@ export const moreSites = [
 		description:
 			'The course site for a CalArts seminar on AI, cybernetics and art, which Scott Benzel teaches and I run the labs for. It holds the syllabus and a reader for the texts. Students get notes, highlights, a Claude assistant scoped to the reading, and a shared feed of highlights.',
 		stack: ['SvelteKit', 'Cloudflare', 'Claude']
+	},
+	{
+		id: 'scott-benzel',
+		name: 'Scott Benzel',
+		url: 'https://scottbenzel.net',
+		client: 'Scott Benzel',
+		year: '2026',
+		description:
+			'A portfolio and archive for the Los Angeles interdisciplinary artist: exhibitions, selected texts, video and an editable catalogue of works.',
+		stack: ['Astro', 'EmDash CMS', 'Cloudflare Workers', 'D1 + R2']
 	},
 	{
 		id: 'abmnemonic',
