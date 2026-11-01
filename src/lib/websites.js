@@ -49,15 +49,6 @@ export const featuredSites = [
 		stack: ['React (Vinext)', 'Three.js', 'Cloudflare Workers', 'D1']
 	},
 	{
-		id: 'repare',
-		name: 'Repare',
-		url: 'https://getrepare.com',
-		year: '2026',
-		description:
-			'Fixes AI product images using the original renders as reference. Box a region on the render, box where it belongs in the AI image, and Gemini paints a matching patch that gets feathered in, with layers, outpainting and video generation.',
-		stack: ['SvelteKit', 'Gemini', 'Veo', 'Three.js']
-	},
-	{
 		id: 'yaytso',
 		name: 'yaytso',
 		url: 'https://yaytso.art',
