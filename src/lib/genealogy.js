@@ -20,6 +20,8 @@
  * @typedef {Object} GenealogyMap
  * @property {Bubble[]} nodes
  * @property {[string, string][]} links Pairs of bubble ids
+ * @property {Bubble | null} [around] One bubble drawn around all the others: present in
+ *   everything rather than connected to it
  */
 
 /** @type {GenealogyMap} */
@@ -71,7 +73,12 @@ export const defaultMap = {
 			label: 'New technology',
 			text: 'Bleeding-edge tech is something I continually gravitate around.'
 		},
-		{ id: 'gathering', label: 'Gathering people' }
+		{ id: 'gathering', label: 'Gathering people' },
+		{
+			id: 'access',
+			label: 'Access',
+			text: 'Who gets in, at what price, and who decides.'
+		}
 	],
 	links: [
 		['school', 'psychology'],
@@ -90,6 +97,14 @@ export const defaultMap = {
 		['meowwolf', 'technology'],
 		['meowwolf', 'gathering'],
 		['la', 'music'],
-		['la', 'technology']
-	]
+		['la', 'technology'],
+		['access', 'tickets'],
+		['access', 'gathering']
+	],
+	around: {
+		id: 'anima',
+		label: 'Anima',
+		text: 'Present in everything. A lens arrived at in November 2026 and read backwards over the rest; not an origin.',
+		refs: [{ label: 'C. G. Jung' }]
+	}
 };

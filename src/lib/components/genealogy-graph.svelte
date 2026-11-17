@@ -10,6 +10,7 @@
 	 * @type {{
 	 *   nodes: Bubble[],
 	 *   links: [string, string][],
+	 *   around?: Bubble | null,
 	 *   selected?: string | null,
 	 *   editing?: boolean,
 	 *   onpick?: (id: string | null) => void,
@@ -20,6 +21,7 @@
 	let {
 		nodes,
 		links,
+		around = null,
 		selected = null,
 		editing = false,
 		onpick = () => {},
@@ -62,9 +64,59 @@
 	const bodies = new Map();
 
 	const shapes = $derived(new Map(nodes.map((n) => [n.id, shape(n.label)])));
+
+	// The surrounding bubble: a circle in the middle of the frame that the others stay inside.
+	// It fills the frame's short side, and grows past it when the bubbles need more room.
+	const ring = $derived.by(() => {
+		if (!around || !W) return null;
+		let room = 0;
+		for (const s of shapes.values()) room += Math.PI * (s.r + 14) ** 2;
+		room /= 0.55;
+		const half = Math.min(W, H) / 2;
+		const fit = half - 14;
+		// the part of a circle of this radius that the frame's short side leaves in view
+		const inFrame = (/** @type {number} */ r) =>
+			r <= half
+				? Math.PI * r * r
+				: 2 * (half * Math.sqrt(r * r - half * half) + r * r * Math.asin(half / r));
+		let r = fit;
+		let far = Math.max(fit, Math.max(W, H) / 2 - 14);
+		if (inFrame(fit) < room) {
+			for (let i = 0; i < 20; i++) {
+				const mid = (r + far) / 2;
+				if (inFrame(mid) < room) r = mid;
+				else far = mid;
+			}
+			r = far;
+		}
+		return { x: W / 2, y: H / 2, r, whole: r <= fit };
+	});
+
 	const unit = $derived(
-		Math.max(110, Math.min(230, Math.sqrt((W * H) / Math.max(nodes.length, 6))))
+		Math.max(
+			110,
+			Math.min(
+				230,
+				Math.sqrt(
+					Math.min(W * H, ring ? Math.PI * ring.r * ring.r : Infinity) / Math.max(nodes.length, 6)
+				)
+			)
+		)
 	);
+
+	/** Keep a bubble inside the frame, and inside the surrounding bubble. @param {Body} b @param {number} r */
+	function keep(b, r) {
+		b.x = Math.max(r + 4, Math.min(W - r - 4, b.x));
+		b.y = Math.max(r + 4, Math.min(H - r - 4, b.y));
+		if (!ring) return;
+		const dx = b.x - ring.x;
+		const dy = b.y - ring.y;
+		const d = Math.hypot(dx, dy);
+		const max = Math.max(0, ring.r - r - 12);
+		if (d <= max) return;
+		b.x = ring.x + (dx / (d || 1)) * max;
+		b.y = ring.y + (dy / (d || 1)) * max;
+	}
 
 	/** Give every bubble a body, and drop bodies whose bubble was deleted. */
 	function sync() {
@@ -126,8 +178,9 @@
 			q.vy -= dy * f;
 		}
 		// a loose pull to the middle, shaped to the frame
-		const gx = 0.003 * Math.max(1, Math.pow(H / W, 1.6));
-		const gy = 0.003 * Math.max(1, Math.pow(W / H, 1.6));
+		const round = !!ring?.whole;
+		const gx = 0.003 * (round ? 1 : Math.max(1, Math.pow(H / W, 1.6)));
+		const gy = 0.003 * (round ? 1 : Math.max(1, Math.pow(W / H, 1.6)));
 		let energy = 0;
 		for (const { n, b, r } of list) {
 			if (b.held) {
@@ -139,12 +192,14 @@
 				b.vx = b.vy = 0;
 				b.x += (n.pos[0] * W - b.x) * 0.3;
 				b.y += (n.pos[1] * H - b.y) * 0.3;
+				keep(b, r);
 				continue;
 			}
 			b.vx = (b.vx + (W / 2 - b.x) * gx) * 0.78;
 			b.vy = (b.vy + (H / 2 - b.y) * gy) * 0.78;
-			b.x = Math.max(r + 4, Math.min(W - r - 4, b.x + b.vx));
-			b.y = Math.max(r + 4, Math.min(H - r - 4, b.y + b.vy));
+			b.x += b.vx;
+			b.y += b.vy;
+			keep(b, r);
 			energy += Math.abs(b.vx) + Math.abs(b.vy);
 		}
 		return energy;
@@ -228,8 +283,9 @@
 		const rect = box.getBoundingClientRect();
 		const r = shapes.get(press.id)?.r ?? 30;
 		b.held = true;
-		b.x = Math.max(r, Math.min(W - r, event.clientX - rect.left - press.offX));
-		b.y = Math.max(r, Math.min(H - r, event.clientY - rect.top - press.offY));
+		b.x = event.clientX - rect.left - press.offX;
+		b.y = event.clientY - rect.top - press.offY;
+		keep(b, r);
 	}
 
 	function onPointerUp() {
@@ -258,7 +314,19 @@
 	}
 
 	// ---------- what to draw ----------
-	const focus = $derived(dragId ?? hover ?? selected);
+	// the surrounding bubble holds everything, so focusing it fades nothing
+	const focus = $derived.by(() => {
+		const id = dragId ?? hover ?? selected;
+		return id === around?.id ? null : id;
+	});
+
+	// its label sits on the line: at the top, or on the left when the top is out of frame
+	const rim = $derived.by(() => {
+		if (!ring) return null;
+		return ring.y - ring.r >= 8
+			? { x: ring.x, y: ring.y - ring.r }
+			: { x: ring.x - ring.r, y: ring.y };
+	});
 
 	const near = $derived.by(() => {
 		const set = new Set();
@@ -324,6 +392,23 @@
 				ondblclick={onDoubleClick}
 				role="none"
 			/>
+
+			{#if ring && rim && around}
+				<g
+					class="node around"
+					class:selected={selected === around.id}
+					role="button"
+					tabindex="0"
+					aria-label={around.label}
+					aria-pressed={selected === around.id}
+					onclick={() => onpick(around.id)}
+					onkeydown={(event) => onKey(event, around.id)}
+				>
+					<circle class="reach" cx={ring.x} cy={ring.y} r={ring.r} />
+					<circle class="ring" cx={ring.x} cy={ring.y} r={ring.r} />
+					<text x={rim.x} y={rim.y + 4}>{around.label || 'Untitled'}</text>
+				</g>
+			{/if}
 
 			{#each drawnEdges as e (e.key)}
 				<line class="edge" class:dim={e.dim} x1={e.x1} y1={e.y1} x2={e.x2} y2={e.y2} />
@@ -400,6 +485,28 @@
 		transition: stroke 0.2s ease;
 	}
 
+	/* the surrounding bubble: only its line and label take clicks */
+	.ring {
+		fill: none;
+		stroke: #000;
+		stroke-width: 0.75;
+		pointer-events: none;
+	}
+
+	.reach {
+		fill: none;
+		stroke: transparent;
+		stroke-width: 18;
+		pointer-events: stroke;
+	}
+
+	.around text {
+		paint-order: stroke;
+		stroke: #fff;
+		stroke-width: 10px;
+		stroke-linejoin: round;
+	}
+
 	text {
 		font-family: var(--font-body);
 		font-size: 12px;
@@ -411,7 +518,9 @@
 	}
 
 	.node.selected .bubble,
-	.node:focus-visible .bubble {
+	.node:focus-visible .bubble,
+	.node.selected .ring,
+	.node:focus-visible .ring {
 		stroke-width: 2;
 	}
 

@@ -19,7 +19,12 @@
 	/** @type {HTMLInputElement | null} */
 	let nameInput = $state(null);
 
-	const node = $derived(map.nodes.find((n) => n.id === selected) ?? null);
+	const node = $derived(
+		map.nodes.find((n) => n.id === selected) ??
+			(map.around && map.around.id === selected ? map.around : null)
+	);
+	// the bubble drawn around the others is in everything, so it has no connections
+	const isAround = $derived(!!node && node.id === map.around?.id);
 	const connected = $derived(
 		selected
 			? map.links
@@ -33,7 +38,11 @@
 	onMount(() => {
 		try {
 			const saved = JSON.parse(localStorage.getItem(STORE) ?? 'null');
-			if (saved && Array.isArray(saved.nodes) && Array.isArray(saved.links)) map = saved;
+			if (saved && Array.isArray(saved.nodes) && Array.isArray(saved.links)) {
+				// a map saved before the surrounding bubble existed gets it from the starting map
+				if (saved.around === undefined) saved.around = fresh().around ?? null;
+				map = saved;
+			}
 		} catch (e) {
 			// unreadable or blocked storage: start from the default map
 		}
@@ -53,7 +62,7 @@
 	/** @param {string | null} id */
 	function pick(id) {
 		if (connecting && selected && id && id !== selected) {
-			toggleLink(selected, id);
+			if (id !== map.around?.id) toggleLink(selected, id);
 			return;
 		}
 		connecting = false;
@@ -81,6 +90,7 @@
 	function removeBubble() {
 		if (!node || !confirm(`Delete "${node.label}"?`)) return;
 		const id = node.id;
+		if (isAround) map.around = null;
 		map.links = map.links.filter(([a, b]) => a !== id && b !== id);
 		map.nodes = map.nodes.filter((n) => n.id !== id);
 		selected = null;
@@ -155,6 +165,7 @@
 		<GenealogyGraph
 			nodes={map.nodes}
 			links={map.links}
+			around={map.around ?? null}
 			{selected}
 			{editing}
 			onpick={pick}
@@ -195,18 +206,20 @@
 					<button onclick={addRef}>Add reference</button>
 				</div>
 
-				<div class="field">
-					<span>Connected to</span>
-					{#each connected as other (other.id)}
-						<div class="link-row">
-							{other.label}
-							<button onclick={() => toggleLink(node.id, other.id)}>Remove</button>
-						</div>
-					{/each}
-					<button onclick={() => (connecting = !connecting)}>
-						{connecting ? 'Finish connecting' : 'Connect to…'}
-					</button>
-				</div>
+				{#if !isAround}
+					<div class="field">
+						<span>Connected to</span>
+						{#each connected as other (other.id)}
+							<div class="link-row">
+								{other.label}
+								<button onclick={() => toggleLink(node.id, other.id)}>Remove</button>
+							</div>
+						{/each}
+						<button onclick={() => (connecting = !connecting)}>
+							{connecting ? 'Finish connecting' : 'Connect to…'}
+						</button>
+					</div>
+				{/if}
 
 				<button class="delete" onclick={removeBubble}>Delete bubble</button>
 			{:else}
@@ -245,6 +258,9 @@
 		color: #000;
 		font-size: 13px;
 		line-height: 1.5;
+		/* underlines are one long hand-drawn line; each button shows a different stretch of it */
+		--underline: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='6'%3E%3Cpath d='M0 3.2C9 2.4 17 3.9 28 3.3S47 2.3 58 3S74 4.1 86 3.4S108 2.5 121 3.1S139 3.9 152 3.2S171 2.2 183 2.9S204 3.8 216 3.5S233 2.6 247 3S266 4 279 3.3S301 2.4 312 3.1S331 3.7 344 3.4S366 2.5 378 2.9S392 3.6 400 3.2' fill='none' stroke='%23000' stroke-width='1' stroke-linecap='round'/%3E%3C/svg%3E");
+		--underline-heavy: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='6'%3E%3Cpath d='M0 3.2C9 2.4 17 3.9 28 3.3S47 2.3 58 3S74 4.1 86 3.4S108 2.5 121 3.1S139 3.9 152 3.2S171 2.2 183 2.9S204 3.8 216 3.5S233 2.6 247 3S266 4 279 3.3S301 2.4 312 3.1S331 3.7 344 3.4S366 2.5 378 2.9S392 3.6 400 3.2' fill='none' stroke='%23000' stroke-width='1.9' stroke-linecap='round'/%3E%3C/svg%3E");
 	}
 
 	.genealogy-page.open {
@@ -297,14 +313,34 @@
 		font-weight: 400;
 		letter-spacing: 0;
 		text-transform: none;
-		text-decoration: underline;
-		text-decoration-thickness: 1px;
-		text-underline-offset: 3px;
+		text-decoration: none;
+		padding-bottom: 2px;
+		background: var(--underline) 0 100% repeat-x;
 		cursor: pointer;
 	}
 
-	.genealogy-page button:hover {
-		text-decoration-thickness: 2px;
+	.genealogy-page button:hover,
+	.genealogy-page a:hover {
+		background-image: var(--underline-heavy);
+	}
+
+	.genealogy-page button:nth-of-type(2),
+	.ref-row:nth-child(even) button,
+	.link-row:nth-child(even) button {
+		background-position-x: -83px;
+	}
+
+	.genealogy-page button:nth-of-type(3) {
+		background-position-x: -171px;
+	}
+
+	.genealogy-page button:nth-of-type(4) {
+		background-position-x: -247px;
+	}
+
+	.genealogy-page button:nth-of-type(5),
+	li:nth-child(even) a {
+		background-position-x: -318px;
 	}
 
 	.genealogy-page button:focus-visible,
@@ -376,9 +412,9 @@
 
 	.genealogy-page a {
 		color: #000;
-		text-decoration: underline;
-		text-decoration-thickness: 1px;
-		text-underline-offset: 3px;
+		text-decoration: none;
+		padding-bottom: 2px;
+		background: var(--underline) -129px 100% repeat-x;
 	}
 
 	label,
