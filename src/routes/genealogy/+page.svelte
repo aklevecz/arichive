@@ -8,6 +8,44 @@
 
 	const STORE = 'genealogy-map-v1';
 	const fresh = () => /** @type {GenealogyMap} */ (JSON.parse(JSON.stringify(defaultMap)));
+	const pristine = JSON.stringify(defaultMap);
+
+	/** @param {[string, string]} link */
+	const linkKey = ([a, b]) => (a < b ? `${a}|${b}` : `${b}|${a}`);
+	// what the published map held when a copy was saved, so later additions can be told apart
+	const published = () => ({
+		nodes: defaultMap.nodes.map((n) => n.id),
+		links: defaultMap.links.map(linkKey)
+	});
+
+	/**
+	 * A saved copy keeps its own edits and picks up whatever was published after it was saved.
+	 * Bubbles and links it had already seen and no longer holds were deleted on purpose, and stay deleted.
+	 *
+	 * @param {GenealogyMap & { seen?: { nodes: string[], links: string[] } }} saved
+	 */
+	function withPublished(saved) {
+		const { seen, ...own } = saved;
+		const start = fresh();
+		if (own.around === undefined) own.around = start.around ?? null;
+		const have = new Set(own.nodes.map((n) => n.id));
+		const links = new Set(own.links.map(linkKey));
+		// a copy saved before `seen` existed: what it holds is what it had seen
+		const seenNodes = new Set(seen?.nodes ?? have);
+		const seenLinks = new Set(seen?.links ?? links);
+		for (const n of start.nodes) {
+			if (seenNodes.has(n.id) || have.has(n.id)) continue;
+			own.nodes.push(n);
+			have.add(n.id);
+		}
+		for (const link of start.links) {
+			const key = linkKey(link);
+			if (seenLinks.has(key) || links.has(key) || !have.has(link[0]) || !have.has(link[1]))
+				continue;
+			own.links.push(link);
+		}
+		return own;
+	}
 
 	let map = $state(fresh());
 	let loaded = $state(false);
@@ -39,9 +77,7 @@
 		try {
 			const saved = JSON.parse(localStorage.getItem(STORE) ?? 'null');
 			if (saved && Array.isArray(saved.nodes) && Array.isArray(saved.links)) {
-				// a map saved before the surrounding bubble existed gets it from the starting map
-				if (saved.around === undefined) saved.around = fresh().around ?? null;
-				map = saved;
+				map = withPublished(saved);
 			}
 		} catch (e) {
 			// unreadable or blocked storage: start from the default map
@@ -53,7 +89,9 @@
 		const json = JSON.stringify(map);
 		if (!loaded) return;
 		try {
-			localStorage.setItem(STORE, json);
+			// an untouched map is not saved, so it keeps following the published one
+			if (json === pristine) localStorage.removeItem(STORE);
+			else localStorage.setItem(STORE, JSON.stringify({ ...JSON.parse(json), seen: published() }));
 		} catch (e) {
 			// storage full or blocked: the map still works for this visit
 		}
