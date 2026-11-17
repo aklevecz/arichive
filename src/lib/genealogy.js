@@ -78,6 +78,27 @@ export const defaultMap = {
 			id: 'access',
 			label: 'Access',
 			text: 'Who gets in, at what price, and who decides.'
+		},
+		{ id: 'djing', label: 'DJing' },
+		{
+			id: 'new-york',
+			label: 'New York',
+			text: 'Moving to New York and failing.'
+		},
+		{
+			id: 'festival',
+			label: 'Music festival',
+			text: 'The first main firing event. At a music festival, the tension between music and day-job life converged into the outburst.'
+		},
+		{
+			id: 'real-world',
+			label: 'The real world',
+			text: 'After being fired: living in the real world, juxtaposed with the 9–5 world.'
+		},
+		{
+			id: 'pedernal',
+			label: 'Pedernal',
+			text: 'Climbing Mount Pedernal in Abiquiú and running out of water.'
 		}
 	],
 	links: [
@@ -99,7 +120,14 @@ export const defaultMap = {
 		['la', 'music'],
 		['la', 'technology'],
 		['access', 'tickets'],
-		['access', 'gathering']
+		['access', 'gathering'],
+		['djing', 'music'],
+		['djing', 'parties'],
+		['djing', 'gathering'],
+		['festival', 'fired'],
+		['festival', 'music'],
+		['festival', 'sf'],
+		['real-world', 'fired']
 	],
 	around: {
 		id: 'anima',
